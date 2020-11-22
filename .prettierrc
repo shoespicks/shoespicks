@@ -1,4 +1,35 @@
 {
-  "semi": false,
-  "singleQuote": true
+  "printWidth": 100,
+  "tabWidth": 2,
+  "overrides": [
+    {
+      "files": "*.ts",
+      "options": {
+        "parser": "typescript",
+        "trailingComma": "none",
+        "singleQuote": true,
+        "endOfLine": "lf"
+      }
+    },
+    {
+      "files": "*.js",
+      "options": {
+        "trailingComma": "none",
+        "singleQuote": true,
+        "endOfLine": "lf"
+      }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "parser": "scss"
+      }
+    },
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ]
 }
