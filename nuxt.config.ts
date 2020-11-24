@@ -35,8 +35,16 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+
+    '@nuxtjs/markdownit'
   ],
+
+  markdownit: {
+    injected: true, // 「$md」でどこからでも使えるようにする
+    breaks: true, // 改行を<br/>に変換する
+    html: true
+  },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
