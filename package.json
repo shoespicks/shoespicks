@@ -13,14 +13,17 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/markdownit": "^1.2.10",
     "@vue/composition-api": "^1.0.0-beta.6",
     "bootstrap": "^4.5.2",
     "bootstrap-vue": "^2.17.3",
+    "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
     "firebase": "^7.17.2",
     "nuxt": "^2.14.6",
     "nuxt-ts": "^2.8.1",
     "vue": "^2.6.12",
+    "vue-chartjs": "^3.5.1",
     "vue-template-compiler": "^2.6.12"
   },
   "devDependencies": {
