@@ -9,7 +9,7 @@
       </b-form-group>
       <!-- １. 表示順を変更する -->
       <b-form-group label="価格">
-        <b-form-radio-group 
+        <b-form-radio-group
           v-model="form.name"
           :options="price"
           class="mb-3"
@@ -18,7 +18,7 @@
         ></b-form-radio-group>
       </b-form-group>
       <b-form-group label="軽さ">
-        <b-form-radio-group 
+        <b-form-radio-group
           v-model="form.name"
           :options="weight"
           class="mb-3"
@@ -35,25 +35,25 @@
           name="新着"
         ></b-form-checkbox-group>
       </b-form-group> -->
-      
+
       <b-btn type="submit">検索</b-btn>
     </b-form>
+
+    <p v-for="spike in spikes" @click="$nuxt.$router.push(spike.fields.id)">
+      {{ spike.fields.spikeTitle }}
+    </p>
 
     <h2 class="maker">アシックス</h2>
 
     <div class="flex">
       <b-card
-      　v-for="spike in spikes"
+        　v-for="spike in spikes"
         :title="spike.fields.spikeTitle"
         img-alt="Image"
-        style="max-width: 50%;"
+        style="max-width: 50%"
         tag="article"
       >
-        <b-img
-          :src="spike.fields.spikePhoto[0].fields.file.url"
-          fluid-grow
-          alt="スパイク画像"
-        >
+        <b-img :src="spike.fields.spikePhoto[0].fields.file.url" fluid-grow alt="スパイク画像">
         </b-img>
         <b-badge variant="gray">
           <p>¥{{ spike.fields.spikePrice }}</p>
@@ -85,12 +85,30 @@ export default Vue.extend({
       },
       spikeId: 0,
       spikes: [],
-      price:      [ { item: 'A', name: '安い順' },{ item: 'B', name: '高い順' } ],
-      weight:     [ { item: 'C', name: '軽い順' },{ item: 'D', name: '重い順' } ],
-      width:      [ { item: 'C', name: '広い順' },{ item: 'D', name: '狭い順' } ],
-      resilience: [ { item: 'C', name: '高い順' },{ item: 'D', name: '低い順' } ],
-      angle:      [ { item: 'C', name: '高い順' },{ item: 'D', name: '低い順' } ],
-      grip :      [ { item: 'C', name: '高い順' },{ item: 'D', name: '低い順' } ]
+      price: [
+        { item: "A", name: "安い順" },
+        { item: "B", name: "高い順" },
+      ],
+      weight: [
+        { item: "C", name: "軽い順" },
+        { item: "D", name: "重い順" },
+      ],
+      width: [
+        { item: "C", name: "広い順" },
+        { item: "D", name: "狭い順" },
+      ],
+      resilience: [
+        { item: "C", name: "高い順" },
+        { item: "D", name: "低い順" },
+      ],
+      angle: [
+        { item: "C", name: "高い順" },
+        { item: "D", name: "低い順" },
+      ],
+      grip: [
+        { item: "C", name: "高い順" },
+        { item: "D", name: "低い順" },
+      ],
     };
   },
   methods: {
@@ -112,7 +130,7 @@ export default Vue.extend({
         content_type: "spike",
         // "fields.spikeEvent": this.form.name,
         // - を入れると降順になる
-       order: "-fields.spikeWeight",
+        order: "-fields.spikeWeight",
       };
 
       contentfulClient.getEntries(searchInput).then((e: any) => {
@@ -126,7 +144,6 @@ export default Vue.extend({
     },
   },
 });
-
 </script>
 
 <style>
@@ -165,7 +182,7 @@ export default Vue.extend({
 }
 .maker {
   padding: 15px 20px;
-  background-color: #0038C9;
+  background-color: #0038c9;
   border: 1px;
   color: white;
   display: inline-block;
