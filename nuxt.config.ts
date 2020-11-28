@@ -36,7 +36,7 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-
+    // markdown追加
     '@nuxtjs/markdownit'
   ],
 
