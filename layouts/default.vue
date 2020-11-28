@@ -1,13 +1,24 @@
 <template>
   <div>
+    <my-header />
     <Nuxt />
   </div>
 </template>
 
+<script>
+import myHeader from "~/components/shared/myHeader";
+
+export default {
+  components: {
+    myHeader,
+  },
+};
+</script>
+
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

@@ -76,7 +76,6 @@
                   class="blog-content"
                   v-html="$md.render(spike.fields.spikePlayerQuestion)"
                 ></div>
-                <!-- <div>{{ spike.fields.spikePlayerQuestion }}</div> -->
                 <b-img
                   :src="spike.fields.spikePlayerListPhoto[0].fields.file.url"
                   fluid-grow
