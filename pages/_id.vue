@@ -1,4 +1,33 @@
 <template>
+  <!-- firebaceお試し -->
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyAKBCoMAXTPhipdNBxXOoxIc7RlBj_z-q4",
+      authDomain: "shoespicks-9b614.firebaseapp.com",
+      databaseURL: "https://shoespicks-9b614.firebaseio.com",
+      projectId: "shoespicks-9b614",
+      storageBucket: "shoespicks-9b614.appspot.com",
+      messagingSenderId: "767094896500",
+      appId: "1:767094896500:web:bcdf190333b172b2cede21",
+      measurementId: "G-95T257EXNB",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
+  <!-- //firebaceお試し -->
+
   <div class="container">
     <div>
       <h1 class="title">
