@@ -72,8 +72,10 @@
                 <b-button pill variant="outline-secondary">今すぐネットで購入する</b-button>
 
                 <h2>一流選手に聞いてみた！</h2>
-                <div class="blog-content" v-html="$md.render(content)"></div>
-                <!-- <div>{{ spike.fields.spikePlayerQuestion }}</div> -->
+                <div
+                  class="blog-content"
+                  v-html="$md.render(spike.fields.spikePlayerQuestion)"
+                ></div>
                 <b-img
                   :src="spike.fields.spikePlayerListPhoto[0].fields.file.url"
                   fluid-grow
@@ -139,7 +141,6 @@ import BarChart from "@/components/BarChart.vue";
 interface Data {
   spikeId: number;
   spike: any;
-  content: string;
 }
 
 export default Vue.extend({
@@ -150,8 +151,6 @@ export default Vue.extend({
     return {
       spikeId: 0,
       spike: {},
-      // 本来はcontentfulから取得したデータを入れておく
-      content: "# 見出し1  ## 見出し２",
     };
   },
   async asyncData({ payload, params }) {
