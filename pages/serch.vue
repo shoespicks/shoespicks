@@ -8,7 +8,7 @@
         <b-form-input type="text" v-model="form.name" placeholder="スパイクで検索"></b-form-input>
       </b-form-group>
       <!-- １. 表示順を変更する -->
-      <b-form-group label="価格">
+      <!-- <b-form-group label="価格">
         <b-form-radio-group
           v-model="form.name"
           :options="price"
@@ -25,30 +25,26 @@
           value-field="item"
           text-field="name"
         ></b-form-radio-group>
-      </b-form-group>
+      </b-form-group> -->
 
       <!-- 2. 絞り込む -->
-      <!-- <b-form-group label="新着">
+      <b-form-group label="絞り込み">
         <b-form-checkbox-group
-          v-model="form.spike"
-          :options="spike"
-          name="新着"
+          v-model="form.items"
+          :options="items"
+          name="item"
         ></b-form-checkbox-group>
-      </b-form-group> -->
+      </b-form-group>
 
       <b-btn type="submit">検索</b-btn>
     </b-form>
-
-    <p v-for="spike in spikes" @click="$nuxt.$router.push(spike.fields.id)">
-      {{ spike.fields.spikeTitle }}
-    </p>
 
     <h2 class="maker">アシックス</h2>
 
     <div class="flex">
       <b-card
-        　v-for="spike in spikes"
-        :title="spike.fields.spikeTitle"
+        　v-for="spike in spikes" @click="$nuxt.$router.push(spike.fields.id)"
+        :title="spike.fields.spikeTitle" 
         img-alt="Image"
         style="max-width: 50%"
         tag="article"
@@ -60,6 +56,10 @@
         </b-badge>
       </b-card>
     </div>
+      <h2 class="maker">ミズノ</h2>
+      <h2 class="maker">アディダス</h2>
+      <h2 class="maker">NB</h2>
+      <h2 class="maker">NIKE</h2>
   </div>
 </template>
 
@@ -76,6 +76,7 @@ export default Vue.extend({
     return {
       form: {
         name: "",
+        items: [],
         price: [],
         weight: [],
         width: [],
@@ -85,6 +86,14 @@ export default Vue.extend({
       },
       spikeId: 0,
       spikes: [],
+      items: [
+        { text: "新着", value: "新着" },
+        { text: "初心者", value: "初心者" },
+        { text: "土兼用", value: "土兼用" },
+        { text: "100m", value: "100m" },
+        { text: "200m", value: "200m" },
+        { text: "400m", value: "400m" },
+      ],
       price: [
         { item: "A", name: "安い順" },
         { item: "B", name: "高い順" },
@@ -116,12 +125,6 @@ export default Vue.extend({
     //     content_type: "track",
     //     "fields.alias[match]": this.form.name,
     //   };
-    //   if (this.form.areas.length > 0) {
-    //     searchInput["fields.area[in]"] = this.form.areas.join(",");
-    //   }
-    //   if (this.form.events.length > 0) {
-    //     searchInput["fields.events[all]"] = this.form.events.join(",");
-    //   }
     submit(e: Event) {
       console.log("submit");
       e.preventDefault();
@@ -132,6 +135,13 @@ export default Vue.extend({
         // - を入れると降順になる
         order: "-fields.spikeWeight",
       };
+
+      if (this.form.items.length > 0) {
+        // searchInput["fields.item[in]"] = this.form.items.join(",");
+        // searchInput["spike.fields.spikeEvent.items[in]"] = this.form.items.join(",");
+        // console.log(spike.fields.spikeEvent.items);
+      }
+
 
       contentfulClient.getEntries(searchInput).then((e: any) => {
         e.items?.forEach((item: any, index: number) => {
