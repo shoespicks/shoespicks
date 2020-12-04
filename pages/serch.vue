@@ -1,8 +1,6 @@
 <template>
-  <div class="container">
+  <div>
     <!-- 井口貴文開発中 -->
-    <!-- フィルター -->
-    <!-- Cards -->
     <b-form @submit="submit">
       <b-form-group>
         <b-form-input type="text" v-model="form.name" placeholder="スパイクで検索"></b-form-input>
@@ -30,12 +28,11 @@
       <!-- 2. 絞り込む -->
       <b-form-group label="絞り込み">
         <b-form-checkbox-group
-          v-model="form.items"
-          :options="items"
+          v-model="form.events"
+          :options="events"
           name="item"
         ></b-form-checkbox-group>
       </b-form-group>
-
       <b-btn type="submit">検索</b-btn>
     </b-form>
 
@@ -76,7 +73,7 @@ export default Vue.extend({
     return {
       form: {
         name: "",
-        items: [],
+        events: [],
         price: [],
         weight: [],
         width: [],
@@ -86,7 +83,7 @@ export default Vue.extend({
       },
       spikeId: 0,
       spikes: [],
-      items: [
+      events: [
         { text: "新着", value: "新着" },
         { text: "初心者", value: "初心者" },
         { text: "土兼用", value: "土兼用" },
@@ -121,31 +118,24 @@ export default Vue.extend({
     };
   },
   methods: {
-    //   const searchInput: { [key: string]: string } = {
-    //     content_type: "track",
-    //     "fields.alias[match]": this.form.name,
-    //   };
     submit(e: Event) {
-      console.log("submit");
       e.preventDefault();
 
       const searchInput: { [key: string]: string } = {
         content_type: "spike",
         // "fields.spikeEvent": this.form.name,
-        // - を入れると降順になる
-        order: "-fields.spikeWeight",
+        //  "fields.spikeEnvironment": this.form.name,
+         "fields.alias[match]": this.form.name,
+        // order: "-fields.spikeWeight",
       };
 
-      if (this.form.items.length > 0) {
-        // searchInput["fields.item[in]"] = this.form.items.join(",");
-        // searchInput["spike.fields.spikeEvent.items[in]"] = this.form.items.join(",");
-        // console.log(spike.fields.spikeEvent.items);
+      if (this.form.events.length > 0) {
+        // searchInput["fields.spikeEvent[all]"] = this.form.events.join(",");
+        // searchInput["fields.spikeEnvironment[all]"] = this.form.events.join(",");
+        searchInput["fields"] = this.form.events.join(",");
       }
-
-
       contentfulClient.getEntries(searchInput).then((e: any) => {
         e.items?.forEach((item: any, index: number) => {
-          console.log(index + "つめ");
           console.log(item);
         });
 
@@ -157,14 +147,6 @@ export default Vue.extend({
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  /* display: flex;
-  justify-content: center; */
-  align-items: center;
-  text-align: center;
-}
 .flex {
   display: flex;
 }
@@ -195,7 +177,7 @@ export default Vue.extend({
   background-color: #0038c9;
   border: 1px;
   color: white;
-  display: inline-block;
+  display: block;
   border-radius: 10px;
 }
 </style>
