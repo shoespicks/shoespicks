@@ -1,0 +1,70 @@
+/*======================
+記述ルール
+======================*/
+
+/*　ルール１　プロパティの並び順
+
+１．位置関係  = position,flex,top,right,left,display,float
+２．サイズ    = widht, height,padding, marign
+３．文字系    = font, text-align, line-height, letter-spacing, color
+４．背景      = background, border
+５．その他    = animation, opacity, transition等
+
+　　ルール２　インデント
+１．クラス名と鉤括弧の間に１スペース
+２．青文字のプロパティはエンター押したときのデフォのスペース（クラス名より２スペース内側）
+３．値は１スペースの後に書き始める
+４．ルール度に基本１行あける
+
+*/
+
+.example,
+.example1 {
+  display: block;
+  float: left;
+  width: 16.6%;
+  height: 70px;
+  padding: 0 0 10% 0;
+  margin: 0 auto;
+  font: 400 14px 'open sans',sans-serif;
+  color: #333;
+  line-height: 20px;
+  text-align: center;
+  background: #fff;
+  cursor: pointer;
+  border-bottom:2px solid #ddd;
+}
+
+/*　ルール３　IDの使用
+１．CSSのスタイリングでは柄はない。
+2. JSでマーキングしたい時や、内部リンクでマーキングしたい時に使う
+*/
+
+/*　ルール４　例外
+１．プロパティが１つしかなく、その同類が多いときは１列に書く
+ →まとめて書いてあげたほうが見やすくなるのと整理しやすくなる
+*/
+.example  { background: url(example.png) no-repeat center center; }
+.example1 { background: url(example.png) no-repeat center center; }
+
+/*==============
+共有
+================*/
+* {
+  padding: 0;
+  margin: 0;
+}
+a {
+  color:#ffffff;
+  text-decoration:none;
+}
+li {
+  display:inline;
+  list-style: none;
+}
+body {
+  color: #fff;
+  text-align: center;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}

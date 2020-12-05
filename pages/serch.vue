@@ -28,6 +28,11 @@
       <!-- 2. 絞り込む -->
       <b-form-group label="絞り込み">
         <b-form-checkbox-group
+          v-model="form.environment"
+          :options="environment"
+          name="item"
+        ></b-form-checkbox-group>
+         <b-form-checkbox-group
           v-model="form.events"
           :options="events"
           name="item"
@@ -40,8 +45,9 @@
 
     <div class="flex">
       <b-card
-        　v-for="spike in spikes" @click="$nuxt.$router.push(spike.fields.id)"
-        :title="spike.fields.spikeTitle" 
+        　v-for="spike in spikes"
+        @click="$nuxt.$router.push(spike.fields.id)"
+        :title="spike.fields.spikeTitle"
         img-alt="Image"
         style="max-width: 50%"
         tag="article"
@@ -53,10 +59,10 @@
         </b-badge>
       </b-card>
     </div>
-      <h2 class="maker">ミズノ</h2>
-      <h2 class="maker">アディダス</h2>
-      <h2 class="maker">NB</h2>
-      <h2 class="maker">NIKE</h2>
+    <h2 class="maker">ミズノ</h2>
+    <h2 class="maker">アディダス</h2>
+    <h2 class="maker">NB</h2>
+    <h2 class="maker">NIKE</h2>
   </div>
 </template>
 
@@ -73,6 +79,7 @@ export default Vue.extend({
     return {
       form: {
         name: "",
+        environment: [],
         events: [],
         price: [],
         weight: [],
@@ -83,10 +90,12 @@ export default Vue.extend({
       },
       spikeId: 0,
       spikes: [],
-      events: [
+      environment: [
         { text: "新着", value: "新着" },
         { text: "初心者", value: "初心者" },
         { text: "土兼用", value: "土兼用" },
+      ],
+      events: [
         { text: "100m", value: "100m" },
         { text: "200m", value: "200m" },
         { text: "400m", value: "400m" },
@@ -122,17 +131,18 @@ export default Vue.extend({
       e.preventDefault();
 
       const searchInput: { [key: string]: string } = {
+        // Step1 エントリ情報を取得する
         content_type: "spike",
         // "fields.spikeEvent": this.form.name,
         //  "fields.spikeEnvironment": this.form.name,
-         "fields.alias[match]": this.form.name,
-        // order: "-fields.spikeWeight",
-      };
-
+        "fields.alias[match]": this.form.name,
+      }; // Step2　取得情報が複数個ある場合発火する
+      
+      if (this.form.environment.length > 0) {
+        searchInput["fields.spikeEnvironment[all]"] = this.form.environment.join(",");
+      }
       if (this.form.events.length > 0) {
-        // searchInput["fields.spikeEvent[all]"] = this.form.events.join(",");
-        // searchInput["fields.spikeEnvironment[all]"] = this.form.events.join(",");
-        searchInput["fields"] = this.form.events.join(",");
+        searchInput["fields.spikeEvent[all]"] = this.form.events.join(",");
       }
       contentfulClient.getEntries(searchInput).then((e: any) => {
         e.items?.forEach((item: any, index: number) => {
