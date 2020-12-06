@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style>
-a.site-name {
+.site-name {
   text-decoration: none;
   color: rgba(0, 0, 0, 0.87);
   font-size: 1.25rem;

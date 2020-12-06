@@ -32,11 +32,7 @@
           <template v-else>
             <v-list class="py-0">
               <template v-if="posts.length">
-                <v-list-item
-                  v-for="(post, i) in posts"
-                  :key="i"
-                  :to="$store.getters.linkTo('posts', post)"
-                >
+                <v-list-item v-for="(post, i) in posts" :key="i">
                   <v-list-item-content>
                     <v-list-item-title>
                       {{ post.fields.title }}
