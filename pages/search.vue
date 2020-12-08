@@ -32,13 +32,35 @@
           <template v-else>
             <v-list class="py-0">
               <template v-if="posts.length">
-                <v-list-item v-for="(post, i) in posts" :key="i">
+                <div class="flex">
+                  <b-card
+                    　v-for="(post, i) in posts"
+                    :key="i"
+                    @click="$nuxt.$router.push(post.fields.id)"
+                    :title="post.fields.spikeTitle"
+                    img-alt="Image"
+                    style="max-width: 50%"
+                    tag="article"
+                  >
+                    <b-img
+                      :src="post.fields.spikePhoto[0].fields.file.url"
+                      fluid-grow
+                      alt="スパイク画像"
+                    >
+                    </b-img>
+                    <b-badge variant="gray">
+                      <p>¥{{ post.fields.spikePrice }}</p>
+                    </b-badge>
+                  </b-card>
+                </div>
+
+                <!-- <v-list-item v-for="(post, i) in posts" :key="i">
                   <v-list-item-content>
                     <v-list-item-title>
                       {{ post.fields.title }}
                     </v-list-item-title>
                   </v-list-item-content>
-                </v-list-item>
+                </v-list-item> -->
               </template>
               <template v-else>
                 <v-list-item class="justify-center">
@@ -99,3 +121,35 @@ export default {
   },
 };
 </script>
+<style>
+.flex {
+  display: flex;
+}
+.title {
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+.subtitle {
+  font-weight: 300;
+  font-size: 42px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+.links {
+  padding-top: 15px;
+}
+.maker {
+  padding: 15px 20px;
+  background-color: #0038c9;
+  border: 1px;
+  color: white;
+  display: block;
+  border-radius: 10px;
+}
+</style>

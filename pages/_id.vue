@@ -4,11 +4,16 @@
       <h1 class="title">
         {{ spike.fields.spikeTitle }}
       </h1>
-      <b-img
-        :src="spike.fields.spikePhoto[0].fields.file.url"
-        fluid-grow
-        alt="Fluid-grow image"
-      ></b-img>
+      <v-carousel>
+        <v-carousel-item
+          v-for="(spikeImg, id) in spike.fields.spikePhoto"
+          :key="id"
+          :src="spike.fields.spikePhoto[id].fields.file.url"
+          reverse-transition="fade-transition"
+          transition="fade-transition"
+          class="kalsel"
+        ></v-carousel-item>
+      </v-carousel>
       <p>参考価格：{{ spike.fields.spikePrice }}（税込）</p>
       <b-button pill variant="outline-secondary">今すぐネットで購入する</b-button>
       <p>{{ spike.fields.spikeDescription }}</p>
@@ -206,7 +211,7 @@ export default Vue.extend({
   padding-top: 15px;
 }
 
-/* ======================================追加============================================= */
+/* ======================================wordpressから追加============================================= */
 
 /*===========
  * タブ１　総合評価Table
@@ -241,5 +246,12 @@ export default Vue.extend({
   table.pb_spec_table td {
     text-align: left;
   }
+}
+
+/* ======================================新規追加============================================= */
+
+.kalsel {
+  width: 50vw;
+  height: 50vh;
 }
 </style>
