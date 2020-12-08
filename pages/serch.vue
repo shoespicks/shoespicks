@@ -28,6 +28,16 @@
       <!-- 2. 絞り込む -->
       <b-form-group label="絞り込み">
         <b-form-checkbox-group
+          v-model="form.status"
+          :options="status"
+          name="item"
+        ></b-form-checkbox-group>
+        <b-form-checkbox-group
+          v-model="form.target"
+          :options="target"
+          name="item"
+        ></b-form-checkbox-group>
+        <b-form-checkbox-group
           v-model="form.environment"
           :options="environment"
           name="item"
@@ -79,6 +89,8 @@ export default Vue.extend({
     return {
       form: {
         name: "",
+        status: [],
+        target: [],
         environment: [],
         events: [],
         price: [],
@@ -90,9 +102,13 @@ export default Vue.extend({
       },
       spikeId: 0,
       spikes: [],
-      environment: [
+      status: [
         { text: "新着", value: "新着" },
+      ],
+      target: [
         { text: "初心者", value: "初心者" },
+      ],
+      environment: [
         { text: "土兼用", value: "土兼用" },
       ],
       events: [
@@ -130,14 +146,18 @@ export default Vue.extend({
     submit(e: Event) {
       e.preventDefault();
 
+      // Step1 エントリ情報を取得する
       const searchInput: { [key: string]: string } = {
-        // Step1 エントリ情報を取得する
         content_type: "spike",
-        // "fields.spikeEvent": this.form.name,
-        //  "fields.spikeEnvironment": this.form.name,
         "fields.alias[match]": this.form.name,
-      }; // Step2　取得情報が複数個ある場合発火する
-      
+      };
+      // Step2　取得情報が複数個ある場合発火する
+      if (this.form.status.length > 0) {
+        searchInput["fields.spikeStatus[all]"] = this.form.status.join(",");
+      }
+      if (this.form.target.length > 0) {
+        searchInput["fields.spikeTarget[all]"] = this.form.target.join(",");
+      }
       if (this.form.environment.length > 0) {
         searchInput["fields.spikeEnvironment[all]"] = this.form.environment.join(",");
       }
@@ -148,7 +168,6 @@ export default Vue.extend({
         e.items?.forEach((item: any, index: number) => {
           console.log(item);
         });
-
         this.spikes = e.items;
       });
     },
@@ -160,7 +179,6 @@ export default Vue.extend({
 .flex {
   display: flex;
 }
-
 .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
@@ -170,7 +188,6 @@ export default Vue.extend({
   color: #35495e;
   letter-spacing: 1px;
 }
-
 .subtitle {
   font-weight: 300;
   font-size: 42px;
@@ -178,7 +195,6 @@ export default Vue.extend({
   word-spacing: 5px;
   padding-bottom: 15px;
 }
-
 .links {
   padding-top: 15px;
 }
