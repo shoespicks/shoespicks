@@ -16,8 +16,10 @@
           <!-- 検索するボタンをクリックした時/@click -->
           <v-btn color="primary" @click="getPosts"> 検索する </v-btn>
         </v-col>
+
         <v-col cols="12">
           検索結果{{ posts.length }}件
+           <Filter />
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title> 検索結果{{ posts.length }}件 </v-list-item-title>
@@ -80,7 +82,13 @@
 
 <script>
 import { contentfulClient } from "~/plugins/contentful";
+
+import filter from "~/components/filter";
+
 export default {
+  components: {
+      filter
+  },
   data() {
     return {
       query: "",

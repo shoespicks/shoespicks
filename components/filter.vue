@@ -30,22 +30,22 @@
         <b-form-checkbox-group
           v-model="form.status"
           :options="status"
-          name="item"
+          name="status"
         ></b-form-checkbox-group>
         <b-form-checkbox-group
           v-model="form.target"
           :options="target"
-          name="item"
+          name="target"
         ></b-form-checkbox-group>
         <b-form-checkbox-group
           v-model="form.environment"
           :options="environment"
-          name="item"
+          name="environment"
         ></b-form-checkbox-group>
          <b-form-checkbox-group
           v-model="form.events"
           :options="events"
-          name="item"
+          name="events"
         ></b-form-checkbox-group>
       </b-form-group>
       <b-btn type="submit">検索</b-btn>
@@ -73,6 +73,7 @@
     <h2 class="maker">アディダス</h2>
     <h2 class="maker">NB</h2>
     <h2 class="maker">NIKE</h2>
+    うんこっこ
   </div>
 </template>
 
@@ -153,6 +154,7 @@ export default Vue.extend({
       };
       // Step2　取得情報が複数個ある場合発火する
       if (this.form.status.length > 0) {
+        // form.statusに入っているvalueを連結して、代入する
         searchInput["fields.spikeStatus[all]"] = this.form.status.join(",");
       }
       if (this.form.target.length > 0) {
