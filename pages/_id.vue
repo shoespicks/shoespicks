@@ -4,14 +4,13 @@
       <h1 class="title">
         {{ spike.fields.spikeTitle }}
       </h1>
-      <v-carousel>
+      <v-carousel :show-arrows="false" hide-delimiter-background show-arrows-on-hover>
         <v-carousel-item
           v-for="(spikeImg, id) in spike.fields.spikePhoto"
           :key="id"
           :src="spike.fields.spikePhoto[id].fields.file.url"
           reverse-transition="fade-transition"
           transition="fade-transition"
-          class="kalsel"
         ></v-carousel-item>
       </v-carousel>
       <p>参考価格：{{ spike.fields.spikePrice }}（税込）</p>
@@ -250,8 +249,8 @@ export default Vue.extend({
 
 /* ======================================新規追加============================================= */
 
-.kalsel {
-  width: 50vw;
-  height: 50vh;
+/* vuetifyの上書き */
+.theme--dark.v-btn.v-btn--icon {
+  color: #327cbe;
 }
 </style>

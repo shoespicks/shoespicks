@@ -6,6 +6,10 @@
 </template>
 
 <script>
+// cssの読み込み
+import "@/assets/css/style.css";
+
+// ヘッダーの読み込み
 import myHeader from "~/components/shared/myHeader";
 
 export default {
