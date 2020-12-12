@@ -1,21 +1,53 @@
-/*==============
-共有
-================*/
+/*==============共通================*/
 * {
-  padding: 0;
-  margin: 0;
+  font-family: "Hiragino Kaku Gothic Pro", sans-serif;
 }
-a {
-  color:#ffffff;
-  text-decoration:none;
+/*==============チャート（BarChart.vue）================*/
+/*==============全ページ共通（default.vue）================*/
+/*==============ヘッダー（myHeader.vue）================*/
+/*==============ヘッダーの検索蘭（searchForm.vue）================*/
+
+/*==============TOPページ（index.vue）================*/
+/*==============検索ページ（search.vue）================*/
+/*==============詳細ページ（_id.vue）================*/
+
+/* wordpressから追加 */
+/*===========
+ * タブ１　総合評価Table
+=============*/
+/* 新規タブ付き総合評価 */
+.sougou-table tbody {
+  display: block;
 }
-li {
-  display:inline;
-  list-style: none;
+.sougou-table tr {
+  display: flex;
 }
-body {
+.sougou-table td {
+  padding: 1% !important;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-left: none;
+}
+.sougou-table td:nth-child(1) {
   color: #fff;
-  text-align: center;
-  box-sizing: border-box;
-  overflow-x: hidden;
+  background-color: #0494c8 !important;
+}
+.sougou-table td:nth-child(2) {
+  text-align: left;
+  padding-left: 3% !important;
+}
+
+/* 総合評価などの tableタイトル*/
+@media only screen and (max-width: 767px) {
+  h3.pb_spec_table_title {
+    padding: 0.6rem;
+  }
+  table.pb_spec_table td {
+    text-align: left;
+  }
+}
+
+/* vuetifyの上書き */
+.theme--dark.v-btn.v-btn--icon {
+  color: #327cbe;
 }

@@ -4,14 +4,13 @@
       <h1 class="title">
         {{ spike.fields.spikeTitle }}
       </h1>
-      <v-carousel>
+      <v-carousel :show-arrows="false" hide-delimiter-background show-arrows-on-hover>
         <v-carousel-item
           v-for="(spikeImg, id) in spike.fields.spikePhoto"
           :key="id"
           :src="spike.fields.spikePhoto[id].fields.file.url"
           reverse-transition="fade-transition"
           transition="fade-transition"
-          class="kalsel"
         ></v-carousel-item>
       </v-carousel>
       <p>参考価格：{{ spike.fields.spikePrice }}（税込）</p>
@@ -209,49 +208,5 @@ export default Vue.extend({
 
 .links {
   padding-top: 15px;
-}
-
-/* ======================================wordpressから追加============================================= */
-
-/*===========
- * タブ１　総合評価Table
-=============*/
-/* 新規タブ付き総合評価 */
-.sougou-table tbody {
-  display: block;
-}
-.sougou-table tr {
-  display: flex;
-}
-.sougou-table td {
-  padding: 1% !important;
-  border: 1px solid #ddd;
-  border-top: none;
-  border-left: none;
-}
-.sougou-table td:nth-child(1) {
-  color: #fff;
-  background-color: #0494c8 !important;
-}
-.sougou-table td:nth-child(2) {
-  text-align: left;
-  padding-left: 3% !important;
-}
-
-/* 総合評価などの tableタイトル*/
-@media only screen and (max-width: 767px) {
-  h3.pb_spec_table_title {
-    padding: 0.6rem;
-  }
-  table.pb_spec_table td {
-    text-align: left;
-  }
-}
-
-/* ======================================新規追加============================================= */
-
-.kalsel {
-  width: 50vw;
-  height: 50vh;
 }
 </style>
