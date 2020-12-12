@@ -209,48 +209,4 @@ export default Vue.extend({
 .links {
   padding-top: 15px;
 }
-
-/* ======================================wordpressから追加============================================= */
-
-/*===========
- * タブ１　総合評価Table
-=============*/
-/* 新規タブ付き総合評価 */
-.sougou-table tbody {
-  display: block;
-}
-.sougou-table tr {
-  display: flex;
-}
-.sougou-table td {
-  padding: 1% !important;
-  border: 1px solid #ddd;
-  border-top: none;
-  border-left: none;
-}
-.sougou-table td:nth-child(1) {
-  color: #fff;
-  background-color: #0494c8 !important;
-}
-.sougou-table td:nth-child(2) {
-  text-align: left;
-  padding-left: 3% !important;
-}
-
-/* 総合評価などの tableタイトル*/
-@media only screen and (max-width: 767px) {
-  h3.pb_spec_table_title {
-    padding: 0.6rem;
-  }
-  table.pb_spec_table td {
-    text-align: left;
-  }
-}
-
-/* ======================================新規追加============================================= */
-
-/* vuetifyの上書き */
-.theme--dark.v-btn.v-btn--icon {
-  color: #327cbe;
-}
 </style>
