@@ -54,14 +54,6 @@
                     </b-badge>
                   </b-card>
                 </div>
-
-                <!-- <v-list-item v-for="(post, i) in posts" :key="i">
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      {{ post.fields.title }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item> -->
               </template>
               <template v-else>
                 <v-list-item class="justify-center">

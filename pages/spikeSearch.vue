@@ -1,10 +1,10 @@
 <template>
   <div>
-    <!-- 井口貴文開発中 -->
-    <b-form @submit="submit">
+    <b-form @submit.prevent="submit">
       <b-form-group>
         <b-form-input type="text" v-model="form.name" placeholder="スパイクで検索"></b-form-input>
       </b-form-group>
+      <!-- 井口貴文開発中 -->
       <!-- １. 表示順を変更する -->
       <!-- <b-form-group label="価格">
         <b-form-radio-group
@@ -42,7 +42,7 @@
           :options="environment"
           name="environment"
         ></b-form-checkbox-group>
-         <b-form-checkbox-group
+        <b-form-checkbox-group
           v-model="form.events"
           :options="events"
           name="events"
@@ -51,28 +51,54 @@
       <b-btn type="submit">検索</b-btn>
     </b-form>
 
-    <h2 class="maker">アシックス</h2>
+    <v-col cols="12">
+      <!-- ロード中のアニメーション -->
+      <template v-if="loading">
+        <div class="text-center">
+          <v-progress-circular indeterminate color="grey" />
+        </div>
+      </template>
+      <!-- 検索結果表示 -->
+      <template v-else>
+        <template v-if="spikes.length">
+          <h2 class="maker">アシックス</h2>
 
-    <div class="flex">
-      <b-card
-        　v-for="spike in spikes"
-        @click="$nuxt.$router.push(spike.fields.id)"
-        :title="spike.fields.spikeTitle"
-        img-alt="Image"
-        style="max-width: 50%"
-        tag="article"
-      >
-        <b-img :src="spike.fields.spikePhoto[0].fields.file.url" fluid-grow alt="スパイク画像">
-        </b-img>
-        <b-badge variant="gray">
-          <p>¥{{ spike.fields.spikePrice }}</p>
-        </b-badge>
-      </b-card>
-    </div>
-    <h2 class="maker">ミズノ</h2>
-    <h2 class="maker">アディダス</h2>
-    <h2 class="maker">NB</h2>
-    <h2 class="maker">NIKE</h2>
+          <div class="flex">
+            <b-card
+              　v-for="spike in spikes"
+              @click="$nuxt.$router.push(spike.fields.id)"
+              :title="spike.fields.spikeTitle"
+              img-alt="Image"
+              style="max-width: 50%"
+              tag="article"
+            >
+              <b-img
+                :src="spike.fields.spikePhoto[0].fields.file.url"
+                fluid-grow
+                alt="スパイク画像"
+              >
+              </b-img>
+              <b-badge variant="gray">
+                <p>¥{{ spike.fields.spikePrice }}</p>
+              </b-badge>
+            </b-card>
+          </div>
+          <h2 class="maker">ミズノ</h2>
+          <h2 class="maker">アディダス</h2>
+          <h2 class="maker">NB</h2>
+          <h2 class="maker">NIKE</h2>
+        </template>
+        <template v-else>
+          <v-list-item class="justify-center">
+            <div class="text-center">
+              <p>検索結果{{ spikes.length }}件</p>
+              <p>キーワードに一致する投稿がありません。</p>
+              <v-icon> mdi-emoticon-cry-outline </v-icon>
+            </div>
+          </v-list-item>
+        </template>
+      </template>
+    </v-col>
   </div>
 </template>
 
@@ -102,15 +128,9 @@ export default Vue.extend({
       },
       spikeId: 0,
       spikes: [],
-      status: [
-        { text: "新着", value: "新着" },
-      ],
-      target: [
-        { text: "初心者", value: "初心者" },
-      ],
-      environment: [
-        { text: "土兼用", value: "土兼用" },
-      ],
+      status: [{ text: "新着", value: "新着" }],
+      target: [{ text: "初心者", value: "初心者" }],
+      environment: [{ text: "土兼用", value: "土兼用" }],
       events: [
         { text: "100m", value: "100m" },
         { text: "200m", value: "200m" },
