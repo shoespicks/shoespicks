@@ -2,7 +2,7 @@
   <v-container fluid>
     <!-- 検索フォーム上でエンターを押した時/@submit -->
     <v-form @submit.prevent="getPosts">
-      <v-row align="center">
+      <v-row align>
         <v-col cols="12" sm="10" md="8">
           <v-text-field
             v-model="query"
@@ -19,7 +19,6 @@
 
         <v-col cols="12">
           検索結果{{ posts.length }}件
-           <Filter />
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title> 検索結果{{ posts.length }}件 </v-list-item-title>
@@ -83,12 +82,7 @@
 <script>
 import { contentfulClient } from "~/plugins/contentful";
 
-import filter from "~/components/filter";
-
 export default {
-  components: {
-      filter
-  },
   data() {
     return {
       query: "",

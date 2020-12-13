@@ -73,7 +73,6 @@
     <h2 class="maker">アディダス</h2>
     <h2 class="maker">NB</h2>
     <h2 class="maker">NIKE</h2>
-    うんこっこ
   </div>
 </template>
 

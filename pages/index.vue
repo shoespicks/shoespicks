@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <p @click="$nuxt.$router.push('search')">
+    <p @click="$nuxt.$router.push('spikeSearch')">
       <b-btn>検索する</b-btn>
     </p>
   </div>
