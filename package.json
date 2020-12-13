@@ -52,6 +52,7 @@
     "sass-loader": "^9.0.2",
     "ts-jest": "^26.1.0",
     "vue-jest": "^3.0.4",
-    "vuex-module-decorators": "^0.17.0"
+    "vuex-module-decorators": "^0.17.0",
+    "vue-loader": "^15.7.2"
   }
 }
