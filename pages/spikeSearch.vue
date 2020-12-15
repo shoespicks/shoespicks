@@ -6,27 +6,26 @@
       </b-form-group>
       <!-- 井口貴文開発中 -->
       <!-- １. 表示順を変更する -->
-      <!-- <b-form-group label="価格">
+      <b-form-group label="価格">
         <b-form-radio-group
-          v-model="form.name"
+          v-model="form.sort.price"
           :options="price"
           class="mb-3"
           value-field="item"
           text-field="name"
         ></b-form-radio-group>
       </b-form-group>
-      <b-form-group label="軽さ">
+      <!-- <b-form-group label="軽さ">
         <b-form-radio-group
-          v-model="form.name"
+          v-model="form.sort.weight"
           :options="weight"
           class="mb-3"
           value-field="item"
           text-field="name"
         ></b-form-radio-group>
       </b-form-group> -->
-
       <!-- 2. 絞り込む -->
-      <b-form-group label="絞り込み">
+      <b-form-group label="絞り込む">
         <b-form-checkbox-group
           v-model="form.status"
           :options="status"
@@ -53,13 +52,13 @@
 
     <v-col cols="12">
       <!-- ロード中のアニメーション -->
-      <template v-if="loading">
+      <!-- <template v-if="loading">
         <div class="text-center">
           <v-progress-circular indeterminate color="grey" />
         </div>
-      </template>
+      </template> -->
       <!-- 検索結果表示 -->
-      <template v-else>
+      <!-- <template v-else> -->
         <template v-if="spikes.length">
           <h2 class="maker">アシックス</h2>
 
@@ -97,7 +96,7 @@
             </div>
           </v-list-item>
         </template>
-      </template>
+      <!-- </template> -->
     </v-col>
   </div>
 </template>
@@ -119,12 +118,14 @@ export default Vue.extend({
         target: [],
         environment: [],
         events: [],
-        price: [],
-        weight: [],
-        width: [],
-        resilience: [],
-        angle: [],
-        grip: [],
+        sort: {
+          price: [],
+          weight: [],
+          width: [],
+          resilience: [],
+          angle: [],
+          grip: [],
+        }
       },
       spikeId: 0,
       spikes: [],
@@ -137,24 +138,24 @@ export default Vue.extend({
         { text: "400m", value: "400m" },
       ],
       price: [
-        { item: "A", name: "安い順" },
-        { item: "B", name: "高い順" },
+        { item: "L", name: "安い順" },
+        { item: "H", name: "高い順" },
       ],
       weight: [
-        { item: "C", name: "軽い順" },
-        { item: "D", name: "重い順" },
+        { item: "L", name: "軽い順" },
+        { item: "H", name: "重い順" },
       ],
       width: [
-        { item: "C", name: "広い順" },
-        { item: "D", name: "狭い順" },
+        { item: "H", name: "広い順" },
+        { item: "L", name: "狭い順" },
       ],
       resilience: [
-        { item: "C", name: "高い順" },
-        { item: "D", name: "低い順" },
+        { item: "H", name: "高い順" },
+        { item: "L", name: "低い順" },
       ],
       angle: [
-        { item: "C", name: "高い順" },
-        { item: "D", name: "低い順" },
+        { item: "H", name: "高い順" },
+        { item: "L", name: "低い順" },
       ],
       grip: [
         { item: "C", name: "高い順" },
@@ -166,12 +167,30 @@ export default Vue.extend({
     submit(e: Event) {
       e.preventDefault();
 
-      // Step1 エントリ情報を取得する
-      const searchInput: { [key: string]: string } = {
+      // 機能０ 検索窓で検索する
+      var searchInput: { [key: string]: string } = {
         content_type: "spike",
         "fields.alias[match]": this.form.name,
       };
-      // Step2　取得情報が複数個ある場合発火する
+      // 機能１　並び替え
+      // if (this.form.sort.price.length > 0) {
+        if (this.form.sort.price[0] == "H") {
+          var searchInput: { [key: string]: string } = {
+            content_type: "spike",
+            order: "-fields.spikePrice"
+          };
+          console.log("Highが取得できたよ！");
+        }
+        else if (this.form.sort.price[0] == "L") {
+          var searchInput: { [key: string]: string } = {
+            content_type: "spike",
+            order: "fields.spikePrice"
+          };
+          console.log("Lowが取得できたよ！");
+        }
+      // }
+
+      // 機能２　絞り込む　チェックボックスで選ばれたものを検索する
       if (this.form.status.length > 0) {
         // form.statusに入っているvalueを連結して、代入する
         searchInput["fields.spikeStatus[all]"] = this.form.status.join(",");
