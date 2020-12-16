@@ -175,18 +175,10 @@ export default Vue.extend({
       // 機能１　並び替え
       // if (this.form.sort.price.length > 0) {
         if (this.form.sort.price[0] == "H") {
-          var searchInput: { [key: string]: string } = {
-            content_type: "spike",
-            order: "-fields.spikePrice"
-          };
-          console.log("Highが取得できたよ！");
+          searchInput["order"] = "-fields.spikePrice";
         }
         else if (this.form.sort.price[0] == "L") {
-          var searchInput: { [key: string]: string } = {
-            content_type: "spike",
-            order: "fields.spikePrice"
-          };
-          console.log("Lowが取得できたよ！");
+          searchInput["order"] = "fields.spikePrice";
         }
       // }
 
