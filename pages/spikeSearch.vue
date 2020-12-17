@@ -173,14 +173,46 @@ export default Vue.extend({
         "fields.alias[match]": this.form.name,
       };
       // 機能１　並び替え
-      // if (this.form.sort.price.length > 0) {
-        if (this.form.sort.price[0] == "H") {
+      //  for(var key in grip) {
+      //       console.log(key);
+      //     }
+      // Object.keys(sort).forEach(function (value){
+      //   console.log(value + ":" + this[value]);
+      // }, sort)
+
+      // for (let i = 0; i < this.form.sort.price.length; i++) {
+
+      // }
+      // サンプル３
+      for (var key in this.form.sort) {
+        console.log("このKEYは： " + key);
+        var arr = "this.form.sort." + key + "[0]";
+        console.log("この総合arrは： " + arr);
+        if (arr == "H") {
           searchInput["order"] = "-fields.spikePrice";
         }
-        else if (this.form.sort.price[0] == "L") {
+        else if (arr == "L") {
           searchInput["order"] = "fields.spikePrice";
         }
-      // }
+      }
+      // サンプル２
+      // Object.keys(this.form.sort).forEach(function (value){
+      //   console.log(value + ":" + [value]);
+      //   if (form.sort.value == "H") {
+      //     searchInput["order"] = "-fields.spikePrice";
+      //   }
+      //   else if (value == "L") {
+      //     searchInput["order"] = "fields.spikePrice";
+      //   }
+      // }, this.form.sort)
+
+      // サンプル１
+        // if (this.form.sort.price[0] == "H") {
+        //   searchInput["order"] = "-fields.spikePrice";
+        // }
+        // else if (this.form.sort.price[0] == "L") {
+        //   searchInput["order"] = "fields.spikePrice";
+        // }
 
       // 機能２　絞り込む　チェックボックスで選ばれたものを検索する
       if (this.form.status.length > 0) {
