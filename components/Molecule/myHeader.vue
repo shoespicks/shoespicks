@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import searchForm from "../ui/searchForm";
+import searchForm from "../Atom/searchForm";
 export default {
   components: {
     searchForm,

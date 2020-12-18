@@ -10,7 +10,7 @@
 import "@/assets/css/style.css";
 
 // ヘッダーの読み込み
-import myHeader from "~/components/shared/myHeader";
+import myHeader from "~/components/Molecule/myHeader";
 
 export default {
   components: {
