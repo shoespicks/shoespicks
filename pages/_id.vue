@@ -140,7 +140,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { contentfulClient } from "~/plugins/contentful";
-import BarChart from "@/components/BarChart.vue";
+import BarChart from "@/components/Molecule/BarChart.vue";
 
 interface Data {
   spikeId: number;
