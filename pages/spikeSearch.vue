@@ -2,7 +2,7 @@
   <div>
     <b-form @submit.prevent="submit">
       <b-form-group>
-        <b-form-input type="text" v-model="form.name" placeholder="スパイクで検索"></b-form-input>
+        <b-form-input type="text" v-model="form.name" placeholder="スパイクで検索" autofocus></b-form-input>
       </b-form-group>
       <!-- 井口貴文開発中 -->
       <!-- １. 表示順を変更する -->
