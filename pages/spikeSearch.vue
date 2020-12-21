@@ -120,11 +120,11 @@ export default Vue.extend({
         events: [],
         sort: {
           price: [],
-          weight: [],
-          width: [],
-          resilience: [],
-          angle: [],
-          grip: [],
+          // weight: [],
+          // width: [],
+          // resilience: [],
+          // angle: [],
+          // grip: [],
         }
       },
       spikeId: 0,
@@ -158,8 +158,8 @@ export default Vue.extend({
         { item: "L", name: "低い順" },
       ],
       grip: [
-        { item: "C", name: "高い順" },
-        { item: "D", name: "低い順" },
+        { item: "H", name: "高い順" },
+        { item: "L", name: "低い順" },
       ],
     };
   },
@@ -173,46 +173,30 @@ export default Vue.extend({
         "fields.alias[match]": this.form.name,
       };
       // 機能１　並び替え
-      //  for(var key in grip) {
-      //       console.log(key);
-      //     }
-      // Object.keys(sort).forEach(function (value){
-      //   console.log(value + ":" + this[value]);
-      // }, sort)
-
-      // for (let i = 0; i < this.form.sort.price.length; i++) {
-
-      // }
-      // サンプル３
-      for (var key in this.form.sort) {
-        console.log("このKEYは： " + key);
-        var arr = "this.form.sort." + key + "[0]";
-        console.log("この総合arrは： " + arr);
-        if (arr == "H") {
-          searchInput["order"] = "-fields.spikePrice";
-        }
-        else if (arr == "L") {
-          searchInput["order"] = "fields.spikePrice";
-        }
-      }
-      // サンプル２
-      // Object.keys(this.form.sort).forEach(function (value){
-      //   console.log(value + ":" + [value]);
-      //   if (form.sort.value == "H") {
+      // サンプル1
+      // for (var key in this.form.sort) {
+      //   var arr = "this.form.sort." + key + "[0]";
+      //   if (arr == "H") {
       //     searchInput["order"] = "-fields.spikePrice";
+      //     console.log("Hが正常に出たよ！");
       //   }
-      //   else if (value == "L") {
+      //   else if (arr == "L") {
       //     searchInput["order"] = "fields.spikePrice";
       //   }
-      // }, this.form.sort)
+      //   else {
+      //     console.log("ここはelse　" + arr);
+      //   }
+      //   console.log("失敗しね！！");
+      // }
 
-      // サンプル１
-        // if (this.form.sort.price[0] == "H") {
-        //   searchInput["order"] = "-fields.spikePrice";
-        // }
-        // else if (this.form.sort.price[0] == "L") {
-        //   searchInput["order"] = "fields.spikePrice";
-        // }
+      // サンプル2
+        if (this.form.sort.price[0] == "H") {
+          searchInput["order"] = "-fields.spikePrice";
+        }
+        else if (this.form.sort.price[0] == "L") {
+          searchInput["order"] = "fields.spikePrice";
+        }
+
 
       // 機能２　絞り込む　チェックボックスで選ばれたものを検索する
       if (this.form.status.length > 0) {
