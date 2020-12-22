@@ -10,20 +10,56 @@
         <b-form-radio-group
           v-model="form.sort.price"
           :options="price"
+          class="mb-2"
+          value-field="item"
+          text-field="name"
+        ></b-form-radio-group>
+      </b-form-group>
+      <b-form-group label="軽さ">
+        <b-form-radio-group
+          v-model="form.sort.weight"
+          :options="weight"
+          class="mb-2"
+          value-field="item"
+          text-field="name"
+        ></b-form-radio-group>
+      </b-form-group>
+      <b-form-group label="広さ">
+        <b-form-radio-group
+          v-model="form.sort.width"
+          :options="width"
+          class="mb-2"
+          value-field="item"
+          text-field="name"
+        ></b-form-radio-group>
+      </b-form-group>
+      <b-form-group label="反発">
+        <b-form-radio-group
+          v-model="form.sort.resilience"
+          :options="resilience"
+          class="mb-2"
+          value-field="item"
+          text-field="name"
+        ></b-form-radio-group>
+      </b-form-group>
+      <b-form-group label="角度">
+        <b-form-radio-group
+          v-model="form.sort.angle"
+          :options="angle"
+          class="mb-2"
+          value-field="item"
+          text-field="name"
+        ></b-form-radio-group>
+      </b-form-group>
+      <b-form-group label="グリップ性">
+        <b-form-radio-group
+          v-model="form.sort.grip"
+          :options="grip"
           class="mb-3"
           value-field="item"
           text-field="name"
         ></b-form-radio-group>
       </b-form-group>
-      <!-- <b-form-group label="軽さ">
-        <b-form-radio-group
-          v-model="form.sort.weight"
-          :options="weight"
-          class="mb-3"
-          value-field="item"
-          text-field="name"
-        ></b-form-radio-group>
-      </b-form-group> -->
       <!-- 2. 絞り込む -->
       <b-form-group label="絞り込む">
         <b-form-checkbox-group
@@ -120,11 +156,11 @@ export default Vue.extend({
         events: [],
         sort: {
           price: [],
-          // weight: [],
-          // width: [],
-          // resilience: [],
-          // angle: [],
-          // grip: [],
+          weight: [],
+          width: [],
+          resilience: [],
+          angle: [],
+          grip: [],
         }
       },
       spikeId: 0,
@@ -175,28 +211,23 @@ export default Vue.extend({
       // 機能１　並び替え
       // サンプル1
       // for (var key in this.form.sort) {
-      //   var arr = "this.form.sort." + key + "[0]";
-      //   if (arr == "H") {
+      //   if ( arr == "H") {
       //     searchInput["order"] = "-fields.spikePrice";
       //     console.log("Hが正常に出たよ！");
       //   }
-      //   else if (arr == "L") {
+      //   else if ( arr == "L") {
       //     searchInput["order"] = "fields.spikePrice";
       //   }
-      //   else {
-      //     console.log("ここはelse　" + arr);
-      //   }
-      //   console.log("失敗しね！！");
+      //   console.log("失敗しね！！" + arr);
       // }
 
       // サンプル2
-        if (this.form.sort.price[0] == "H") {
-          searchInput["order"] = "-fields.spikePrice";
-        }
-        else if (this.form.sort.price[0] == "L") {
-          searchInput["order"] = "fields.spikePrice";
-        }
-
+      if (this.form.sort.price[0] == "H") {
+        searchInput["order"] = "-fields.spikePrice";
+      }
+      else if (this.form.sort.price[0] == "L") {
+        searchInput["order"] = "fields.spikePrice";
+      }
 
       // 機能２　絞り込む　チェックボックスで選ばれたものを検索する
       if (this.form.status.length > 0) {
