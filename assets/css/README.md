@@ -49,6 +49,10 @@
 　 Sec ＞ Wrap ＞ Con ＞ Box
 
 5-2 　役割を示す名前
+　　　　名前読んだら、何を表しているか分かる命名
+　　　　英単語２語〜３語
+　　　　キャメルケース
+
 　　例: 共通部分の場合
 　　　　要素・文字囲い　 spacL spaceM spaceS
 　　　　文字サイズ textL textM textS textSub
@@ -62,14 +66,14 @@
 　　例：index.vue のトップページの場合
 　　　　種目で選ぶ: .menuEvent
 　　　　ランキングで選ぶ: .menuRanking
-　　例：serch.vue のスパイク図鑑ページの場合
+　　例：spikeSerch.vue のスパイク図鑑ページの場合
 　　　　フィルター : .filter
 　　　　メーカーロゴ :　.makerLogo
 　　　　スパイクリスト: .spikeImg, .spikePrice, .spikeTitle
 　　例: \_id.vue の詳細ページ
-　　　　レビュー: .review
-　　　　比較チャート: .chart
-　　　　基本情報: .detail
-　　　　一流選手: .voice
-　　　　商品紹介: .product
-　　　　おすすめ: .recommend
+　　　　レビュー: .pubReview
+　　　　比較チャート: .cmpChart
+　　　　基本情報: .detailInfo
+　　　　一流選手: .playerVoice
+　　　　商品紹介: .productDetail
+　　　　おすすめ: .recommendType

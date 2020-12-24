@@ -8,21 +8,21 @@
   min-height: 100vh;
   max-width: 800px;
 }
-
-.title {
-  display: block;
-  font-weight: 300;
-  font-size: 60px;
-  color: #35495e;
-  letter-spacing: 1px;
+html {
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
 }
 
 /* =================================================layouts================================================= */
@@ -32,14 +32,42 @@
 /* =========Atom========= */
 /*==ヘッダーの検索蘭（searchForm.vue）==*/
 
+/*==購入ボタン（purchase.vue）==*/
+.purchaseBtn {
+  font-weight: 600;
+  font-size: 16px;
+  background: linear-gradient(to bottom, #ffd800, #e2be00) !important;
+  border-color: #ffd900;
+  color: #fff;
+  padding: 10px 25px 15px;
+  border-radius: 20px;
+}
+.purchaseBtn:hover {
+  color: #ffd900;
+  background: #fff !important;
+  border-color: #ffd900;
+}
+
 /* =========Molecule========= */
 /*==チャート（BarChart.vue）==*/
 /*==ヘッダー（myHeader.vue）==*/
+.backTopLink {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 1.25rem;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*==ヘッダー（myFooter.vue）==*/
 
 /* =========Organism========= */
 
 /* =================================================pages================================================= */
 /*==TOPページ（index.vue）==*/
+
 /*==検索ページ（spikeSearch.vue）==*/
 .flex {
   display: flex;
@@ -54,44 +82,45 @@
 }
 
 /*==詳細ページ（_id.vue）==*/
+.itemTitle {
+  display: block;
+  font-weight: 300;
+  font-size: 20px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
 
-/* wordpressから追加 */
-/*===========
- * タブ１　総合評価Table
-=============*/
-/* 新規タブ付き総合評価 */
-.sougou-table tbody {
+/* スパイク情報表 */
+.basicInfo {
+  border-collapse: collapse;
+  width: 99.7709%;
+  height: 243px;
+}
+.basicInfo tbody {
   display: block;
 }
-.sougou-table tr {
+.basicInfo tr {
   display: flex;
 }
-.sougou-table td {
+.basicInfo td {
   padding: 1% !important;
   border: 1px solid #ddd;
   border-top: none;
   border-left: none;
 }
-.sougou-table td:nth-child(1) {
+.basicInfo td:nth-child(1) {
+  text-align: center;
   color: #fff;
   background-color: #0494c8 !important;
+  width: 25%;
 }
-.sougou-table td:nth-child(2) {
+.basicInfo td:nth-child(2) {
   text-align: left;
   padding-left: 3% !important;
+  width: 75%;
 }
 
-/* 総合評価などの tableタイトル*/
-@media only screen and (max-width: 767px) {
-  h3.pb_spec_table_title {
-    padding: 0.6rem;
-  }
-  table.pb_spec_table td {
-    text-align: left;
-  }
-}
-
-/* vuetifyの上書き */
+/* カルーセルの３点 */
 .theme--dark.v-btn.v-btn--icon {
-  color: #327cbe;
+  color: #327cbe; /* vuetifyの上書き */
 }

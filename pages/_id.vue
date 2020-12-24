@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <h1 class="title">
+      <h1 class="itemTitle">
         {{ spike.fields.spikeTitle }}
       </h1>
       <v-carousel :show-arrows="false" hide-delimiter-background show-arrows-on-hover>
@@ -14,7 +14,7 @@
         ></v-carousel-item>
       </v-carousel>
       <p>参考価格：{{ spike.fields.spikePrice }}（税込）</p>
-      <b-button pill variant="outline-secondary">今すぐネットで購入する</b-button>
+      <PurchaseBtn />
       <p>{{ spike.fields.spikeDescription }}</p>
 
       <div>
@@ -27,53 +27,44 @@
 
                 <h2>基本情報</h2>
 
-                <table
-                  class="sougou-table"
-                  style="border-collapse: collapse; width: 99.7709%; height: 243px"
-                >
+                <table class="basicInfo">
                   <tbody>
                     <tr>
-                      <td style="width: 26.092%">定価価格</td>
-                      <td style="width: 73.908%">{{ spike.fields.spikePrice }}円（税込）</td>
+                      <td>定価価格</td>
+                      <td>{{ spike.fields.spikePrice }}円（税込）</td>
                     </tr>
                     <tr>
-                      <td style="width: 26.092%">重さ</td>
-                      <td style="width: 73.908%">
-                        片足{{ spike.fields.spikeWeightNumber }}（26cm）
-                      </td>
+                      <td>重さ</td>
+                      <td>片足{{ spike.fields.spikeWeightNumber }}（26cm）</td>
                     </tr>
                     <tr>
-                      <td style="width: 26.092%">対応種目</td>
-                      <td style="width: 73.908%">{{ spike.fields.spikeEvent }}</td>
+                      <td>対応種目</td>
+                      <td>{{ spike.fields.spikeEvent }}</td>
                     </tr>
                     <tr>
-                      <td style="width: 26.092%">サイズ</td>
-                      <td style="width: 73.908%">
-                        {{ spike.fields.spikeMinSiza }}cm〜{{ spike.fields.spikeMaxSize }}cm
-                      </td>
+                      <td>サイズ</td>
+                      <td>{{ spike.fields.spikeMinSiza }}cm〜{{ spike.fields.spikeMaxSize }}cm</td>
                     </tr>
                     <tr>
-                      <td style="width: 26.092%">対応環境</td>
-                      <td style="width: 73.908%">{{ spike.fields.spikeEnvironment }}</td>
+                      <td>対応環境</td>
+                      <td>{{ spike.fields.spikeEnvironment }}</td>
                     </tr>
                     <tr>
-                      <td style="width: 26.092%">アッパー素材</td>
-                      <td style="width: 73.908%">{{ spike.fields.spikeUpperMaterial }}</td>
+                      <td>アッパー素材</td>
+                      <td>{{ spike.fields.spikeUpperMaterial }}</td>
                     </tr>
                     <tr>
-                      <td style="width: 26.092%">ソール素材</td>
-                      <td style="width: 73.908%">{{ spike.fields.spikeSoleMaterial }}</td>
+                      <td>ソール素材</td>
+                      <td>{{ spike.fields.spikeSoleMaterial }}</td>
                     </tr>
                     <tr>
-                      <td style="width: 26.092%">備考</td>
-                      <td style="width: 73.908%">
-                        {{ spike.fields.spikePinLength }}mm{{ spike.fields.spikePinType }}
-                      </td>
+                      <td>備考</td>
+                      <td>{{ spike.fields.spikePinLength }}mm{{ spike.fields.spikePinType }}</td>
                     </tr>
                   </tbody>
                 </table>
 
-                <b-button pill variant="outline-secondary">今すぐネットで購入する</b-button>
+                <PurchaseBtn />
 
                 <h2>一流選手に聞いてみた！</h2>
                 <div
@@ -124,7 +115,7 @@
                 <h2>こんな人にオススメ</h2>
                 <p>{{ spike.fields.spikeRecomend }}</p>
 
-                <b-button pill variant="outline-secondary">今すぐネットで購入する</b-button>
+                <PurchaseBtn />
               </b-card-text>
             </b-tab>
             <b-tab title="口コミ">
@@ -141,6 +132,7 @@
 import Vue from "vue";
 import { contentfulClient } from "~/plugins/contentful";
 import BarChart from "@/components/Molecule/BarChart.vue";
+import purchaseBtn from "@/components/Atom/purchaseBtn.vue";
 
 interface Data {
   spikeId: number;
@@ -180,4 +172,3 @@ export default Vue.extend({
   methods: {},
 });
 </script>
-
