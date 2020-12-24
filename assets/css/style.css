@@ -2,6 +2,29 @@
 * {
   font-family: "Hiragino Kaku Gothic Pro", sans-serif;
 }
+
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 800px;
+}
+
+.title {
+  display: block;
+  font-weight: 300;
+  font-size: 60px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 42px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+
 /* =================================================layouts================================================= */
 /*==全ページ共通（default.vue）==*/
 
@@ -15,10 +38,21 @@
 
 /* =========Organism========= */
 
-
 /* =================================================pages================================================= */
 /*==TOPページ（index.vue）==*/
 /*==検索ページ（spikeSearch.vue）==*/
+.flex {
+  display: flex;
+}
+.maker {
+  padding: 15px 20px;
+  background-color: #0038c9;
+  border: 1px;
+  color: white;
+  display: block;
+  border-radius: 10px;
+}
+
 /*==詳細ページ（_id.vue）==*/
 
 /* wordpressから追加 */

@@ -2,7 +2,12 @@
   <div>
     <b-form @submit.prevent="submit">
       <b-form-group>
-        <b-form-input type="text" v-model="form.name" placeholder="スパイクで検索" autofocus></b-form-input>
+        <b-form-input
+          type="text"
+          v-model="form.name"
+          placeholder="スパイクで検索"
+          autofocus
+        ></b-form-input>
       </b-form-group>
       <!-- 井口貴文開発中 -->
       <!-- １. 表示順を変更する -->
@@ -95,43 +100,39 @@
       </template> -->
       <!-- 検索結果表示 -->
       <!-- <template v-else> -->
-        <template v-if="spikes.length">
-          <h2 class="maker">アシックス</h2>
+      <template v-if="spikes.length">
+        <h2 class="maker">アシックス</h2>
 
-          <div class="flex">
-            <b-card
-              　v-for="spike in spikes"
-              @click="$nuxt.$router.push(spike.fields.id)"
-              :title="spike.fields.spikeTitle"
-              img-alt="Image"
-              style="max-width: 50%"
-              tag="article"
-            >
-              <b-img
-                :src="spike.fields.spikePhoto[0].fields.file.url"
-                fluid-grow
-                alt="スパイク画像"
-              >
-              </b-img>
-              <b-badge variant="gray">
-                <p>¥{{ spike.fields.spikePrice }}</p>
-              </b-badge>
-            </b-card>
+        <div class="flex">
+          <b-card
+            　v-for="spike in spikes"
+            @click="$nuxt.$router.push(spike.fields.id)"
+            :title="spike.fields.spikeTitle"
+            img-alt="Image"
+            style="max-width: 50%"
+            tag="article"
+          >
+            <b-img :src="spike.fields.spikePhoto[0].fields.file.url" fluid-grow alt="スパイク画像">
+            </b-img>
+            <b-badge variant="gray">
+              <p>¥{{ spike.fields.spikePrice }}</p>
+            </b-badge>
+          </b-card>
+        </div>
+        <h2 class="maker">ミズノ</h2>
+        <h2 class="maker">アディダス</h2>
+        <h2 class="maker">NB</h2>
+        <h2 class="maker">NIKE</h2>
+      </template>
+      <template v-else>
+        <v-list-item class="justify-center">
+          <div class="text-center">
+            <p>検索結果{{ spikes.length }}件</p>
+            <p>キーワードに一致する投稿がありません。</p>
+            <v-icon> mdi-emoticon-cry-outline </v-icon>
           </div>
-          <h2 class="maker">ミズノ</h2>
-          <h2 class="maker">アディダス</h2>
-          <h2 class="maker">NB</h2>
-          <h2 class="maker">NIKE</h2>
-        </template>
-        <template v-else>
-          <v-list-item class="justify-center">
-            <div class="text-center">
-              <p>検索結果{{ spikes.length }}件</p>
-              <p>キーワードに一致する投稿がありません。</p>
-              <v-icon> mdi-emoticon-cry-outline </v-icon>
-            </div>
-          </v-list-item>
-        </template>
+        </v-list-item>
+      </template>
       <!-- </template> -->
     </v-col>
   </div>
@@ -161,7 +162,7 @@ export default Vue.extend({
           resilience: [],
           angle: [],
           grip: [],
-        }
+        },
       },
       spikeId: 0,
       spikes: [],
@@ -224,8 +225,7 @@ export default Vue.extend({
       // サンプル2
       if (this.form.sort.price[0] == "H") {
         searchInput["order"] = "-fields.spikePrice";
-      }
-      else if (this.form.sort.price[0] == "L") {
+      } else if (this.form.sort.price[0] == "L") {
         searchInput["order"] = "fields.spikePrice";
       }
 
@@ -253,36 +253,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style>
-.flex {
-  display: flex;
-}
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-.links {
-  padding-top: 15px;
-}
-.maker {
-  padding: 15px 20px;
-  background-color: #0038c9;
-  border: 1px;
-  color: white;
-  display: block;
-  border-radius: 10px;
-}
-</style>
