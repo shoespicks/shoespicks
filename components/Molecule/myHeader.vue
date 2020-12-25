@@ -5,7 +5,7 @@
         {{ siteName }}
       </nuxt-link>
       <v-spacer />
-      <Searchform />
+      <search-form />
     </v-app-bar>
   </div>
 </template>
