@@ -114,8 +114,7 @@
 
                 <h2>こんな人にオススメ</h2>
                 <p>{{ spike.fields.spikeRecomend }}</p>
-
-                <PurchaseBtn />
+                <div @click="externalLink"><PurchaseBtn /></div>
               </b-card-text>
             </b-tab>
             <b-tab title="口コミ">
@@ -169,6 +168,11 @@ export default Vue.extend({
     return { spikeId: spike.sys.id, spike };
   },
   created() {},
-  methods: {},
+  methods: {
+    externalLink() {
+      const url = this.spike.fields.amazonURL;
+      window.open(url, "_blank");
+    },
+  },
 });
 </script>
