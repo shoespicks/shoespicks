@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <h1 class="itemTitle">
-        {{ spike.fields.spikeTitle }}
+        {{ spike.fields.spikeMaker[0] }}<br />{{ spike.fields.spikeTitle }} 評価レビュー
       </h1>
       <v-carousel :show-arrows="false" hide-delimiter-background show-arrows-on-hover>
         <v-carousel-item
@@ -14,7 +14,7 @@
         ></v-carousel-item>
       </v-carousel>
       <p>参考価格：{{ spike.fields.spikePrice }}（税込）</p>
-      <PurchaseBtn />
+      <div @click="externalLink"><PurchaseBtn /></div>
       <p>{{ spike.fields.spikeDescription }}</p>
 
       <div>
@@ -64,7 +64,7 @@
                   </tbody>
                 </table>
 
-                <PurchaseBtn />
+                <div @click="externalLink"><PurchaseBtn /></div>
 
                 <h2>一流選手に聞いてみた！</h2>
                 <div
