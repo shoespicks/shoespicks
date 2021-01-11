@@ -14,7 +14,7 @@
         ></v-carousel-item>
       </v-carousel>
       <p>参考価格：{{ spike.fields.spikePrice }}（税込）</p>
-      <div @click="externalLink"><PurchaseBtn /></div>
+      <purchaseBtn :url="spike.fields.amazonURL"></purchaseBtn>
       <p>{{ spike.fields.spikeDescription }}</p>
 
       <div>
@@ -64,7 +64,7 @@
                   </tbody>
                 </table>
 
-                <div @click="externalLink"><PurchaseBtn /></div>
+                <purchaseBtn :url="spike.fields.amazonURL"></purchaseBtn>
 
                 <h2>一流選手に聞いてみた！</h2>
                 <div
@@ -114,7 +114,7 @@
 
                 <h2>こんな人にオススメ</h2>
                 <p>{{ spike.fields.spikeRecomend }}</p>
-                <div @click="externalLink"><PurchaseBtn /></div>
+                <purchaseBtn :url="spike.fields.amazonURL"></purchaseBtn>
               </b-card-text>
             </b-tab>
             <b-tab title="口コミ">
@@ -141,6 +141,7 @@ interface Data {
 export default Vue.extend({
   components: {
     BarChart,
+    purchaseBtn,
   },
   data(): Data {
     return {
@@ -168,11 +169,5 @@ export default Vue.extend({
     return { spikeId: spike.sys.id, spike };
   },
   created() {},
-  methods: {
-    externalLink() {
-      const url = this.spike.fields.amazonURL;
-      window.open(url, "_blank");
-    },
-  },
 });
 </script>
