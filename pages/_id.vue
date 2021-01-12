@@ -22,7 +22,7 @@
           <b-tabs card>
             <b-tab title="詳細" active>
               <b-card-text>
-                <BarChart />
+                <barChart :parameter="spike"></barChart>
                 <b-button pill variant="primary">他の靴と比較する</b-button>
 
                 <h2>基本情報</h2>

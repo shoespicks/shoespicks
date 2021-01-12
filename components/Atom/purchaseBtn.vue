@@ -14,7 +14,6 @@ export default {
   props: ["url"],
   methods: {
     externalLink() {
-      // this.＝このclass内の変数を指定するもの
       window.open(this.url, "_blank");
     },
   },
