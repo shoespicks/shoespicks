@@ -38,7 +38,7 @@ html {
   font-size: 16px;
   background: linear-gradient(to bottom, #ffd800, #e2be00) !important;
   border-color: #ffd900;
-  color: #fff;
+  color: #fff !important;
   padding: 10px 25px 15px;
   border-radius: 20px;
 }
@@ -51,14 +51,18 @@ html {
 /* =========Molecule========= */
 /*==チャート（BarChart.vue）==*/
 /*==ヘッダー（myHeader.vue）==*/
-.backTopLink {
-  text-decoration: none;
-  color: rgba(0, 0, 0, 0.87);
-  font-size: 1.25rem;
-  line-height: 1.5;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.navBar {
+  background-color: #0a1921 !important;
+}
+.humbargerMenu {
+  color: #fff !important;
+}
+.logoLink {
+  position: absolute;
+  right: 1vw;
+}
+.serviceLogo {
+  height: 6.2vh;
 }
 
 /*==ヘッダー（myFooter.vue）==*/
