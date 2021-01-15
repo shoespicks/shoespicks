@@ -1,8 +1,5 @@
 <template>
   <div class="container">
-    <p @click="$nuxt.$router.push('spikeSearch')">
-      <b-btn>検索する</b-btn>
-    </p>
 
     <section class="topView">
       <h1>シューズ選びにこだわりを</h1>
@@ -21,7 +18,8 @@
       <!-- よく検索されているスパイクを上位５つくらい表示する
       おそらくsys.date　的なやつで検索履歴に残っているやつでできる気がする -->
       <h2>よく見られているスパイク | 短距離</h2>
-      <h2>よく見られているスパイク | 中距離</h2>
+      <h2>よく見られているスパイク | 中
+        距離</h2>
 
     </section>
 

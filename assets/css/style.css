@@ -71,6 +71,44 @@ html {
 
 /* =================================================pages================================================= */
 /*==TOPページ（index.vue）==*/
+/* section 1 */
+.topView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  background-color: gray;
+  color: white;
+}
+.topView h1 {
+  font-weight: 900;
+  font-size: 1.5rem !important;
+}
+/* section 2 */
+.topSearchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90vw;
+  background-color: gainsboro;
+  padding: 10%;
+  margin: 0 auto;
+}
+.btn {
+  background-color: #2D80F7 !important;
+  color: white !important;
+  border-color: #2D80F7 !important;
+}
+/* section 3 */
+.commonlySeen h2 {
+  font-size: 2.5vh;
+}
+
+/* section 4 */
+
+/*  このサイトの使い方の文字色　#437BB9 */
+
+
 
 /*==検索ページ（spikeSearch.vue）==*/
 .flex {
