@@ -3,7 +3,7 @@ import { Radar } from "vue-chartjs";
 import { contentfulClient } from "~/plugins/contentful";
 export default {
   // 親（id.vue）からspikeの情報を取得
-  props: ["parameter"],
+  props: ["parameter", "parameter2"],
   // チャートを5角形に設定
   extends: Radar,
   data() {
@@ -20,6 +20,17 @@ export default {
               this.parameter.fields.spikeAngle,
               this.parameter.fields.spikeGlip,
               this.parameter.fields.spikeResilience,
+            ],
+          },
+          {
+            label: ["Data two"],
+            backgroundColor: "rgba(254,147,0, 0.4)",
+            data: [
+              this.parameter2.fields.spikeWeight,
+              this.parameter2.fields.spikeWidth,
+              this.parameter2.fields.spikeAngle,
+              this.parameter2.fields.spikeGlip,
+              this.parameter2.fields.spikeResilience,
             ],
           },
         ],
