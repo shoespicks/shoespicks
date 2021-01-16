@@ -65,8 +65,36 @@ html {
   height: 6.2vh;
 }
 
-/*==ヘッダー（myFooter.vue）==*/
+/*==フッター（myFooter.vue）==*/
+.bgFooter {
+  width: 100vw;
+  padding: 4vw 1vw;
+  color: #fff;
+  background-color: #0a1921 !important;
+}
+.bgFooter a,
+.bgFooter li {
+  list-style-type: none;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+.sepLine {
+  /* SNSと堺の線 */
+  width: 80vw;
+  height: 0.4vw;
+  background-color: #fff;
+  margin: 1.5vw 0;
+}
 
+.socialBox {
+  margin: 0.3vw 0;
+}
+
+.socialicon {
+  width: 48px;
+  margin-right: 1.2vw;
+}
 /* =========Organism========= */
 
 /* =================================================pages================================================= */
@@ -98,11 +126,25 @@ html {
   padding: 10%;
   margin: 0 auto;
 }
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+.btn {
+  background-color: #2d80f7 !important;
+  color: white !important;
+  border-color: #2d80f7 !important;
+}
+=======
+>>>>>>> Stashed changes
 /* .testtest {
   background-color: #2D80F7 !important;
   color: white !important;
   border-color: #2D80F7 !important;
 } */
+<<<<<<< Updated upstream
+=======
+>>>>>>> 7b8ad34438864aa5611562904d019a2e0b2de046
+>>>>>>> Stashed changes
 /* section 3 */
 .commonlySeen {
   padding: 24vw 0 10vw;
@@ -114,8 +156,6 @@ html {
 /* section 4 */
 
 /*  このサイトの使い方の文字色　#437BB9 */
-
-
 
 /*==検索ページ（spikeSearch.vue）==*/
 .flex {
