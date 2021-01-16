@@ -86,6 +86,10 @@ html {
 }
 /* section 2 */
 .topSearchBar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,12 +98,15 @@ html {
   padding: 10%;
   margin: 0 auto;
 }
-.btn {
+/* .testtest {
   background-color: #2D80F7 !important;
   color: white !important;
   border-color: #2D80F7 !important;
-}
+} */
 /* section 3 */
+.commonlySeen {
+  padding: 24vw 0 10vw;
+}
 .commonlySeen h2 {
   font-size: 2.5vh;
 }
