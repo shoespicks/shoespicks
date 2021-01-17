@@ -77,8 +77,11 @@ html {
   list-style-type: none;
   text-decoration: none;
   color: #fff;
+}
+.bgFooter ul {
   font-weight: 600;
 }
+
 .sepLine {
   /* SNSと堺の線 */
   width: 80vw;
@@ -87,13 +90,9 @@ html {
   margin: 1.5vw 0;
 }
 
-.socialBox {
-  margin: 0.3vw 0;
-}
-
-.socialicon {
+.socialicon img {
   width: 48px;
-  margin-right: 1.2vw;
+  margin:0.3vw 1.2vw 0.3vw 0;
 }
 /* =========Organism========= */
 

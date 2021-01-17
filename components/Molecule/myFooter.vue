@@ -15,24 +15,15 @@
       </a>
       <div class="sepLine"></div>
       <li>SNS</li>
-      <div class="socialBox">
+      <div class="socialicon">
         <a href="https://www.youtube.com/?gl=JP">
-          <img
-            class="socialicon"
-            src="@/assets//img/socialicon/IG_Glyph_Fill.png"
-            alt="Instgramロゴ"
-          />
+          <img src="@/assets//img/socialicon/IG_Glyph_Fill.png" alt="Instgramロゴ" />
+        </a>
+        <a href="https://www.youtube.com/?gl=JP">
+          <img src="@/assets//img/socialicon/f_logo_RGB-Blue_58.png" alt="facebookロゴ" />
         </a>
         <a href="https://www.youtube.com/?gl=JP">
           <img
-            class="socialicon"
-            src="@/assets//img/socialicon/f_logo_RGB-Blue_58.png"
-            alt="facebookロゴ"
-          />
-        </a>
-        <a href="https://www.youtube.com/?gl=JP">
-          <img
-            class="socialicon"
             src="@/assets//img/socialicon/Twitter_Social_Icon_Circle_Color.png"
             alt="Twitterロゴ"
           />
@@ -42,7 +33,9 @@
     <p>©︎2021 Einja, Inc. All Rights Received</p>
     <p>利用規約</p>
     <p>プライバシーポリシー</p>
-    <p>運営会社</p>
+    <a href="https://moyashitaro.github.io/einja/">
+      <p>運営会社</p>
+    </a>
   </div>
 </template>
 <script>
