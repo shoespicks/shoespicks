@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> 
     <b-form @submit.prevent="submit">
       <b-form-group>
         <b-form-input type="text" v-model="form.name" placeholder="スパイクで検索" autofocus></b-form-input>
@@ -132,6 +132,7 @@
             </div>
           </v-list-item>
         </template>
+        <div>propsのitemは　 {{ user_code }}　です</div>
       <!-- </template> -->
     </v-col>
   </div>
@@ -146,6 +147,9 @@ interface Data {
 }
 
 export default Vue.extend({
+  props: {
+    user_code: String
+  },
   data() {
     return {
       form: {
@@ -200,6 +204,9 @@ export default Vue.extend({
     };
   },
   methods: {
+    test () {
+      console.log("testでたよ");
+    },
     submit(e: Event) {
       e.preventDefault();
 
@@ -252,4 +259,9 @@ export default Vue.extend({
     },
   },
 });
+if (process.browser) {
+  window.onload = function () {
+    
+  };
+}
 </script>

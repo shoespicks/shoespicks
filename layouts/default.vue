@@ -15,5 +15,10 @@ export default {
     myHeader,
     myFooter,
   },
+  head: {
+    bodyAttrs: {
+      onload: "test"
+    }
+  }
 };
 </script>

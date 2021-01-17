@@ -17,12 +17,14 @@
           v-model="events"
           :options="options">
         </b-form-select>
-          <!-- <b-form-checkbox-group
-            v-model="form.status"
-            :options="status"
-            name="status"
-          ></b-form-checkbox-group> -->
-       <b-btn type="submit">検索</b-btn>
+<!-- console.log('afterEach起動成功！！'); -->
+       <b-btn @click="$nuxt.$router.push({
+          name: 'spikeSearch',
+          params: {
+            user_code: events
+          }
+        }).catch(() => {})">検索
+       </b-btn>
       </b-form>
     </section>
 
@@ -53,7 +55,7 @@ export default Vue.extend({
       events: [],
       options: [
           { value: '100m', text: "100m" },
-          { value: '200m', text: "200" },
+          { value: '200m', text: "200m" },
           { value: '110mh', text: "110mハードル" },
           { value: '400m', text: "400m" },
         ]
