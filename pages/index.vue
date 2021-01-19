@@ -11,12 +11,22 @@
       <!-- <p @click="$nuxt.$router.push('spikeSearch')">
         <b-btn>検索する</b-btn>
       </p> -->
-      <b-form @submit.prevent="submit">
+      <b-form>
         <!-- 2. 絞り込む -->
-        <b-form-select 
+        <b-form-select
           v-model="events"
-          :options="options">
+          :options="options"
+          >
         </b-form-select>
+        <!-- <b-form-select name="" id="">
+          <template #first>
+            <b-form-select-option :value="null" disabled>こだわり</b-form-select-option>
+          </template>
+          <b-form-select-option value="C">価格</b-form-select-option>
+          <b-form-select-option value="C">反発</b-form-select-option>
+          <b-form-select-option value="C">軽さ</b-form-select-option>
+        </b-form-select> -->
+
 <!-- console.log('afterEach起動成功！！'); -->
        <b-btn @click="$nuxt.$router.push({
           name: 'spikeSearch',
@@ -52,12 +62,33 @@ export default Vue.extend({
   data() {
     return {
       spikes: [],
-      events: [],
+      events: null,
       options: [
-          { value: '100m', text: "100m" },
-          { value: '200m', text: "200m" },
-          { value: '110mh', text: "110mハードル" },
-          { value: '400m', text: "400m" },
+        { value: null, text: '種目', disabled: true },
+          {
+            label: '短距離',
+            options: [
+              { value: '100m', text: '100m' },
+              { value: '200m', text: '200m' },
+              { value: '400m', text: '400m' },
+              { value: '110mH', text: '110mH' }
+            ]
+          },
+          {
+            label: '中距離',
+            options: [
+              { value: '800m', text: '800m' },
+              { value: '1500m', text: '1500m' },
+            ]
+          },
+          {
+            label: '長距離',
+            options: [
+              { value: '3000m', text: '3000m' },
+              { value: '5000m', text: '5000m' },
+              { value: '10000m', text: '10000m' },
+            ]
+          },
         ]
     };
   },

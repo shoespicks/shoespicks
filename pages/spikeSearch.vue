@@ -204,9 +204,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    test () {
-      console.log("testでたよ");
-    },
     submit(e: Event) {
       e.preventDefault();
 
@@ -261,6 +258,7 @@ export default Vue.extend({
 });
 if (process.browser) {
   window.onload = function () {
+    console.log("ここのOnloadは機能したよ");
     
   };
 }
