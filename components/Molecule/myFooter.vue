@@ -1,41 +1,44 @@
 <template>
   <div class="bgFooter">
-    <ul>
-      <nuxt-link to="/">
-        <li>TOPへ</li>
-      </nuxt-link>
-      <nuxt-link to="/spikeSearch">
-        <li>スパイク図鑑</li>
-      </nuxt-link>
-      <nuxt-link to="/spikeCompare">
-        <li>こだわり比較</li>
-      </nuxt-link>
-      <a href="https://note.com/smartdash">
-        <li>SMART DASH</li>
+    <div class="socialicon">
+      <p>SNSをフォローして最新情報をチェック！！</p>
+      <a href="https://www.youtube.com/?gl=JP">
+        <img src="@/assets//img/socialicon/IG_Glyph_Fill.png" alt="Instgram" />
       </a>
-      <div class="sepLine"></div>
-      <li>SNS</li>
-      <div class="socialicon">
-        <a href="https://www.youtube.com/?gl=JP">
-          <img src="@/assets//img/socialicon/IG_Glyph_Fill.png" alt="Instgramロゴ" />
-        </a>
-        <a href="https://www.youtube.com/?gl=JP">
-          <img src="@/assets//img/socialicon/f_logo_RGB-Blue_58.png" alt="facebookロゴ" />
-        </a>
-        <a href="https://www.youtube.com/?gl=JP">
-          <img
-            src="@/assets//img/socialicon/Twitter_Social_Icon_Circle_Color.png"
-            alt="Twitterロゴ"
-          />
-        </a>
-      </div>
+      <a href="https://www.youtube.com/?gl=JP">
+        <img src="@/assets//img/socialicon/f_logo_RGB-Blue_58.png" alt="Facebook" />
+      </a>
+      <a href="https://www.youtube.com/channel/UCuEGLSAoPqO7kfIAuwieRuQ/featured">
+        <img src="@/assets//img/socialicon/youtube_social_squircle_red.png" alt="Youtube" />
+      </a>
+      <a href="https://www.youtube.com/?gl=JP">
+        <img src="@/assets//img/socialicon/Twitter_Social_Icon_Circle_Color.png" alt="Twitter" />
+      </a>
+    </div>
+    <ul>
+      <li>無料会員登録｜ログイン</li>
+      <li>
+        <nuxt-link to="/spikeSearch">スパイクを探す</nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/spikeCompare">スパイクを比較する</nuxt-link>
+      </li>
+      <li>
+        <a href="https://note.com/smartdash">SMART DASH</a>
+      </li>
+      <!-- <div class="sepLine"></div> -->
+      <li>
+        <a href="https://moyashitaro.github.io/einja/">運営会社</a>
+      </li>
+      <li>利用規約</li>
+      <li><nuxt-link to="/privacy">プライバシーポリシー</nuxt-link></li>
+      <li>©︎2021 Einja, Inc. All Rights Received</li>
     </ul>
-    <p>©︎2021 Einja, Inc. All Rights Received</p>
-    <p>利用規約</p>
-    <p>プライバシーポリシー</p>
-    <a href="https://moyashitaro.github.io/einja/">
-      <p>運営会社</p>
-    </a>
+    <div class="brandLogo">
+      <nuxt-link to="/">
+        <img src="@/assets/img/ShoesPicksLogo.png" alt="ShoesPicks" />ShoesPicks
+      </nuxt-link>
+    </div>
   </div>
 </template>
 <script>

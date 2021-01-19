@@ -57,43 +57,48 @@ html {
 .humbargerMenu {
   color: #fff !important;
 }
-.logoLink {
-  position: absolute;
-  right: 1vw;
-}
-.serviceLogo {
-  height: 6.2vh;
-}
 
 /*==フッター（myFooter.vue）==*/
 .bgFooter {
   width: 100vw;
-  padding: 4vw 1vw;
+  padding: 5vw 7vw;
+  font-size: 3.2vw;
   color: #fff;
   background-color: #0a1921 !important;
 }
+.brandLogo {
+  text-align: center;
+  font-weight: 600;
+}
+.brandLogo img {
+  height: 6.2vh;
+}
 .bgFooter a,
-.bgFooter li {
+li {
   list-style-type: none;
   text-decoration: none;
   color: #fff;
+  line-height: 200%;
 }
-.bgFooter ul {
+.bgFooter ul > li:first-of-type {
   font-weight: 600;
 }
+.socialicon {
+  text-align: center;
+  font-weight: 600;
+}
+.socialicon img {
+  width: 48px;
+  margin: 2vw 2vw 6vw 2vw;
+}
 
-.sepLine {
-  /* SNSと堺の線 */
+/* .sepLine {
+  SNSと堺の線
   width: 80vw;
   height: 0.4vw;
   background-color: #fff;
   margin: 1.5vw 0;
-}
-
-.socialicon img {
-  width: 48px;
-  margin:0.3vw 1.2vw 0.3vw 0;
-}
+} */
 /* =========Organism========= */
 
 /* =================================================pages================================================= */
