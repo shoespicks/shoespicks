@@ -31,7 +31,18 @@ html {
 /* ================================================components================================================ */
 /* =========Atom========= */
 /*==ヘッダーの検索蘭（searchForm.vue）==*/
+/*==ヘッダーのハンバーガーメニュー（hamburgerMenu.vue）==*/
+.menuBack {
+  background-color: #0a1921 !important;
+}
 
+.sepLine {
+  /* SNSと堺の線 */
+  width: 80vw;
+  height: 0.4vw;
+  background-color: #fff;
+  margin: 1.5vw 0;
+}
 /*==購入ボタン（purchase.vue）==*/
 .purchaseBtn {
   font-weight: 600;
@@ -51,12 +62,6 @@ html {
 /* =========Molecule========= */
 /*==チャート（BarChart.vue）==*/
 /*==ヘッダー（myHeader.vue）==*/
-.navBar {
-  background-color: #0a1921 !important;
-}
-.humbargerMenu {
-  color: #fff !important;
-}
 
 /*==フッター（myFooter.vue）==*/
 .bgFooter {
@@ -92,13 +97,6 @@ li {
   margin: 2vw 2vw 6vw 2vw;
 }
 
-/* .sepLine {
-  SNSと堺の線
-  width: 80vw;
-  height: 0.4vw;
-  background-color: #fff;
-  margin: 1.5vw 0;
-} */
 /* =========Organism========= */
 
 /* =================================================pages================================================= */

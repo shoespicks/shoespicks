@@ -34,13 +34,10 @@
       <li><nuxt-link to="/privacy">プライバシーポリシー</nuxt-link></li>
       <li>©︎2021 Einja, Inc. All Rights Received</li>
     </ul>
-    <div class="brandLogo">
-      <nuxt-link to="/">
-        <img src="@/assets/img/ShoesPicksLogo.png" alt="ShoesPicks" />ShoesPicks
-      </nuxt-link>
-    </div>
+    <ShoesPicksLogo />
   </div>
 </template>
 <script>
+import shoesPicksLogo from "../Atom/shoesPicksLogo";
 export default {};
 </script>
