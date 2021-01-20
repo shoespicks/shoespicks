@@ -1,6 +1,6 @@
 <template>
   <div> 
-    <b-form @submit.prevent="submit">
+    <b-form @submit.prevent="submit" onload="submit()">
       <b-form-group>
         <b-form-input type="text" v-model="form.name" placeholder="スパイクで検索" autofocus></b-form-input>
       </b-form-group>

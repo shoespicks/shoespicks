@@ -64,7 +64,7 @@ export default Vue.extend({
       spikes: [],
       events: null,
       options: [
-        { value: null, text: '種目', disabled: true },
+        { value: null, text: '種目', disabled: true},
           {
             label: '短距離',
             options: [
