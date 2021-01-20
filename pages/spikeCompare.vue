@@ -9,9 +9,14 @@
         </b-form-select>
 
         <div class="mt-2">ID: <strong>{{ spike1 }}</strong></div>
+
+        <section><p>{{ $route.query.spikeName }}</p></section>
+        
       <b-btn type="submit">一覧取得</b-btn>
+
     </b-form>
     <b-form @submit.prevent="submit2">
+
       <b-btn type="submit2">検索</b-btn>
       <b-card
         　v-for="spike in spikes2"
@@ -20,22 +25,29 @@
         style="max-width: 50%"
         tag="article"
       >
-        <barChart :parameter="spike" :parameter2="spike"></barChart>
+        <!-- <barChart :parameter="query" :parameter2="query"></barChart> -->
+      
       </b-card>
     </b-form>
+    <section><p>{{spikes2}}</p></section>
+    <barChart v-if="spikes2" :parameter="spike" :parameter2="spikes2"></barChart>
   </div>
 </template>
 
 <script lang="ts">
-import { contentfulClient } from "~/plugins/contentful";
 import Vue from "vue";
+import { contentfulClient } from "~/plugins/contentful";
 import BarChart from "@/components/Molecule/BarChart.vue";
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
 interface Data {
   spikeId: number;
+  spike: any,
   spikes: any;
   spikes2: any;
   spike1: any;
+  query: any,
 }
 
 export default Vue.extend({
@@ -46,14 +58,40 @@ export default Vue.extend({
   data(): Data {
     return {
       spikeId: 0,
+      spike:{},
       spikes: [],
       spikes2: [],
       spike1: null,
+      query: this.$route.query.spikeName,
     };
   },
+
+async asyncData({ payload, query }) {
+    const spike = !!payload
+      ? payload
+      : await contentfulClient
+          .getEntries({
+            content_type: "spike",
+            "fields.id": query.spikeName,
+            // "fields.id": params.id,
+          })
+          .then((e: any) => {
+            e.items?.forEach((item: any, index: number) => {
+              console.log(index + "つめdayo");
+              console.log(item);
+            });
+             return e.items[0];
+          });
+    return { spikeId: spike.sys.id, spike };
+  },
+
+  created(){
+    const thisQuery = this.$route.query.spikeName
+  },
+
   methods: {
     submit(e: Event) {
-      e.preventDefault();
+      // e.preventDefault();
 
       var searchInput: { [key: string]: string } = {
         content_type: "spike",
@@ -61,14 +99,14 @@ export default Vue.extend({
       };
       contentfulClient.getEntries(searchInput).then((e: any) => {
         e.items?.forEach((item: any, index: number) => {
-          console.log(item);
+          // console.log(item);
         });
         this.spikes = e.items;
       });
     },
-    submit2(e: Event) {
-      e.preventDefault();
 
+    submit2(e: Event) {
+      // e.preventDefault();
       var searchInput: { [key: string]: string } = {
         content_type: "spike",
         // "fields.id[match]": this.form.name,
@@ -76,10 +114,18 @@ export default Vue.extend({
       };
       contentfulClient.getEntries(searchInput).then((e: any) => {
         e.items?.forEach((item: any, index: number) => {
-          console.log(item);
+          // console.log(item);
         });
         this.spikes2 = e.items;
+        // [
+        //   e.items.fields.spikeWeight,
+        //   e.items.fields.spikeWidth,
+        //   e.items.fields.spikeAngle,
+        //   e.items.fields.spikeGlip,
+        //   e.items.fields.spikeResilience,
+        //   ];
       });
+      
     },
   },
 });

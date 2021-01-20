@@ -23,7 +23,13 @@
             <b-tab title="詳細" active>
               <b-card-text>
                 <barChart :parameter="spike" :parameter2="spike"></barChart>
-                <b-button pill variant="primary">他の靴と比較する</b-button>
+                
+                <!-- <NuxtLink to="/spikeCompare">
+                <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
+                </NuxtLink> -->
+                <router-link :to="{ name: 'spikeCompare', query: {spikeName: spike.fields.id}}">
+                <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
+                </router-link>
 
                 <h2>基本情報</h2>
 
@@ -132,6 +138,9 @@ import Vue from "vue";
 import { contentfulClient } from "~/plugins/contentful";
 import BarChart from "@/components/Molecule/BarChart.vue";
 import purchaseBtn from "@/components/Atom/purchaseBtn.vue";
+import spikeCompareVue from "./spikeCompare.vue";
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
 interface Data {
   spikeId: number;
@@ -170,4 +179,20 @@ export default Vue.extend({
   },
   created() {},
 });
+
+
+//compareをルーティング
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/spikecompare:',
+      name: 'spikeCompare',
+      component: spikeCompareVue
+    }
+  ]
+})
+
+
 </script>
+
+

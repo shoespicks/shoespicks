@@ -21,16 +21,24 @@ export default {
               this.parameter.fields.spikeGlip,
               this.parameter.fields.spikeResilience,
             ],
+            // default: null
           },
+
           {
             label: ["Data two"],
             backgroundColor: "rgba(254,147,0, 0.4)",
             data: [
-              this.parameter2.fields.spikeWeight,
-              this.parameter2.fields.spikeWidth,
-              this.parameter2.fields.spikeAngle,
-              this.parameter2.fields.spikeGlip,
-              this.parameter2.fields.spikeResilience,
+              this.parameter2[0],
+              this.parameter2[1],
+              this.parameter2[2],
+              this.parameter2[3],
+              this.parameter2[4]
+              
+              // this.parameter2.fields.spikeWeight,
+              // this.parameter2.fields.spikeWidth,
+              // this.parameter2.fields.spikeAngle,
+              // this.parameter2.fields.spikeGlip,
+              // this.parameter2.fields.spikeResilience,
             ],
           },
         ],
