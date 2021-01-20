@@ -1,10 +1,11 @@
 <template>
   <div>
-    <b-form @submit.prevent="submit">
+    <b-form @submit.prevent="submit"><!--プルダウンの入力でリロードしない-->
         <b-form-select v-model="spike1" class="mb-3">
           <b-form-select-option :value="null">選べぇーーー！！</b-form-select-option>
+          <!-- <b-form-select v-model="selected" :options="options"></b-form-select> -->
           <b-form-select-option-group label="Grouped options">
-            <b-form-select-option :value="spike.fields.id" v-for="spike in spikes" :key="spike.fields.id">{{ spike.fields.spikeTitle }}</b-form-select-option>
+          <b-form-select-option :value="spike.fields.id" v-for="spike in spikes" :key="spike.fields.id">{{ spike.fields.spikeTitle }}</b-form-select-option>
           </b-form-select-option-group>
         </b-form-select>
 
@@ -48,6 +49,8 @@ interface Data {
   spikes2: any;
   spike1: any;
   query: any,
+  selected: any;
+  options: any;
 }
 
 export default Vue.extend({
@@ -63,9 +66,21 @@ export default Vue.extend({
       spikes2: [],
       spike1: null,
       query: this.$route.query.spikeName,
+      selected: null,
+      options: [
+        { value: null, text: 'はい。選べ。' },
+        { 
+          label:'Grouped options',
+          options:[
+            { value: 'a', text: 'This is First option' },
+            { value: 'b', text: 'Selected Option' },
+            { value: { C: '3PO' }, text: 'This is an option with object value' },
+            { value: 'd', text: 'This one is disabled', disabled: true },
+          ]}
+      ],
     };
   },
-
+  
 async asyncData({ payload, query }) {
     const spike = !!payload
       ? payload
@@ -77,17 +92,28 @@ async asyncData({ payload, query }) {
           })
           .then((e: any) => {
             e.items?.forEach((item: any, index: number) => {
-              console.log(index + "つめdayo");
-              console.log(item);
+              // console.log(index + "つめdayo");
+              // console.log(item);
             });
              return e.items[0];
           });
-    return { spikeId: spike.sys.id, spike };
+          
+    return { spike };
   },
 
-  created(){
-    const thisQuery = this.$route.query.spikeName
-  },
+  created: function() {
+    console.log("ちなみ");
+    var searchInput: { [key: string]: string } = {
+        content_type: "spike",
+        // "fields.id[match]": this.form.name,
+      };
+      contentfulClient.getEntries(searchInput).then((e: any) => {
+        e.items?.forEach((item: any, index: number) => {
+          // console.log(item);
+        });
+        this.spikes = e.items;
+      });
+    },
 
   methods: {
     submit(e: Event) {
@@ -104,7 +130,6 @@ async asyncData({ payload, query }) {
         this.spikes = e.items;
       });
     },
-
     submit2(e: Event) {
       // e.preventDefault();
       var searchInput: { [key: string]: string } = {
