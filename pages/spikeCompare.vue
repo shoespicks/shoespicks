@@ -1,10 +1,11 @@
 <template>
   <div>
-    <b-form @submit.prevent="submit"><!--プルダウンの入力でリロードしない-->
+    <!-- <b-form @submit.prevent="submit">プルダウンの入力でリロードしない -->
+      <b-form @submit="submit">
         <b-form-select v-model="spike1" class="mb-3">
           <b-form-select-option :value="null">選べぇーーー！！</b-form-select-option>
           <!-- <b-form-select v-model="selected" :options="options"></b-form-select> -->
-          <b-form-select-option-group label="Grouped options">
+          <b-form-select-option-group :label="category">
           <b-form-select-option :value="spike.fields.id" v-for="spike in spikes" :key="spike.fields.id">{{ spike.fields.spikeTitle }}</b-form-select-option>
           </b-form-select-option-group>
         </b-form-select>
@@ -30,8 +31,13 @@
       
       </b-card>
     </b-form>
-    <section><p>{{spikes2}}</p></section>
-    <barChart v-if="spikes2" :parameter="spike" :parameter2="spikes2"></barChart>
+    <section v-if="spikes2">
+      <p>{{spikes2}}</p>
+      <barChart :parameter="spike" :parameter2="spikes2"></barChart>
+    </section>
+    <section v-else>
+      <barChart :parameter="spike"></barChart>
+    </section>
   </div>
 </template>
 
@@ -51,6 +57,7 @@ interface Data {
   query: any,
   selected: any;
   options: any;
+  category: any;
 }
 
 export default Vue.extend({
@@ -67,17 +74,8 @@ export default Vue.extend({
       spike1: null,
       query: this.$route.query.spikeName,
       selected: null,
-      options: [
-        { value: null, text: 'はい。選べ。' },
-        { 
-          label:'Grouped options',
-          options:[
-            { value: 'a', text: 'This is First option' },
-            { value: 'b', text: 'Selected Option' },
-            { value: { C: '3PO' }, text: 'This is an option with object value' },
-            { value: 'd', text: 'This one is disabled', disabled: true },
-          ]}
-      ],
+      options: [{ value: null, text: 'はい。選べ。' },],
+      category: null,
     };
   },
   
@@ -102,15 +100,18 @@ async asyncData({ payload, query }) {
   },
 
   created: function() {
-    console.log("ちなみ");
+    var spikeCategory = this.spike.fields.spikeCategory;
+    // console.log(spikeCategory);
     var searchInput: { [key: string]: string } = {
         content_type: "spike",
-        // "fields.id[match]": this.form.name,
+        // "fields.id": this.spike.name,
+        "fields.spikeCategory[match]": spikeCategory[0],
       };
       contentfulClient.getEntries(searchInput).then((e: any) => {
         e.items?.forEach((item: any, index: number) => {
           // console.log(item);
         });
+        this.category = spikeCategory[0];
         this.spikes = e.items;
       });
     },
@@ -142,15 +143,16 @@ async asyncData({ payload, query }) {
           // console.log(item);
         });
         this.spikes2 = e.items;
+        // console.log(this.spikes2);
+        // this.spikes2.push(
         // [
         //   e.items.fields.spikeWeight,
         //   e.items.fields.spikeWidth,
         //   e.items.fields.spikeAngle,
         //   e.items.fields.spikeGlip,
         //   e.items.fields.spikeResilience,
-        //   ];
+        //   ]);
       });
-      
     },
   },
 });
