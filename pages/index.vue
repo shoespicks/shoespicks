@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
 
     <section class="topView">
       <h1>シューズ選びにこだわりを</h1>
