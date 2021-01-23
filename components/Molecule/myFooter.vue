@@ -31,7 +31,7 @@
       </li>
       <li>利用規約</li>
       <li><nuxt-link to="/privacy">プライバシーポリシー</nuxt-link></li>
-      <li>©︎2021 Einja, Inc. All Rights Received</li>
+      <li>©︎{{ new Date().getFullYear() }} Einja, Inc. All Rights Received</li>
     </ul>
     <ShoesPicksLogo />
   </div>

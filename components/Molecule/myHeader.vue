@@ -5,7 +5,7 @@
         <v-app-bar-nav-icon v-b-toggle.sidebar-backdrop></v-app-bar-nav-icon>
       </v-app-bar>
 
-      <b-sidebar id="sidebar-backdrop" :backdrop-variant="dark" backdrop shadow>
+      <b-sidebar id="sidebar-backdrop" :backdrop-variant="variant" backdrop shadow>
         <ShoesPicksLogo />
         <ul class="hamburger">
           <li>無料会員登録｜ログイン</li>
@@ -59,7 +59,9 @@ export default {
     shoesPicksLogo,
   },
   data() {
-    return {};
+    return {
+      variant: "dark",
+    };
   },
 };
 </script>
