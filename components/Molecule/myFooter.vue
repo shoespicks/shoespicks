@@ -26,7 +26,6 @@
       <li>
         <a href="https://note.com/smartdash">SMART DASH</a>
       </li>
-      <!-- <div class="sepLine"></div> -->
       <li>
         <a href="https://moyashitaro.github.io/einja/">運営会社</a>
       </li>
