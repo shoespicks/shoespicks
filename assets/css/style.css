@@ -142,19 +142,25 @@ html {
   margin: 0 auto;
 }
 
-
-
 /* section 3 */
 .commonlySeen {
-  padding: 33vw 0 10vw;
+  padding: 33vw 3vh 10vw;
 }
 .commonlySeen h2 {
   font-size: 2.5vh;
 }
 
 /* section 4 */
-
 /*  このサイトの使い方の文字色　#437BB9 */
+.howToUse {
+    padding: 0 3vh 0;
+}
+.howToUse h2 {
+  font-size: 4vh;
+  color: #437BB9;
+  font-weight: bold;
+  text-align: center;
+}
 
 /*==検索ページ（spikeSearch.vue）==*/
 .flex {
