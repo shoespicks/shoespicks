@@ -27,7 +27,7 @@
                 <!-- <NuxtLink to="/spikeCompare">
                 <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
                 </NuxtLink> -->
-                <router-link :to="{ name: 'spikeCompare', query: {spikeName: spike.fields.id}}">
+                <router-link :to="{ name: 'spikeCompare', query: {spikeName1: spike.fields.id}}">
                 <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
                 </router-link>
 

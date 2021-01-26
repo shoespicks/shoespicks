@@ -2,11 +2,22 @@
 import { Radar } from "vue-chartjs";
 import { contentfulClient } from "~/plugins/contentful";
 export default {
-  // 親（id.vue）からspikeの情報を取得
-  props: ["parameter", "parameter2"],
-  // チャートを5角形に設定
   extends: Radar,
-  data() {
+  
+  // 親（id.vue）からspikeの情報を取得
+  props: {
+    parameter:{
+      type:Object,
+      default:null,
+      },
+    parameter2:{
+      type:Object,
+      default:null,
+      }
+    },
+  // props: ["parameter", "parameter2"],
+  // チャートを5角形に設定
+  data(parameter, parameter2) {
     return {
       chartdata: {
         labels: ["軽さ", "広さ", "ソールの反り", "グリップ力", "反発性"],
@@ -43,6 +54,7 @@ export default {
           },
         ],
       },
+      
       options: {
         responsive: true,
         maintainAspectRatio: false,
