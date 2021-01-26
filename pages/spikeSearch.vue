@@ -1,6 +1,6 @@
 <template>
   <div> 
-    <b-form @submit.prevent="submit" onload="submit()">
+    <b-form @submit.prevent="submit">
       <b-form-group>
         <b-form-input type="text" v-model="form.name" placeholder="スパイクで検索" autofocus></b-form-input>
       </b-form-group>
@@ -152,6 +152,9 @@ export default Vue.extend({
   },
   data() {
     return {
+      query: "",
+      posts: [],
+      loading: false,
       form: {
         name: "",
         status: [],
@@ -203,10 +206,40 @@ export default Vue.extend({
       ],
     };
   },
+  computed: {
+    isRequired() {
+      return !!this.query && !/^\s+$/.test(this.query);
+    },
+  },
+  watch: {
+    "$route.query.q": {
+      handler(newVal) {
+        this.query = newVal;
+        // クエリーが投げられた一番最初
+        this.getPosts();
+      },
+      immediate: true,
+    },
+  },
   methods: {
+     async getPosts() {
+      // 空白時に検索しない条件式
+      if (this.isRequired) {
+        this.loading = true;
+        await contentfulClient
+          .getEntries({
+            content_type: "spike",
+            query: this.query,
+          })
+          .then(({ items }) => (this.posts = items))
+          .catch(console.error);
+        this.loading = false;
+      }
+    },
+
+    
     submit(e: Event) {
       e.preventDefault();
-
       // 機能０ 検索窓で検索する
       var searchInput: { [key: string]: string } = {
         content_type: "spike",
@@ -224,7 +257,7 @@ export default Vue.extend({
       //   }
       //   console.log("失敗しね！！" + arr);
       // }
-
+      
       // サンプル2
       if (this.form.sort.price[0] == "H") {
         searchInput["order"] = "-fields.spikePrice";
@@ -255,11 +288,13 @@ export default Vue.extend({
       });
     },
   },
+  
 });
+
 if (process.browser) {
   window.onload = function () {
-    console.log("ここのOnloadは機能したよ");
-    
+    // console.log("ここのOnloadは機能したよ");
+  //  submit()
   };
 }
 </script>

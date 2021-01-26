@@ -18,6 +18,7 @@
           :options="options"
           >
         </b-form-select>
+        <searchForm></searchForm>
         <!-- <b-form-select name="" id="">
           <template #first>
             <b-form-select-option :value="null" disabled>こだわり</b-form-select-option>
@@ -57,8 +58,12 @@
 <script lang="ts">
 import { contentfulClient } from "~/plugins/contentful";
 import Vue from "vue";
+import searchForm from "@/components/Atom/searchForm.vue";
 
 export default Vue.extend({
+  components: {
+    searchForm,
+  },
   data() {
     return {
       spikes: [],
