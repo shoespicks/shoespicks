@@ -2,7 +2,12 @@
   <div> 
     <b-form @submit.prevent="submit">
       <b-form-group>
-        <b-form-input type="text" v-model="form.name" placeholder="スパイクで検索" autofocus></b-form-input>
+        <b-form-input 
+        　　type="text"
+        　　v-model="query"
+        　　placeholder="スパイクで検索"
+        　　autofocus>
+        </b-form-input>
       </b-form-group>
       <!-- 井口貴文開発中 -->
       <!-- １. 表示順を変更する -->
@@ -153,7 +158,7 @@ export default Vue.extend({
   data() {
     return {
       query: "",
-      posts: [],
+
       loading: false,
       form: {
         name: "",
@@ -231,19 +236,17 @@ export default Vue.extend({
             content_type: "spike",
             query: this.query,
           })
-          .then(({ items }) => (this.posts = items))
+          .then(({ items }) => (this.spikes = items))
           .catch(console.error);
         this.loading = false;
       }
     },
-
-    
     submit(e: Event) {
       e.preventDefault();
       // 機能０ 検索窓で検索する
       var searchInput: { [key: string]: string } = {
         content_type: "spike",
-        "fields.alias[match]": this.form.name,
+        "fields.alias[match]": this.query,
       };
       // 機能１　並び替え
       // サンプル1
