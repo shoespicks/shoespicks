@@ -1,6 +1,9 @@
 <template>
-  <div class="page">
-    <form class="form" @submit.prevent>
+  <div class="login">
+    <p v-if="user.login" class="text">
+      {{ user }}
+    </p>
+    <form v-else class="form" @submit.prevent>
       <label class="label">
         <span class="label"> email </span>
         <input class="input" type="text" v-model="email" />
@@ -15,9 +18,12 @@
 </template>
 
 <script>
-import firebase from "~/plugins/firebase";
-
 export default {
+  computed: {
+    user() {
+      return this.$store.getters["user"];
+    },
+  },
   data() {
     return {
       email: "",
@@ -25,21 +31,10 @@ export default {
     };
   },
   methods: {
-    // login() {
-    //   firebase
-    //     .auth()
-    //     .signInWithEmailAndPassword(this.email, this.password)
-    //     .then((user) => {
-    //       // eslintがある場合は
-    //       // 引数にuser追加とeslint-disable-lineの記載
-    //       console.log("成功！"); // eslint-disable-line
-    //     })
-    //     .catch((error) => {
-    //       alert(error);
-    //     });
-    // },
     login(email, password) {
-      this.$store.dispatch("login", { email: this.email, password: this.password });
+      if (this.$store.dispatch("login", { email: this.email, password: this.password }))
+        // 成功したら1以上がreturnで帰ってくる
+        this.$router.push("/");
     },
   },
 };
