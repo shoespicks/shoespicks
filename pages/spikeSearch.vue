@@ -20,7 +20,7 @@
           text-field="name"
         ></b-form-radio-group>
       </b-form-group>
-      <b-form-group label="軽さ">
+      <!-- <b-form-group label="軽さ">
         <b-form-radio-group
           v-model="form.sort.weight"
           :options="weight"
@@ -37,7 +37,7 @@
           value-field="item"
           text-field="name"
         ></b-form-radio-group>
-      </b-form-group>
+      </b-form-group> -->
       <!-- <b-form-group label="反発">
         <b-form-radio-group
           v-model="form.sort.resilience"
@@ -158,7 +158,6 @@ export default Vue.extend({
   data() {
     return {
       query: "",
-
       loading: false,
       form: {
         name: "",

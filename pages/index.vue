@@ -29,13 +29,13 @@
         </b-form-select> -->
 
 <!-- console.log('afterEach起動成功！！'); -->
-       <b-btn @click="$nuxt.$router.push({
+       <!-- <b-btn @click="$nuxt.$router.push({
           name: 'spikeSearch',
           params: {
             user_code: events
           }
         }).catch(() => {})">検索
-       </b-btn>
+       </b-btn> -->
       </b-form>
     </section>
 

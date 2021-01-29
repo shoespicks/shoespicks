@@ -11,8 +11,9 @@
        <b-form-select
           v-model="query"
           :options="options"
-          >
+        >
     　</b-form-select>
+      <b-btn @click="submit">検索</b-btn>
     </v-form>
   </div>
 </template>
