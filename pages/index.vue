@@ -30,21 +30,6 @@
           <b-form-select-option value="C">反発</b-form-select-option>
           <b-form-select-option value="C">軽さ</b-form-select-option>
         </b-form-select> -->
-
-        <!-- console.log('afterEach起動成功！！'); -->
-        <b-btn
-          @click="
-            $nuxt.$router
-              .push({
-                name: 'spikeSearch',
-                params: {
-                  user_code: events,
-                },
-              })
-              .catch(() => {})
-          "
-          >検索
-        </b-btn>
       </b-form>
     </section>
 
