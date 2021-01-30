@@ -2,6 +2,7 @@
   <div class="login">
     <p v-if="user.login" class="text">
       {{ user }}
+      <button class="button" type="submit" @click="logout">Logout</button>
     </p>
     <form v-else class="form" @submit.prevent>
       <label class="label">
@@ -35,6 +36,10 @@ export default {
       if (this.$store.dispatch("login", { email: this.email, password: this.password }))
         // 成功したら1以上がreturnで帰ってくる
         this.$router.push("/");
+    },
+    logout() {
+      this.$store.commit("isLogout");
+      this.$router.push("/");
     },
   },
 };
