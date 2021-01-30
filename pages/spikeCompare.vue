@@ -3,23 +3,25 @@
     <!-- <b-form @submit.prevent="submit">プルダウンの入力でリロードしない -->
       <!-- <b-form @submit="submit" action="spikeCompare" method="get"> -->
       <!-- <b-form @submit="submit"> -->
-        <b-form @change="submit">
-        <b-form-select v-model="spike1" class="mb-3">
-          <b-form-select-option :value="null">選択なし</b-form-select-option>
+        <!-- <b-form @change="submit"> -->
+        <b-form-select v-model="spike1" class="mb-3" @change="submit">
+          <b-form-select-option :value="null">{{spike.fields.spiketitle}}</b-form-select-option>
           <b-form-select-option-group :label="category">
+            
           <b-form-select-option :value="selectSpike1.fields.id" v-for="selectSpike1 in spikes" :key="selectSpike1.fields.id">{{ selectSpike1.fields.spikeTitle }}</b-form-select-option>
+
           </b-form-select-option-group>
         </b-form-select>
-      </b-form>
+      <!-- </b-form> -->
       
-      <b-form @change="submit">
-        <b-form-select v-model="spike2" class="mb-3">
+      <!-- <b-form @change="submit"> -->
+        <b-form-select v-model="spike2" class="mb-3" @change="submit">
           <b-form-select-option :value="null">選択なし</b-form-select-option>
           <b-form-select-option-group :label="category">
           <b-form-select-option :value="selectSpike2.fields.id" v-for="selectSpike2 in spikes" :key="selectSpike2.fields.id">{{ selectSpike2.fields.spikeTitle }}</b-form-select-option>
           </b-form-select-option-group>
         </b-form-select>
-      </b-form>
+      <!-- </b-form> -->
 
       <!-- プルダウン選択したタイトルのIDが出る -->
       <div class="mt-2">ID1: <strong>{{ spike1 }}</strong></div>  
@@ -64,15 +66,16 @@ Vue.use(VueRouter)
 
 interface Data {
   spikeId: number;
-  spike: any,
-  spikes: any;
-  selectSpike2: any;
+  spike: any,//spikeName1のデータ
+  spikes: any;//spikeName1のカテゴリに属するスパイクデータ
   spike1: any;
   spike2: any;
   query: any,
   selected: any;
   options: any;
   category: any;
+  parameter1: any;
+  parameter2: any;
 }
 
 export default Vue.extend({
@@ -85,13 +88,14 @@ export default Vue.extend({
       spikeId: 0,
       spike:{},
       spikes: [],
-      selectSpike2: [],
       spike1: this.$route.query.spikeName1,
       spike2: null,
-      query: this.$route.query.spikeName1,
+      query: this.$route.query,
       selected: null,
       options: [{ value: null, text: 'はい。選べ。' },],
-      category: null,
+      category: null,  
+      parameter1: [],
+      parameter2: [],
     };
   },
   
@@ -111,7 +115,7 @@ async asyncData({ payload, query }) {
             });
              return e.items[0];
           });
-          
+          console.log(spike);
     return { spike };
   },
 
@@ -133,29 +137,68 @@ async asyncData({ payload, query }) {
     },
 
   methods: {
-    // submit2(e: Event) {
-    //   // e.preventDefault();
-    //   var searchInput: { [key: string]: string } = {
+    // submit(spike1,spike2){
+    //   var spike1String = String(this.spike1);
+    //   var spike2String = String(this.spike2);
+    //   this.$router.push({query: {spikeName1: spike1String,spikeName2: spike2String}});
+    //   // console.log(this.spikes);
+    //   var searchInput1: { [key: string]: string } = {
     //     content_type: "spike",
-    //     // "fields.id[match]": this.form.name,
-    //     "fields.id[match]": this.spike2,
+    //     "fields.id": this.spike1,
     //   };
-    //   contentfulClient.getEntries(searchInput).then((e: any) => {
+    //   var searchInput2: { [key: string]: string } = {
+    //     content_type: "spike",
+    //     "fields.id": this.spike2,
+    //   };
+
+    //   contentfulClient.getEntries(searchInput1).then((e: any) => {
     //     e.items?.forEach((item: any, index: number) => {
     //       // console.log(item);
+    //       });
+    //       console.log(e.items[0]);
+    //       this.parameter1 = e.items[0];
     //     });
-    //     this.selectSpike2 = e.items;
-    //   });
-      
+
+    //     contentfulClient.getEntries(searchInput2).then((e: any) => {
+    //     e.items?.forEach((item: any, index: number) => {
+    //       });
+    //       console.log(e.items[0]);
+    //       this.parameter2 = e.items[0];
+    //     });
     // },
 
-    submit(spike1,spike2){
+    submit(){
+      console.log(this.spike2);
       var spike1String = String(this.spike1);
       var spike2String = String(this.spike2);
       this.$router.push({query: {spikeName1: spike1String,spikeName2: spike2String}});
       // console.log(this.spikes);
-  
-    }
+      var searchInput1: { [key: string]: string } = {
+        content_type: "spike",
+        "fields.id": this.spike1,
+      };
+      var searchInput2: { [key: string]: string } = {
+        content_type: "spike",
+        "fields.id": this.spike2,
+      };
+
+      contentfulClient.getEntries(searchInput1).then((e: any) => {
+        e.items?.forEach((item: any, index: number) => {
+          // console.log(item);
+          });
+          console.log(e.items[0]);
+          this.parameter1 = e.items[0];
+        });
+
+        contentfulClient.getEntries(searchInput2).then((e: any) => {
+        e.items?.forEach((item: any, index: number) => {
+          });
+          console.log(e.items[0]);
+          this.parameter2 = e.items[0];
+        });
+    },
+
   },
+  
 });
 </script>
