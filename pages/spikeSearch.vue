@@ -137,7 +137,6 @@
             </div>
           </v-list-item>
         </template>
-        <div>propsのitemは　 {{ user_code }}　です</div>
       <!-- </template> -->
     </v-col>
   </div>
@@ -148,13 +147,10 @@ import { contentfulClient } from "~/plugins/contentful";
 import Vue from "vue";
 
 interface Data {
-  spikes: any;
+  spikes: String;
 }
 
 export default Vue.extend({
-  props: {
-    user_code: String
-  },
   data() {
     return {
       query: "",
@@ -212,7 +208,10 @@ export default Vue.extend({
   },
   computed: {
     isRequired() {
-      return !!this.query && !/^\s+$/.test(this.query);
+      // ＆＆前半の読み方：　queryがtrueならの二重否定なのでtrue
+      // ＆＆後半の読み方：　/^\s+$/.test(this.query)　→先頭から末尾にかけて一つ以上ある空白がqueryにあるかチェックします。あればtrue。それの！(否定)なので、空白がなければtrue
+      return !!(this as any).query && !/^\s+$/.test((this as any).query)
+           || !(this as any).query && !/^\s+$/.test((this as any).query);
     },
   },
   watch: {
@@ -235,7 +234,7 @@ export default Vue.extend({
             content_type: "spike",
             query: this.query,
           })
-          .then(({ items }) => (this.spikes = items))
+          .then(({ items }: { items: any }) => (this.spikes = items))
           .catch(console.error);
         this.loading = false;
       }
@@ -292,11 +291,4 @@ export default Vue.extend({
   },
   
 });
-
-if (process.browser) {
-  window.onload = function () {
-    // console.log("ここのOnloadは機能したよ");
-  //  submit()
-  };
-}
 </script>

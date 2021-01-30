@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-form @submit.prevent="submit">
+    <v-form>
       <!-- <v-text-field
         ref="searchForm"
         v-model="query"
@@ -13,7 +13,12 @@
           :options="options"
         >
     　</b-form-select>
-      <b-btn @click="submit">検索</b-btn>
+       <b-form-select
+          v-model="query2"
+          :options="options2"
+        >
+    　</b-form-select>
+      <b-btn @click.prevent="submit">検索</b-btn>
     </v-form>
   </div>
 </template>
@@ -23,6 +28,7 @@ export default {
   data() {
     return {
       query: null,
+      // query2: null,
       options: [
         { value: null, text: '種目', disabled: true},
           {
@@ -49,7 +55,15 @@ export default {
               { value: '10000m', text: '10000m' },
             ]
           },
-      ]
+      ],
+      options2: [
+            { value: null, text: 'メーカー', disabled: true},
+            { value: 'ミズノ', text: 'ミズノ' },
+            { value: 'アシックス', text: 'アシックス' },
+            { value: 'ナイキ', text: 'ナイキ' },
+            { value: 'アディダス', text: 'アディダス' },
+            { value: 'ニューバランス', text: 'ニューバランス' },
+      ],
     };
   },
   computed: {
@@ -66,7 +80,6 @@ export default {
     submit() {
       this.$router.push({ path: "/spikeSearch", query: { q: this.query } });
       this.query = "";
-      this.$refs.searchForm.blur();
     },
   },
 };
