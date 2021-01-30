@@ -44,5 +44,8 @@ export const mutations = {
   },
   switchLogin(state) {
     state.user.login = true;
+  },
+  isLogout(state) {
+    state.user.login = false;
   }
 };

@@ -16,7 +16,7 @@
       </a>
     </div>
     <ul>
-      <li>無料会員登録｜ログイン</li>
+      <li><nuxt-link to="/login">無料会員登録｜ログイン</nuxt-link></li>
       <li>
         <nuxt-link to="/spikeSearch">スパイクを探す</nuxt-link>
       </li>

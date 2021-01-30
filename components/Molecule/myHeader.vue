@@ -8,7 +8,7 @@
       <b-sidebar id="sidebar-backdrop" :backdrop-variant="variant" backdrop shadow>
         <ShoesPicksLogo />
         <ul class="hamburger">
-          <li>無料会員登録｜ログイン</li>
+          <li><nuxt-link to="/login">無料会員登録｜ログイン</nuxt-link></li>
 
           <div class="sepLine"></div>
 
