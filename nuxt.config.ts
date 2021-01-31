@@ -69,5 +69,9 @@ export default {
           });
         });
     }
+  },
+  // ミドルウェアを使ってリロード時にログイン状態の保持
+  router: {
+    middleware: 'reloadCredential'
   }
 };

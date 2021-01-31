@@ -15,6 +15,8 @@
       </label>
       <button class="button" type="submit" @click="login">Login</button>
     </form>
+    <button class="button" type="submit" @click="loginWithTwitter">Twitterでloginする</button>
+    <button class="button" type="submit" @click="loginWithGoogle">googleでloginする</button>
   </div>
 </template>
 
@@ -38,8 +40,16 @@ export default {
         this.$router.push("/");
     },
     logout() {
+      // --------actionsで実装できない--------
+      // this.$store.dispatch("logout");
       this.$store.commit("isLogout");
       this.$router.push("/");
+    },
+    loginWithTwitter() {
+      this.$store.dispatch("loginWithTwitter");
+    },
+    loginWithGoogle() {
+      this.$store.dispatch("loginWithGoogle");
     },
   },
 };

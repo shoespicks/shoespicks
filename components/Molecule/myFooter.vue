@@ -11,7 +11,7 @@
       <a href="https://www.youtube.com/channel/UCuEGLSAoPqO7kfIAuwieRuQ/featured">
         <img src="@/assets//img/socialicon/youtube_social_squircle_red.png" alt="Youtube" />
       </a>
-      <a href="https://www.youtube.com/?gl=JP">
+      <a href="https://twitter.com/PicksShoes">
         <img src="@/assets//img/socialicon/Twitter_Social_Icon_Circle_Color.png" alt="Twitter" />
       </a>
     </div>
