@@ -47,7 +47,11 @@
                     </tr>
                     <tr>
                       <td>対応種目</td>
-                      <td>{{ spike.fields.spikeEvent }}</td>
+                      <td>
+                        <span v-for="spikeEvent in spike.fields.spikeEvent" :key="spikeEvent">
+                          {{ spikeEvent }}/
+                        </span>
+                      </td>
                     </tr>
                     <tr>
                       <td>サイズ</td>
@@ -55,7 +59,7 @@
                     </tr>
                     <tr>
                       <td>対応環境</td>
-                      <td>{{ spike.fields.spikeEnvironment }}</td>
+                      <td>{{ spike.fields.spikeEnvironment[0] }}</td>
                     </tr>
                     <tr>
                       <td>アッパー素材</td>
@@ -67,7 +71,9 @@
                     </tr>
                     <tr>
                       <td>備考</td>
-                      <td>{{ spike.fields.spikePinLength }}mm{{ spike.fields.spikePinType }}</td>
+                      <td>
+                        {{ spike.fields.spikePinLength[0] }}mm {{ spike.fields.spikePinType[0] }}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -135,27 +141,26 @@
                   <p>{{ loginUser }}</p>
                   <img width="50" height="50" :src="loginUser.iconUrl" alt="" />
                   <b-btn @click="logout">ログアウト</b-btn>
+                  <b-form @submit="submitComment">
+                    <b-form-group>
+                      <b-form-input
+                        type="text"
+                        v-model="commentBody"
+                        placeholder="コメントを入力"
+                      ></b-form-input>
+                      {{ commentBody }}
+                    </b-form-group>
+                    <b-btn type="submit">コメントする</b-btn>
+                  </b-form>
                 </div>
 
-                <b-form @submit="submitComment">
-                  <b-form-group>
-                    <b-form-input
-                      type="text"
-                      v-model="commentBody"
-                      placeholder="コメントを入力"
-                    ></b-form-input>
-                    {{ commentBody }}
-                  </b-form-group>
-                  <b-btn type="submit">コメントする</b-btn>
-                </b-form>
-
                 <div v-for="comment in comments" :key="comment.id">
-                  <img
+                  <!-- <img
                     width="50"
                     height="50"
                     v-if="comment.user.iconUrl"
                     :src="comment.user.iconUrl"
-                  />
+                  /> -->
                   <p v-if="comment.user">
                     ユーザ名 : {{ comment.user.displayName }}
                     <span v-if="comment.user.accountName">@{{ comment.user.accountName }}</span>
