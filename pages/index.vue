@@ -16,11 +16,6 @@
       </p> -->
       <b-form>
         <!-- 2. 絞り込む -->
-        <!-- <b-form-select
-          v-model="events"
-          :options="options"
-          >
-        </b-form-select> -->
         <CopySearchForm></CopySearchForm>
         <!-- <b-form-select name="" id="">
           <template #first>
@@ -61,39 +56,6 @@ export default Vue.extend({
     user() {
       return this.$store.getters["user"];
     },
-  },
-  data() {
-    return {
-      spikes: [],
-      events: null,
-      options: [
-        { value: null, text: "種目", disabled: true },
-        {
-          label: "短距離",
-          options: [
-            { value: "100m", text: "100m" },
-            { value: "200m", text: "200m" },
-            { value: "400m", text: "400m" },
-            { value: "110mH", text: "110mH" },
-          ],
-        },
-        {
-          label: "中距離",
-          options: [
-            { value: "800m", text: "800m" },
-            { value: "1500m", text: "1500m" },
-          ],
-        },
-        {
-          label: "長距離",
-          options: [
-            { value: "3000m", text: "3000m" },
-            { value: "5000m", text: "5000m" },
-            { value: "10000m", text: "10000m" },
-          ],
-        },
-      ],
-    };
   },
 });
 </script>

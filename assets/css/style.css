@@ -165,6 +165,7 @@ html {
 /*==検索ページ（spikeSearch.vue）==*/
 .flex {
   display: flex;
+  flex-wrap: wrap;
 }
 .maker {
   padding: 15px 20px;
@@ -173,6 +174,9 @@ html {
   color: white;
   display: block;
   border-radius: 10px;
+}
+.card {
+    width: 46vw;
 }
 
 /*==詳細ページ（_id.vue）==*/
@@ -218,7 +222,6 @@ html {
 .theme--dark.v-btn.v-btn--icon {
   color: #327cbe; /* vuetifyの上書き */
 }
-
 
 @media screen and (min-width: 768px){
   .topSearchBar {
