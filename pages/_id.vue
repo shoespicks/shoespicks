@@ -23,12 +23,14 @@
             <b-tab title="詳細" active>
               <b-card-text>
                 <barChart :parameter="spike" :parameter2="spike"></barChart>
-                
+
                 <!-- <NuxtLink to="/spikeCompare">
                 <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
                 </NuxtLink> -->
-                <router-link :to="{ name: 'spikeCompare', query: {spikeName1: spike.fields.id}}">
-                <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
+                <router-link :to="{ name: 'spikeCompare', query: { spikeName1: spike.fields.id } }">
+                  <b-button pill variant="primary" @click="$nuxt.$router.compare"
+                    >他の靴と比較する</b-button
+                  >
                 </router-link>
 
                 <h2>基本情報</h2>
@@ -124,7 +126,46 @@
               </b-card-text>
             </b-tab>
             <b-tab title="口コミ">
-              <b-card-text>Tab contents 2</b-card-text>
+              <div class="comment">
+                <div v-if="!loginUser">
+                  <b-btn @click="loginWithTwitter">twitterログイン</b-btn>
+                  <b-btn @click="loginWithGoogle">Googleログイン</b-btn>
+                </div>
+                <div v-if="loginUser">
+                  <p>{{ loginUser }}</p>
+                  <img width="50" height="50" :src="loginUser.iconUrl" alt="" />
+                  <b-btn @click="logout">ログアウト</b-btn>
+                </div>
+
+                <b-form @submit="submitComment">
+                  <b-form-group>
+                    <b-form-input
+                      type="text"
+                      v-model="commentBody"
+                      placeholder="コメントを入力"
+                    ></b-form-input>
+                    {{ commentBody }}
+                  </b-form-group>
+                  <b-btn type="submit">コメントする</b-btn>
+                </b-form>
+
+                <div v-for="comment in comments" :key="comment.id">
+                  <img
+                    width="50"
+                    height="50"
+                    v-if="comment.user.iconUrl"
+                    :src="comment.user.iconUrl"
+                  />
+                  <p v-if="comment.user">
+                    ユーザ名 : {{ comment.user.displayName }}
+                    <span v-if="comment.user.accountName">@{{ comment.user.accountName }}</span>
+                  </p>
+                  <p>
+                    コメント : {{ comment.body }}<br />
+                    投稿日時 : {{ comment.date }}
+                  </p>
+                </div>
+              </div>
             </b-tab>
           </b-tabs>
         </b-card>
@@ -139,12 +180,19 @@ import { contentfulClient } from "~/plugins/contentful";
 import BarChart from "@/components/Molecule/BarChart.vue";
 import purchaseBtn from "@/components/Atom/purchaseBtn.vue";
 import spikeCompareVue from "./spikeCompare.vue";
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+// 口コミ用
+import { authStore } from "~/store/index";
+import { commentStore } from "~/store/index";
+import { CommentModel } from "~/store/types/commentEntity";
+
+import VueRouter from "vue-router";
+Vue.use(VueRouter);
 
 interface Data {
   spikeId: number;
   spike: any;
+  commentBody: string;
+  commentName: string;
 }
 
 export default Vue.extend({
@@ -156,6 +204,8 @@ export default Vue.extend({
     return {
       spikeId: 0,
       spike: {},
+      commentBody: "",
+      commentName: "",
     };
   },
   async asyncData({ payload, params }) {
@@ -177,22 +227,73 @@ export default Vue.extend({
 
     return { spikeId: spike.sys.id, spike };
   },
-  created() {},
-});
+  computed: {
+    loginUser() {
+      return authStore.user;
+    },
+    comments(): CommentModel[] | undefined {
+      return commentStore.spikeComments(this.$data.spikeId);
+      // return commentStore.allSpikeComments;
+    },
+  },
+  created() {
+    this.fetchComments();
+  },
+  methods: {
+    submitComment(e: Event) {
+      e.preventDefault();
 
+      commentStore
+        .postSpikeComment({ spikeId: this.spike.sys.id, commentBody: this.commentBody })
+        .then((response: any) => {
+          console.log(response);
+        });
+    },
+
+    fetchComments() {
+      commentStore.fetchSpikeComments(this.spike.sys.id).then((comments) => {
+        console.log(comments);
+      });
+    },
+
+    loginWithTwitter() {
+      authStore
+        .loginWithTwitter()
+        .then((result) => {
+          console.log("clientでも出す");
+          console.log(result);
+        })
+        .catch((e) => {
+          console.log("clientでもエラー出す");
+        });
+    },
+
+    loginWithGoogle() {
+      authStore
+        .loginWithGoogle()
+        .then((result) => {
+          console.log("clientでも出す");
+          console.log(result);
+        })
+        .catch((e) => {
+          console.log("clientでもエラー出す");
+        });
+    },
+
+    logout() {
+      authStore.logout();
+    },
+  },
+});
 
 //compareをルーティング
 const router = new VueRouter({
   routes: [
     {
-      path: '/spikecompare:',
-      name: 'spikeCompare',
-      component: spikeCompareVue
-    }
-  ]
-})
-
-
+      path: "/spikecompare:",
+      name: "spikeCompare",
+      component: spikeCompareVue,
+    },
+  ],
+});
 </script>
-
-

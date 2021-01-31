@@ -21,6 +21,12 @@
 </template>
 
 <script>
+import Vue from "vue";
+import { contentfulClient } from "~/plugins/contentful";
+import { authStore } from "~/store";
+import { commentStore } from "~/store";
+import { CommentModel } from "~/store/types/commentEntity";
+
 export default {
   computed: {
     user() {

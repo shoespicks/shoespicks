@@ -1,9 +1,5 @@
 <template>
   <div>
-    <!-- ////////////ログイン機能検証//////////// -->
-    <p v-if="user.login" class="text">ログインに成功！！！！！！！！うんこ！</p>
-    <p v-else class="text">ログインしてないよ</p>
-    <!-- ////////////ログイン機能検証//////////// -->
     <section class="topView">
       <h1>シューズ選びにこだわりを</h1>
     </section>
@@ -51,11 +47,6 @@ import CopySearchForm from "@/components/Atom/copy-searchForm.vue";
 export default Vue.extend({
   components: {
     CopySearchForm,
-  },
-  computed: {
-    user() {
-      return this.$store.getters["user"];
-    },
   },
 });
 </script>
