@@ -22,13 +22,7 @@
           <b-tabs card>
             <b-tab title="詳細" active>
               <b-card-text>
-<<<<<<< Updated upstream
-                <barChart :parameter="spike" :parameter2="spike"></barChart>
-
-=======
                 <barChart :parameter1="[parameter1]" :parameter2="parameter2"></barChart>
-                
->>>>>>> Stashed changes
                 <!-- <NuxtLink to="/spikeCompare">
                 <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
                 </NuxtLink> -->
@@ -201,13 +195,10 @@ Vue.use(VueRouter);
 interface Data {
   spikeId: number;
   spike: any;
-<<<<<<< Updated upstream
   commentBody: string;
   commentName: string;
-=======
   parameter1: any;
   parameter2: any;
->>>>>>> Stashed changes
 }
 
 export default Vue.extend({
@@ -219,13 +210,10 @@ export default Vue.extend({
     return {
       spikeId: 0,
       spike: {},
-<<<<<<< Updated upstream
       commentBody: "",
       commentName: "",
-=======
       parameter1: [],
       parameter2: null,
->>>>>>> Stashed changes
     };
   },
   async asyncData({ payload, params }) {
@@ -247,7 +235,7 @@ export default Vue.extend({
 
     return { spikeId: spike.sys.id, spike };
   },
-<<<<<<< Updated upstream
+
   computed: {
     loginUser() {
       return authStore.user;
@@ -259,6 +247,13 @@ export default Vue.extend({
   },
   created() {
     this.fetchComments();
+    var spikeWeight1 = this.spike.fields.spikeWeight;
+    var spikeWidth1 = this.spike.fields.spikeWidth;
+    var spikeAngle1 = this.spike.fields.spikeAngle;
+    var spikespikeGlip1 = this.spike.fields.spikeGlip;
+    var spikeResilience1 = this.spike.fields.spikeResilience;
+    this.parameter1 = [spikeWeight1,spikeWidth1,spikeAngle1,spikespikeGlip1,spikeResilience1]
+    console.log(this.parameter1);
   },
   methods: {
     submitComment(e: Event) {
@@ -276,18 +271,6 @@ export default Vue.extend({
         console.log(comments);
       });
     },
-=======
-  created() {
-    var spikeWeight1 = this.spike.fields.spikeWeight;
-    var spikeWidth1 = this.spike.fields.spikeWidth;
-    var spikeAngle1 = this.spike.fields.spikeAngle;
-    var spikespikeGlip1 = this.spike.fields.spikeGlip;
-    var spikeResilience1 = this.spike.fields.spikeResilience;
-    this.parameter1 = [spikeWeight1,spikeWidth1,spikeAngle1,spikespikeGlip1,spikeResilience1]
-    console.log(this.parameter1);
-  },
-});
->>>>>>> Stashed changes
 
     loginWithTwitter() {
       authStore

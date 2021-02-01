@@ -32,6 +32,7 @@ export default {
               backgroundColor: "rgba(6, 147, 200, 0.4)",
               borderColor: "rgba(6, 147, 200, 0.4)",
               fill:"origin",
+              // data: [1,2,3,4,5],
               data: JSON.stringify(parameter1.parameter1),
             }
           ],
