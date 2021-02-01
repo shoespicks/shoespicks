@@ -9,12 +9,13 @@
         dense
       /> -->
        <b-form-select
-          v-model="query"
+          v-model="query[0]"
+          placeholder="種目"
           :options="options"
         >
     　</b-form-select>
        <b-form-select
-          v-model="query2"
+          v-model="query[1]"
           :options="options2"
         >
     　</b-form-select>
@@ -27,10 +28,11 @@
 export default {
   data() {
     return {
-      query: null,
+      query: [],
       // query2: null,
       options: [
-        { value: null, text: '種目', disabled: true},
+        // { value: '種目', text: '種目', disabled: true},
+        { value:'種目', text: '種目', disabled: true, selected: true, style:'display:none;' },
           {
             label: '短距離',
             options: [
@@ -57,7 +59,7 @@ export default {
           },
       ],
       options2: [
-            { value: null, text: 'メーカー', disabled: true},
+            { value: 'メーカー', text: 'メーカー', disabled: true},
             { value: 'ミズノ', text: 'ミズノ' },
             { value: 'アシックス', text: 'アシックス' },
             { value: 'ナイキ', text: 'ナイキ' },
@@ -78,8 +80,9 @@ export default {
   },
   methods: {
     submit() {
-      this.$router.push({ path: "/spikeSearch", query: { q: this.query } });
-      this.query = "";
+      let query = this.query.join('  ');
+      this.$router.push({ path: "/spikeSearch", query: { q: query } });
+      query = "";
     },
   },
 };
