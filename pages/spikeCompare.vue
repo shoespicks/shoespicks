@@ -1,54 +1,26 @@
 <template>
   <div>
     <!-- <b-form @submit.prevent="submit">プルダウンの入力でリロードしない -->
-      <!-- <b-form @submit="submit" action="spikeCompare" method="get"> -->
-      <!-- <b-form @submit="submit"> -->
-        <!-- <b-form @change="submit"> -->
-        <b-form-select v-model="spike1" class="mb-3" @change="submit">
-          <b-form-select-option :value="null">{{spike.fields.spiketitle}}</b-form-select-option>
-          <b-form-select-option-group :label="category">
-            
-          <b-form-select-option :value="selectSpike1.fields.id" v-for="selectSpike1 in spikes" :key="selectSpike1.fields.id">{{ selectSpike1.fields.spikeTitle }}</b-form-select-option>
-
-          </b-form-select-option-group>
-        </b-form-select>
-      <!-- </b-form> -->
-      
-      <!-- <b-form @change="submit"> -->
-        <b-form-select v-model="spike2" class="mb-3" @change="submit">
-          <b-form-select-option :value="null">選択なし</b-form-select-option>
-          <b-form-select-option-group :label="category">
-          <b-form-select-option :value="selectSpike2.fields.id" v-for="selectSpike2 in spikes" :key="selectSpike2.fields.id">{{ selectSpike2.fields.spikeTitle }}</b-form-select-option>
-          </b-form-select-option-group>
-        </b-form-select>
-      <!-- </b-form> -->
+    <b-form-select v-model="spike1" class="mb-3" @change="submit">
+      <b-form-select-option-group :label="category">
+        <b-form-select-option v-for="selectSpike in options" v-bind:value="selectSpike.value" :key="selectSpike.value" :selected="spike1">{{selectSpike.text}}</b-form-select-option>
+      </b-form-select-option-group>
+    </b-form-select>
+    
+    <b-form-select v-model="spike2" class="mb-3" @change="submit">
+      <b-form-select-option :value="null">選択はよ</b-form-select-option>
+      <b-form-select-option-group :label="category">
+      <b-form-select-option v-for="selectSpike in options" v-bind:value="selectSpike.value" :key="selectSpike.value">{{selectSpike.text}}</b-form-select-option>
+      </b-form-select-option-group>
+    </b-form-select>
 
       <!-- プルダウン選択したタイトルのIDが出る -->
       <div class="mt-2">ID1: <strong>{{ spike1 }}</strong></div>  
       <div class="mt-2">ID2: <strong>{{ spike2 }}</strong></div>    
-      <!-- <barChart :parameter="spike1" :parameter2="spike2"></barChart> -->
 
+      <barChart :parameter1="parameter1" :parameter2="parameter2"></barChart>
 
-    <!-- <b-form @submit.prevent="submit2"> -->
-      <!-- <b-form @change="submit2">
-      <b-btn type="submit2">検索</b-btn>
-      <b-card
-        　v-for="spike in selectSpike2"
-        :title="spike.fields.spikeTitle"
-        img-alt="Image"
-        style="max-width: 50%"
-        tag="article"
-      > -->
-      <!-- </b-card>
-    </b-form> -->
-    <!-- <section v-if="selectSpike2!=null">
-      <p>{{selectSpike2}}</p>
-      <barChart :parameter="spike" :parameter2="spike2"></barChart>
-    </section>
-    <section v-else>
-      <barChart :parameter="spike"></barChart>
-    </section> -->
-        <section v-if="selectSpike2!=null">
+        <section v-if="spike2!=null">
       <p>2が入った</p>
     </section>
     <section v-else>
@@ -71,7 +43,6 @@ interface Data {
   spike1: any;
   spike2: any;
   query: any,
-  selected: any;
   options: any;
   category: any;
   parameter1: any;
@@ -91,8 +62,7 @@ export default Vue.extend({
       spike1: this.$route.query.spikeName1,
       spike2: null,
       query: this.$route.query,
-      selected: null,
-      options: [{ value: null, text: 'はい。選べ。' },],
+      options: [],
       category: null,  
       parameter1: [],
       parameter2: [],
@@ -115,7 +85,7 @@ async asyncData({ payload, query }) {
             });
              return e.items[0];
           });
-          console.log(spike);
+          
     return { spike };
   },
 
@@ -127,52 +97,38 @@ async asyncData({ payload, query }) {
         // "fields.id": this.spike.name,
         "fields.spikeCategory[match]": spikeCategory[0],
       };
+      
+      //getで受けとったスパイクのカテゴリのスパイクデータをcontentfulから取得
       contentfulClient.getEntries(searchInput).then((e: any) => {
         e.items?.forEach((item: any, index: number) => {
           // console.log(item);
         });
         this.category = spikeCategory[0];
         this.spikes = e.items;
-      });
+      
+      //プルダウン用の配列optionsにspikesのタイトルを格納→{[value:chronoonix,text:クロノオニキス],[・・・]}
+      for (let i=0; i<this.spikes.length; i++){
+        this.options.push({value:this.spikes[i].fields.id,text:this.spikes[i].fields.spikeTitle});
+        }
+      })
+
+        var spikeWeight1 = this.spike.fields.spikeWeight;
+        var spikeWidth1 = this.spike.fields.spikeWidth;
+        var spikeAngle1 = this.spike.fields.spikeAngle;
+        var spikespikeGlip1 = this.spike.fields.spikeGlip;
+        var spikeResilience1 = this.spike.fields.spikeResilience;
+        this.parameter1 = [spikeWeight1,spikeWidth1,spikeAngle1,spikespikeGlip1,spikeResilience1]
+        // this.parameter1 = JSON.stringify(this.parameter1);
+          // this.parameter1 = e.items[0];
+          console.log("ちなみ");
+          console.log(this.parameter1);
+
     },
 
   methods: {
-    // submit(spike1,spike2){
-    //   var spike1String = String(this.spike1);
-    //   var spike2String = String(this.spike2);
-    //   this.$router.push({query: {spikeName1: spike1String,spikeName2: spike2String}});
-    //   // console.log(this.spikes);
-    //   var searchInput1: { [key: string]: string } = {
-    //     content_type: "spike",
-    //     "fields.id": this.spike1,
-    //   };
-    //   var searchInput2: { [key: string]: string } = {
-    //     content_type: "spike",
-    //     "fields.id": this.spike2,
-    //   };
-
-    //   contentfulClient.getEntries(searchInput1).then((e: any) => {
-    //     e.items?.forEach((item: any, index: number) => {
-    //       // console.log(item);
-    //       });
-    //       console.log(e.items[0]);
-    //       this.parameter1 = e.items[0];
-    //     });
-
-    //     contentfulClient.getEntries(searchInput2).then((e: any) => {
-    //     e.items?.forEach((item: any, index: number) => {
-    //       });
-    //       console.log(e.items[0]);
-    //       this.parameter2 = e.items[0];
-    //     });
-    // },
-
     submit(){
-      console.log(this.spike2);
-      var spike1String = String(this.spike1);
-      var spike2String = String(this.spike2);
-      this.$router.push({query: {spikeName1: spike1String,spikeName2: spike2String}});
-      // console.log(this.spikes);
+      this.$router.push({query: {spikeName1: String(this.spike1),spikeName2: String(this.spike2)}});
+      
       var searchInput1: { [key: string]: string } = {
         content_type: "spike",
         "fields.id": this.spike1,
@@ -183,19 +139,30 @@ async asyncData({ payload, query }) {
       };
 
       contentfulClient.getEntries(searchInput1).then((e: any) => {
-        e.items?.forEach((item: any, index: number) => {
-          // console.log(item);
-          });
-          console.log(e.items[0]);
-          this.parameter1 = e.items[0];
+        e.items?.forEach((item: any, index: number) => {});
+        var spikeWeight1 = e.items[0].fields.spikeWeight;
+        var spikeWidth1 = e.items[0].fields.spikeWidth;
+        var spikeAngle1 = e.items[0].fields.spikeAngle;
+        var spikespikeGlip1 = e.items[0].fields.spikeGlip;
+        var spikeResilience1 = e.items[0].fields.spikeResilience;
+        this.parameter1 = [spikeWeight1,spikeWidth1,spikeAngle1,spikespikeGlip1,spikeResilience1]
+        // this.parameter1 = JSON.stringify(this.parameter1);
+          // this.parameter1 = e.items[0];
+          console.log(this.parameter1);
         });
 
         contentfulClient.getEntries(searchInput2).then((e: any) => {
-        e.items?.forEach((item: any, index: number) => {
-          });
-          console.log(e.items[0]);
-          this.parameter2 = e.items[0];
+        e.items?.forEach((item: any, index: number) => {});
+        var spikeWeight2 = e.items[0].fields.spikeWeight;
+        var spikeWidth2 = e.items[0].fields.spikeWidth;
+        var spikeAngle2 = e.items[0].fields.spikeAngle;
+        var spikespikeGlip2 = e.items[0].fields.spikeGlip;
+        var spikeResilience2 = e.items[0].fields.spikeResilience;
+        this.parameter2 = [spikeWeight2,spikeWidth2,spikeAngle2,spikespikeGlip2,spikeResilience2]
+        // this.parameter2 = JSON.stringify(this.parameter2);
+        console.log(this.parameter2);
         });
+        
     },
 
   },
