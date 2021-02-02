@@ -1,25 +1,25 @@
 <template>
   <div>
     <v-form>
-      <!-- <v-text-field
-        ref="searchForm"
-        v-model="query"
-        hide-details
-        placeholder="キーワードを入力してね"
-        dense
-      /> -->
+      <div class="menuFormCon">
        <b-form-select
-          v-model="query[0]"
-          placeholder="種目"
-          :options="options"
-        >
-    　</b-form-select>
-       <b-form-select
-          v-model="query[1]"
-          :options="options2"
-        >
-    　</b-form-select>
-      <b-btn @click.prevent="submit">検索</b-btn>
+            v-model="query[0]"
+            :options="options"
+          >
+      　</b-form-select>
+        <b-form-select
+            v-model="query[1]"
+            :options="options2"
+          >
+      　</b-form-select>
+      </div>
+      <span class="batsu"></span>
+        <b-form-select
+            v-model="query[2]"
+            :options="options3"
+          >
+        </b-form-select>
+      <b-btn @click.prevent="submit" class="searchBtn">検索</b-btn>
     </v-form>
   </div>
 </template>
@@ -28,44 +28,45 @@
 export default {
   data() {
     return {
-      query: [],
-      // query2: null,
+      query: [null, null, null],
       options: [
-        // { value: '種目', text: '種目', disabled: true},
-        { value:'種目', text: '種目', disabled: true, selected: true, style:'display:none;' },
+        { value: null, text: '種目', disabled: true },
           {
-            label: '短距離',
+            label: 'トラック',
             options: [
-              { value: '100m', text: '100m' },
-              { value: '200m', text: '200m' },
-              { value: '400m', text: '400m' },
-              { value: '110mH', text: '110mH' }
+              { value: '短距離', text: '短距離' },
+              { value: '中距離', text: '中距離' },
+              { value: '長距離', text: '長距離' },
             ]
           },
           {
-            label: '中距離',
+            label: 'フィールド',
             options: [
-              { value: '800m', text: '800m' },
-              { value: '1500m', text: '1500m' },
+              { value: '走幅跳・三段跳', text: '走幅跳・三段跳' },
+              { value: '走高跳・棒高跳', text: '走高跳・棒高跳' },
+              { value: '投擲', text: '投擲' },
             ]
-          },
-          {
-            label: '長距離',
-            options: [
-              { value: '3000m', text: '3000m' },
-              { value: '5000m', text: '5000m' },
-              { value: '10000m', text: '10000m' },
-            ]
-          },
+          }
       ],
       options2: [
-            { value: 'メーカー', text: 'メーカー', disabled: true},
+            { value: null, text: 'メーカー', disabled: true },
             { value: 'ミズノ', text: 'ミズノ' },
             { value: 'アシックス', text: 'アシックス' },
             { value: 'ナイキ', text: 'ナイキ' },
             { value: 'アディダス', text: 'アディダス' },
             { value: 'ニューバランス', text: 'ニューバランス' },
       ],
+      options3: [
+        { value: null, text: 'こだわり', disabled: true },
+            { 
+              label: 'price',
+              options: [
+                { value: 'L', item: 'L', text: '安い順' },
+                { value: 'H', item: 'H', text: '高い順' },
+              ]
+            },
+            // price,weight,width,resilience,angle,grip,
+      ]
     };
   },
   computed: {
