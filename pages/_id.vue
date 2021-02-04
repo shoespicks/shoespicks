@@ -80,7 +80,9 @@
                 <purchaseBtn :url="spike.fields.amazonURL"></purchaseBtn>
 
                 <h2>一流選手に聞いてみた！</h2>
+                <p v-if="!loginUser">ログインして一流選手のレビューを確認しよう</p>
                 <div
+                  v-if="loginUser"
                   class="blog-content"
                   v-html="$md.render(spike.fields.spikePlayerQuestion)"
                 ></div>
@@ -135,10 +137,11 @@
                 <div v-if="!loginUser">
                   <b-btn @click="loginWithTwitter">twitterログイン</b-btn>
                   <b-btn @click="loginWithGoogle">Googleログイン</b-btn>
+                  <p>ログインして口コミを確認しよう</p>
                 </div>
                 <div v-if="loginUser">
                   <p>{{ loginUser }}</p>
-                  <img width="50" height="50" :src="loginUser.iconUrl" alt="" />
+                  <img width="50" height="50" :src="loginUser.iconUrl" alt="ユーザーアイコン" />
                   <b-btn @click="logout">ログアウト</b-btn>
                   <b-form @submit="submitComment">
                     <b-form-group>
@@ -151,23 +154,22 @@
                     </b-form-group>
                     <b-btn type="submit">コメントする</b-btn>
                   </b-form>
-                </div>
-
-                <div v-for="comment in comments" :key="comment.id">
-                  <!-- <img
-                    width="50"
-                    height="50"
-                    v-if="comment.user.iconUrl"
-                    :src="comment.user.iconUrl"
-                  /> -->
-                  <p v-if="comment.user">
-                    ユーザ名 : {{ comment.user.displayName }}
-                    <span v-if="comment.user.accountName">@{{ comment.user.accountName }}</span>
-                  </p>
-                  <p>
-                    コメント : {{ comment.body }}<br />
-                    投稿日時 : {{ comment.date }}
-                  </p>
+                  <div v-for="comment in comments" :key="comment.id">
+                    <p v-if="comment.user">
+                      <img
+                        width="50"
+                        height="50"
+                        v-if="comment.user.iconUrl"
+                        :src="comment.user.iconUrl"
+                      />
+                      ユーザ名 : {{ comment.user.displayName }}
+                      <span v-if="comment.user.accountName">@{{ comment.user.accountName }}</span>
+                    </p>
+                    <p>
+                      コメント : {{ comment.body }}<br />
+                      投稿日時 : {{ comment.date }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </b-tab>
@@ -252,7 +254,7 @@ export default Vue.extend({
     var spikeAngle1 = this.spike.fields.spikeAngle;
     var spikespikeGlip1 = this.spike.fields.spikeGlip;
     var spikeResilience1 = this.spike.fields.spikeResilience;
-    this.parameter1 = [spikeWeight1,spikeWidth1,spikeAngle1,spikespikeGlip1,spikeResilience1]
+    this.parameter1 = [spikeWeight1, spikeWidth1, spikeAngle1, spikespikeGlip1, spikeResilience1];
     console.log(this.parameter1);
   },
   methods: {
@@ -262,12 +264,14 @@ export default Vue.extend({
       commentStore
         .postSpikeComment({ spikeId: this.spike.sys.id, commentBody: this.commentBody })
         .then((response: any) => {
+          this.commentBody = "";
           console.log(response);
         });
     },
 
     fetchComments() {
       commentStore.fetchSpikeComments(this.spike.sys.id).then((comments) => {
+        console.log("commentsだよー");
         console.log(comments);
       });
     },
