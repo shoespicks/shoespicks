@@ -248,7 +248,8 @@ export default Vue.extend({
     },
   },
   created() {
-    this.fetchComments();
+    // 2回出てしまう＋コメントしてから見て欲しい
+    // this.fetchComments();
     var spikeWeight1 = this.spike.fields.spikeWeight;
     var spikeWidth1 = this.spike.fields.spikeWidth;
     var spikeAngle1 = this.spike.fields.spikeAngle;
