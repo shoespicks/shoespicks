@@ -28,7 +28,7 @@
 export default {
   data() {
     return {
-      query: [null, null, null],
+      query: [null,null,null],
       options: [
         { value: null, text: '種目', disabled: true },
           {
@@ -81,8 +81,10 @@ export default {
   },
   methods: {
     submit() {
-      let query = this.query.join('  ');
-      this.$router.push({ path: "/spikeSearch", query: { q: query } });
+      let query = this.query.join(' ');
+      // path: `/spikeSearch/${this.query[0]}/`
+      this.$router.push({ path: "/spikeSearch/", query: { q: query } });
+      // this.$router.push({ path: "/spikeSearch/", query: { q: [this.query[0], this.query[1]] } });
       query = "";
     },
   },

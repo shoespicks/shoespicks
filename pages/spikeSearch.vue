@@ -101,7 +101,7 @@
       <!-- 検索結果表示 -->
       <!-- <template v-else> -->
         <template v-if="spikes.length">
-          <h2 class="maker">アシックス</h2>
+          <!-- <h2 class="maker">{{ spike.fields.spikeMaker }}</h2> -->
 
           <div class="flex">
             <b-card
@@ -123,10 +123,6 @@
               </b-badge>
             </b-card>
           </div>
-          <h2 class="maker">ミズノ</h2>
-          <h2 class="maker">アディダス</h2>
-          <h2 class="maker">NB</h2>
-          <h2 class="maker">NIKE</h2>
         </template>
         <template v-else>
           <v-list-item class="justify-center">
@@ -229,11 +225,52 @@ export default Vue.extend({
       // 空白時に検索しない条件式
       if (this.isRequired) {
         this.loading = true;
+        var loadingInput: { [key: string]: string } = {
+          content_type: "spike",
+          // query: this.query,
+          //  Select1 種目
+          // "fields.spikeCategory[match]": this.query,
+          //  "fields.spikeCategory[match]": this.query[0],
+
+          //  Select2 メーカー
+          // "fields.spikeMaker[match]": this.query,
+          //  "fields.spikeMaker[match]": this.query[1],
+          
+          //  Select3 こだわり
+          // "fields.alias[match]": this.query,
+        };
+
+      // 種目検索＋メーカー検索条件分岐
+      
+      // if (!!this.query[0] && !!this.query[1])
+      var words = this.query.split(' ');
+      if (this.query.match(/^.+\s.+\s$/)) {
+        console.log("みちゃんの両ワキの匂いでたよ！");
+        loadingInput["fields.spikeCategory[match]"] = words[0];
+        loadingInput["fields.spikeMaker[match]"] = words[1];
+        // loadingInput["fields.spikeCategory[match]"] = this.query[0];
+        // loadingInput["fields.spikeMaker[match]"] = this.query[1];
+      }
+      // else if (!!this.query[0] || !!this.query[1]) {
+      else if (this.query.match(/^.+\s$/) || this.query.match(/^\s.+$/)) {
+        console.log("みほちゃんの片乳の匂い!!！");
+        loadingInput["fields.spikeCategory[match]"] = words[0];
+        loadingInput["fields.spikeMaker[match]"] = words[1];
+        // loadingInput["fields.spikeCategory[match]"] = this.query[0];
+        // loadingInput["fields.spikeMaker[match]"] = this.query[1];
+      }
+      // こだわり検索
+      // if (this.query == "H" || !"") {
+      //   console.log("うんこ盛り盛りでたよ！");
+      //   loadingInput["order"] = "-fields.spikePrice";
+      // }
+
         await contentfulClient
-          .getEntries({
-            content_type: "spike",
-            query: this.query,
-          })
+          // .getEntries({
+          //   content_type: "spike",
+          //   query: this.query,
+          // })
+           .getEntries(loadingInput)
           .then(({ items }: { items: any }) => (this.spikes = items))
           .catch(console.error);
         this.loading = false;
@@ -266,7 +303,7 @@ export default Vue.extend({
       else if (this.form.sort.price[0] == "L") {
         searchInput["order"] = "fields.spikePrice";
       }
-
+      
       // 機能２　絞り込む　チェックボックスで選ばれたものを検索する
       if (this.form.status.length > 0) {
         // form.statusに入っているvalueを連結して、代入する
