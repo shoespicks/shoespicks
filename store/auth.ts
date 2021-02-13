@@ -1,6 +1,6 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
 import { UserModel } from '~/store/types/userEntity';
-import {$authRepository, $userRepository} from "~/plugins/repository";
+import { $authRepository, $userRepository } from '~/plugins/repository';
 
 @Module({
   name: 'auth',
@@ -57,6 +57,28 @@ export default class Auth extends VuexModule {
         }
 
         const user = new UserModel(result);
+        this.set(user);
+        $userRepository.upsert(user).then();
+        return user;
+      })
+      .catch((e) => {
+        console.log('認証に失敗しました');
+        console.log(e);
+        return e;
+      });
+  }
+
+  @Action({ rawError: true })
+  public async loginWithFacebook(): Promise<UserModel | null> {
+    return $authRepository
+      .signInWithFacebook()
+      .then((result) => {
+        if (!result.user?.uid) {
+          return null;
+        }
+
+        const user = new UserModel(result);
+        console.log(user);
         this.set(user);
         $userRepository.upsert(user).then();
         return user;

@@ -5,7 +5,7 @@
       <a href="https://www.youtube.com/?gl=JP">
         <img src="@/assets//img/socialicon/IG_Glyph_Fill.png" alt="Instgram" />
       </a>
-      <a href="https://www.youtube.com/?gl=JP">
+      <a href="https://www.facebook.com/ShoesPicks-106804874781788">
         <img src="@/assets//img/socialicon/f_logo_RGB-Blue_58.png" alt="Facebook" />
       </a>
       <a href="https://www.youtube.com/channel/UCuEGLSAoPqO7kfIAuwieRuQ/featured">

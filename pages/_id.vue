@@ -136,6 +136,7 @@
               <div class="comment">
                 <div v-if="!loginUser">
                   <b-btn @click="loginWithTwitter">twitterログイン</b-btn>
+                  <b-btn @click="loginWithFacebook">Facebookログイン</b-btn>
                   <b-btn @click="loginWithGoogle">Googleログイン</b-btn>
                   <p>ログインして口コミを確認しよう</p>
                 </div>
@@ -261,13 +262,16 @@ export default Vue.extend({
   methods: {
     submitComment(e: Event) {
       e.preventDefault();
-
-      commentStore
-        .postSpikeComment({ spikeId: this.spike.sys.id, commentBody: this.commentBody })
-        .then((response: any) => {
-          this.commentBody = "";
-          console.log(response);
-        });
+      // 空白でコメントしないためのif
+      if (!!this.commentBody && !/^\s+$/.test(this.commentBody)) {
+        commentStore
+          .postSpikeComment({ spikeId: this.spike.sys.id, commentBody: this.commentBody })
+          .then((response: any) => {
+            // コメントした内容を一旦リセット
+            this.commentBody = "";
+            console.log(response);
+          });
+      }
     },
 
     fetchComments() {
@@ -281,11 +285,23 @@ export default Vue.extend({
       authStore
         .loginWithTwitter()
         .then((result) => {
-          console.log("clientでも出す");
+          console.log("clientでも出す:twitter");
           console.log(result);
         })
         .catch((e) => {
-          console.log("clientでもエラー出す");
+          console.log("clientでもエラー出す:twitter");
+        });
+    },
+
+    loginWithFacebook() {
+      authStore
+        .loginWithFacebook()
+        .then((result) => {
+          console.log("clientでも出す:Facebook");
+          console.log(result);
+        })
+        .catch((e) => {
+          console.log("clientでもエラー出す:Facebook");
         });
     },
 
@@ -293,11 +309,11 @@ export default Vue.extend({
       authStore
         .loginWithGoogle()
         .then((result) => {
-          console.log("clientでも出す");
+          console.log("clientでも出す:Google");
           console.log(result);
         })
         .catch((e) => {
-          console.log("clientでもエラー出す");
+          console.log("clientでもエラー出す:Google");
         });
     },
 

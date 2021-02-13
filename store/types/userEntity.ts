@@ -12,7 +12,7 @@ export interface UserEntity {
 
   iconUrl?: string | null;
 
-  // 認証先のサービス twitter | google
+  // 認証先のサービス twitter | facebook | google
   provider?: string;
 }
 
@@ -28,7 +28,7 @@ export class UserModel {
 
   iconUrl?: string | null;
 
-  // 認証先のサービス twitter | google
+  // 認証先のサービス twitter | facebook | google
   provider?: string;
 
   constructor(entity: UserEntity);
