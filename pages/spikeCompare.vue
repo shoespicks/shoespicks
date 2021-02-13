@@ -120,13 +120,14 @@ async asyncData({ payload, query }) {
         this.parameter1 = [spikeWeight1,spikeWidth1,spikeAngle1,spikespikeGlip1,spikeResilience1]
         // this.parameter1 = JSON.stringify(this.parameter1);
           // this.parameter1 = e.items[0];
-          console.log("ちなみ");
+          console.log("デフォの値");
           console.log(this.parameter1);
 
     },
 
   methods: {
     submit(){
+
       this.$router.push({query: {spikeName1: String(this.spike1),spikeName2: String(this.spike2)}});
       
       var searchInput1: { [key: string]: string } = {
@@ -148,6 +149,7 @@ async asyncData({ payload, query }) {
         this.parameter1 = [spikeWeight1,spikeWidth1,spikeAngle1,spikespikeGlip1,spikeResilience1]
         // this.parameter1 = JSON.stringify(this.parameter1);
           // this.parameter1 = e.items[0];
+          console.log("1の値");
           console.log(this.parameter1);
         });
 
@@ -160,6 +162,7 @@ async asyncData({ payload, query }) {
         var spikeResilience2 = e.items[0].fields.spikeResilience;
         this.parameter2 = [spikeWeight2,spikeWidth2,spikeAngle2,spikespikeGlip2,spikeResilience2]
         // this.parameter2 = JSON.stringify(this.parameter2);
+        console.log("2の値");
         console.log(this.parameter2);
         });
         
