@@ -50,13 +50,19 @@ export default class Comment extends VuexModule {
   }
 
   @Action({ rawError: true })
-  public async postSpikeComment(args: { spikeId: string; commentBody: string }) {
+  public async postSpikeComment(args: {
+    spikeId: string;
+    commentBody: string;
+    commentName: string;
+  }) {
     console.log(args.spikeId);
     console.log(args.commentBody);
+    console.log(args.commentName);
 
     return $commentRepository
       .createBySpikeId(args.spikeId, {
         body: args.commentBody || null,
+        commentName: args.commentName || null,
         userId: authStore.user?.id || null,
         date: new Date().getTime(),
         replies: null
@@ -87,6 +93,7 @@ export default class Comment extends VuexModule {
               comment: new CommentModel({
                 id: entryId,
                 body: entryComment.body || undefined,
+                commentName: entryComment.commentName || undefined,
                 user: undefined,
                 date: !!entryComment.date ? new Date(entryComment.date) : undefined
               })
@@ -100,6 +107,7 @@ export default class Comment extends VuexModule {
               comment: new CommentModel({
                 id: entryId,
                 body: entryComment.body || undefined,
+                commentName: entryComment.commentName || undefined,
                 user: user ? new UserModel(user) : undefined,
                 date: !!entryComment.date ? new Date(entryComment.date) : undefined
               })

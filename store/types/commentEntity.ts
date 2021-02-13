@@ -2,6 +2,7 @@ import { UserModel } from '~/store/types/userEntity';
 
 export interface CommentEntity {
   body?: string | null;
+  commentName?: string | null;
   userId?: string | null;
   date?: number | null;
   replies?: { [id: string]: CommentEntity } | null;
@@ -10,6 +11,7 @@ export interface CommentEntity {
 export class CommentModel {
   id?: string;
   body?: string;
+  commentName?: string;
   user?: UserModel;
   date?: Date;
   replies?: CommentModel[];

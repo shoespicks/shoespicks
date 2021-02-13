@@ -152,6 +152,12 @@
                         placeholder="コメントを入力"
                       ></b-form-input>
                       {{ commentBody }}
+                      <b-form-input
+                        type="text"
+                        v-model="commentName"
+                        placeholder="コメントを入力"
+                      ></b-form-input>
+                      {{ commentName }}
                     </b-form-group>
                     <b-btn type="submit">コメントする</b-btn>
                   </b-form>
@@ -168,7 +174,9 @@
                     </p>
                     <p>
                       コメント : {{ comment.body }}<br />
-                      投稿日時 : {{ comment.date }}
+                      投稿日時 : {{ comment.date }}<br />
+                      コメント全部 : <br />
+                      {{ comment }}
                     </p>
                   </div>
                 </div>
@@ -265,7 +273,11 @@ export default Vue.extend({
       // 空白でコメントしないためのif
       if (!!this.commentBody && !/^\s+$/.test(this.commentBody)) {
         commentStore
-          .postSpikeComment({ spikeId: this.spike.sys.id, commentBody: this.commentBody })
+          .postSpikeComment({
+            spikeId: this.spike.sys.id,
+            commentBody: this.commentBody,
+            commentName: this.commentName,
+          })
           .then((response: any) => {
             // コメントした内容を一旦リセット
             this.commentBody = "";
