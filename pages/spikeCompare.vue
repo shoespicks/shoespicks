@@ -134,10 +134,6 @@ async asyncData({ payload, query }) {
         content_type: "spike",
         "fields.id": this.spike1,
       };
-      var searchInput2: { [key: string]: string } = {
-        content_type: "spike",
-        "fields.id": this.spike2,
-      };
 
       contentfulClient.getEntries(searchInput1).then((e: any) => {
         e.items?.forEach((item: any, index: number) => {});
@@ -153,8 +149,16 @@ async asyncData({ payload, query }) {
           console.log(this.parameter1);
         });
 
+
+        if(this.spike2){
+
+          
+          var searchInput2: { [key: string]: string } = {
+            content_type: "spike",
+        "fields.id": this.spike2,
+      };
         contentfulClient.getEntries(searchInput2).then((e: any) => {
-        e.items?.forEach((item: any, index: number) => {});
+          e.items?.forEach((item: any, index: number) => {});
         var spikeWeight2 = e.items[0].fields.spikeWeight;
         var spikeWidth2 = e.items[0].fields.spikeWidth;
         var spikeAngle2 = e.items[0].fields.spikeAngle;
@@ -165,6 +169,7 @@ async asyncData({ payload, query }) {
         console.log("2の値");
         console.log(this.parameter2);
         });
+          }
         
     },
 
