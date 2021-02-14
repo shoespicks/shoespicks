@@ -106,12 +106,21 @@
           <div class="flex">
             <b-card
               　v-for="spike in spikes"
-              @click="$nuxt.$router.push(spike.fields.id)"
+              @click="$nuxt.$router.push(`/${spike.fields.id}`)"
               :title="spike.fields.spikeTitle"
               img-alt="Image"
               style="max-width: 50%"
               tag="article"
             >
+            <!-- @click="$nuxt.$router.push({ path: `/spikeSearch/${spike.fields.id}` } )" -->
+             <!-- <b-card
+              　v-for="spike in spikes"
+              @click="$nuxt.$router.push({ path: `/${spike.fields.id}` })"
+              :title="spike.fields.spikeTitle"
+              img-alt="Image"
+              style="max-width: 50%"
+              tag="article"
+            > -->
               <b-img
                 :src="spike.fields.spikePhoto[0].fields.file.url"
                 fluid-grow
@@ -227,37 +236,19 @@ export default Vue.extend({
         this.loading = true;
         var loadingInput: { [key: string]: string } = {
           content_type: "spike",
-          // query: this.query,
-          //  Select1 種目
-          // "fields.spikeCategory[match]": this.query,
-          //  "fields.spikeCategory[match]": this.query[0],
-
-          //  Select2 メーカー
-          // "fields.spikeMaker[match]": this.query,
-          //  "fields.spikeMaker[match]": this.query[1],
-          
-          //  Select3 こだわり
-          // "fields.alias[match]": this.query,
         };
 
       // 種目検索＋メーカー検索条件分岐
-      
-      // if (!!this.query[0] && !!this.query[1])
       var words = this.query.split(' ');
       if (this.query.match(/^.+\s.+\s$/)) {
         console.log("みちゃんの両ワキの匂いでたよ！");
         loadingInput["fields.spikeCategory[match]"] = words[0];
         loadingInput["fields.spikeMaker[match]"] = words[1];
-        // loadingInput["fields.spikeCategory[match]"] = this.query[0];
-        // loadingInput["fields.spikeMaker[match]"] = this.query[1];
       }
-      // else if (!!this.query[0] || !!this.query[1]) {
       else if (this.query.match(/^.+\s$/) || this.query.match(/^\s.+$/)) {
         console.log("みほちゃんの片乳の匂い!!！");
         loadingInput["fields.spikeCategory[match]"] = words[0];
         loadingInput["fields.spikeMaker[match]"] = words[1];
-        // loadingInput["fields.spikeCategory[match]"] = this.query[0];
-        // loadingInput["fields.spikeMaker[match]"] = this.query[1];
       }
       // こだわり検索
       // if (this.query == "H" || !"") {

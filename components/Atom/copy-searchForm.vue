@@ -81,10 +81,18 @@ export default {
   },
   methods: {
     submit() {
-      let query = this.query.join(' ');
+      // someメソッドは配列内の値に引っかかるがあれば true
+      // query配列のなかにnullじゃない値があれば true
+      if (this.query.some( num => num !== null)) {
+        let query = this.query.join(' ');
+        this.$router.push({ path: "/spikeSearch/", query: { q: query } });
+        // this.$router.push({ path: `/spikeSearch/${this.query[0]}`, query: { q: query } });
+      }
+      else if (this.query[0] == null) {
+        let query = this.query.join('');
+        this.$router.push({ path: "/spikeSearch/", query: { q: query } });
+      }
       // path: `/spikeSearch/${this.query[0]}/`
-      this.$router.push({ path: "/spikeSearch/", query: { q: query } });
-      // this.$router.push({ path: "/spikeSearch/", query: { q: [this.query[0], this.query[1]] } });
       query = "";
     },
   },
