@@ -20,28 +20,6 @@ export default {
     },
   // props: ['parameter1', 'parameter2'],
   // チャートを5角形に設定
-  watch: {
-    parameter1:function(){    
-      // data(parameter1, parameter2);
-      console.log(this.chartdata.datasets);
-      // this.chartdata.datasets[0].data = this.parameter1
-      console.log("親Props変更");
-      console.log(this.chartdata.datasets.data);
-      this.renderChart(this.chartdata, this.options);
-    },
-
-    parameter2:function(){    
-      // data(parameter1, parameter2);
-      // this.chartdata.datasets[1].data = this.parameter2
-      console.log("親Props変更");
-      console.log(this.chartdata.datasets.data);
-      this.renderChart(this.chartdata, this.options);
-      }
-
-
-
-      },
-
 
   data(parameter1, parameter2) {
     if(parameter2==null){
@@ -84,7 +62,9 @@ export default {
         },
       };
     }
+
     else
+    
     {
       console.log("両方あるよ");
       console.log(parameter1.parameter1);
@@ -137,5 +117,130 @@ export default {
     // チャートでどこのデータ・どんな設定を使うか指定
     this.renderChart(this.chartdata, this.options);
   },
+
+  watch: {
+    parameter1:function(){    
+      // this.chartdata.datasets[0].data = this.parameter1
+      console.log("親Props変更1");
+      console.log(this.parameter1);
+      this.chartdata.datasets[0].data = this.parameter1;
+      console.log(this.chartdata.datasets[0].data);
+      this.renderChart(this.chartdata, this.options);
+    },
+
+    parameter2:function(){    
+      // data(parameter1, parameter2);
+      // this.chartdata.datasets[1].data = this.parameter2
+      console.log("親Props変更2");
+      if(this.chartdata.datasets[1]){
+        console.log("パラメータ2は入ってるよ");
+        this.chartdata.datasets[1].data = this.parameter2;
+        this.renderChart(this.chartdata, this.options);
+      }else{
+        console.log("パラメータ2はnullだよ");
+        console.log(this.parameter2);
+        var parameter2Data =
+        {
+            label: ["Data two"],
+            backgroundColor: "rgba(254,147,0, 0.4)",
+            borderColor: "rgba(254,147,0, 0.4)",
+            fill:"origin",
+            data: this.parameter2,
+          }
+        this.chartdata.datasets.push(parameter2Data);
+        console.log(this.chartdata.datasets);
+      }
+      this.renderChart(this.chartdata, this.options);
+      }
+      },
+
+      methods:{
+        checkData(parameter1,parameter2){
+          if(parameter2==null){
+            console.log("parameter2はnull");
+            console.log(parameter1.parameter1)
+            return {
+              chartdata: {
+                labels: ["軽さ", "広さ", "ソールの反り", "グリップ力", "反発性"],
+                datasets: [
+                  {
+                    label: ["Data One"],
+                    backgroundColor: "rgba(6, 147, 200, 0.4)",
+                    borderColor: "rgba(6, 147, 200, 0.4)",
+                    fill:"origin",
+                    data: parameter1.parameter1,
+                  }
+                ],
+              },
+              
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                  display: false,
+                },
+                scale: {
+                  pointLabels: {
+                    fontSize: 14,
+                  },
+                  ticks: {
+                    //目盛りの設定
+                    suggestedMin: 0,
+                    suggestedMax: 5,
+                    stepSize: 1,
+                  },
+                },
+              },
+            };
+          }
+        else
+        {
+          console.log("両方あるよ");
+      console.log(parameter1.parameter1);
+      console.log(parameter2.parameter2);
+      return {
+      chartdata: {
+        labels: ["軽さ", "広さ", "ソールの反り", "グリップ力", "反発性"],
+        datasets: [
+          {
+            label: ["Data One"],
+            backgroundColor: "rgba(6, 147, 200, 0.4)",
+            borderColor: "rgba(6, 147, 200, 0.4)",
+            fill:"origin",
+            data: parameter1.parameter1,
+            // data: JSON.stringify(parameter1.parameter1),
+          },
+          {
+            label: ["Data two"],
+            backgroundColor: "rgba(254,147,0, 0.4)",
+            borderColor: "rgba(254,147,0, 0.4)",
+            fill:"origin",
+            data: parameter2.parameter2,
+            // data: JSON.stringify(parameter2.parameter2),
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false,
+        },
+        scale: {
+          pointLabels: {
+            fontSize: 14,
+          },
+          ticks: {
+            //目盛りの設定
+            suggestedMin: 0,
+            suggestedMax: 5,
+            stepSize: 1,
+          },
+        },
+      },
+    };
+  }
+            }
+      }
 };
 </script>
