@@ -130,7 +130,8 @@ html {
   align-items: center;
   height: 40vh;
   background-color: gray;
-  color: white;
+  background: url(../img/davis.png) no-repeat center center;
+  color: black;
 }
 .topView h1 {
   font-weight: 900;
@@ -213,9 +214,6 @@ html {
   color: white;
   display: block;
   border-radius: 10px;
-}
-.card {
-    width: 46vw;
 }
 
 /*==詳細ページ（_id.vue）==*/

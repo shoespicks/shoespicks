@@ -103,35 +103,28 @@
         <template v-if="spikes.length">
           <!-- <h2 class="maker">{{ spike.fields.spikeMaker }}</h2> -->
 
-          <div class="flex">
             <b-card
               　v-for="spike in spikes"
               @click="$nuxt.$router.push(`/${spike.fields.id}`)"
               :title="spike.fields.spikeTitle"
               img-alt="Image"
-              style="max-width: 50%"
               tag="article"
             >
-            <!-- @click="$nuxt.$router.push({ path: `/spikeSearch/${spike.fields.id}` } )" -->
-             <!-- <b-card
-              　v-for="spike in spikes"
-              @click="$nuxt.$router.push({ path: `/${spike.fields.id}` })"
-              :title="spike.fields.spikeTitle"
-              img-alt="Image"
-              style="max-width: 50%"
-              tag="article"
-            > -->
               <b-img
                 :src="spike.fields.spikePhoto[0].fields.file.url"
-                fluid-grow
+                style="width: 40vw;"
                 alt="スパイク画像"
               >
               </b-img>
               <b-badge variant="gray">
-                <p>¥{{ spike.fields.spikePrice }}</p>
+                <p>価格：¥{{ spike.fields.spikePrice }}</p>
+                <p>重さ：{{ spike.fields.spikeWeightNumber }}g</p>
+                <p>反発：{{ spike.fields.spikeResilience }}pw</p>
+                <p>反り：{{ spike.fields.spikeAngle }}角度</p>
+                <p>広さ：{{ spike.fields.spikeWidth }}cm</p>
+                <p>グリップ：{{ spike.fields.spikeGlip }}</p>
               </b-badge>
             </b-card>
-          </div>
         </template>
         <template v-else>
           <v-list-item class="justify-center">
@@ -238,29 +231,61 @@ export default Vue.extend({
           content_type: "spike",
         };
 
+      // こだわり検索
+      const displayOrder = () => {
+        // １　価格順
+        if (this.query.match("高い順")) {
+          loadingInput["order"] = "-fields.spikePrice";
+        } 
+        else if (this.query.match("安い順")) {
+          loadingInput["order"] = "fields.spikePrice";
+        }
+        // ２　重さ順
+        if (this.query.match("重い順")) {
+          loadingInput["order"] = "-fields.spikeWeightNumber";
+        } 
+        else if (this.query.match("軽い順")) {
+          loadingInput["order"] = "fields.spikeWeightNumber";
+        }
+        // ３　反発性順
+        if (this.query.match("強い順")) {
+          loadingInput["order"] = "-fields.spikeResilience";
+        } 
+        else if (this.query.match("弱い順")) {
+          loadingInput["order"] = "fields.spikeResilience";
+        }
+        // ４　反り順
+        if (this.query.match("鋭角順")) {
+          loadingInput["order"] = "-fields.spikeAngle";
+        } 
+        else if (this.query.match("鈍角順")) {
+          loadingInput["order"] = "fields.spikeAngle";
+        }
+        // ５　広さ順
+        if (this.query.match("広い順")) {
+          loadingInput["order"] = "-fields.spikeWidth";
+        } 
+        else if (this.query.match("狭い順")) {
+          loadingInput["order"] = "fields.spikeWidth";
+        }
+        // 6　グリップ順
+        if (this.query.match("グリップ性高い順")) {
+          loadingInput["order"] = "-fields.spikeGlip";
+        } 
+        else if (this.query.match("グリップ性低い順")) {
+          loadingInput["order"] = "fields.spikeGlip";
+        }
+      }
+
       // 種目検索＋メーカー検索条件分岐
       var words = this.query.split(' ');
-      if (this.query.match(/^.+\s.+\s$/)) {
-        console.log("みちゃんの両ワキの匂いでたよ！");
+      console.log("みちゃんの両乳出たよ！！！");
+        console.log(this.query);
         loadingInput["fields.spikeCategory[match]"] = words[0];
         loadingInput["fields.spikeMaker[match]"] = words[1];
-      }
-      else if (this.query.match(/^.+\s$/) || this.query.match(/^\s.+$/)) {
-        console.log("みほちゃんの片乳の匂い!!！");
-        loadingInput["fields.spikeCategory[match]"] = words[0];
-        loadingInput["fields.spikeMaker[match]"] = words[1];
-      }
-      // こだわり検索
-      // if (this.query == "H" || !"") {
-      //   console.log("うんこ盛り盛りでたよ！");
-      //   loadingInput["order"] = "-fields.spikePrice";
-      // }
+        displayOrder();
 
-        await contentfulClient
-          // .getEntries({
-          //   content_type: "spike",
-          //   query: this.query,
-          // })
+      await contentfulClient
            .getEntries(loadingInput)
           .then(({ items }: { items: any }) => (this.spikes = items))
           .catch(console.error);
