@@ -158,6 +158,12 @@
                         placeholder="コメントを入力"
                       ></b-form-input>
                       {{ commentName }}
+                      <b-form-rating
+                        v-model="starRate"
+                        variant="warning"
+                        class="mb-2"
+                      ></b-form-rating>
+                      {{ starRate }}
                     </b-form-group>
                     <b-btn type="submit">コメントする</b-btn>
                   </b-form>
@@ -173,6 +179,15 @@
                       <span v-if="comment.user.accountName">@{{ comment.user.accountName }}</span>
                     </p>
                     <p>
+                      評価 :
+                      <b-form-rating
+                        v-model="comment.starRate"
+                        variant="warning"
+                        readonly
+                        inline
+                        class="mb-2"
+                      ></b-form-rating
+                      ><br />
                       コメント : {{ comment.body }}<br />
                       投稿日時 : {{ comment.date }}<br />
                       コメント全部 : <br />
@@ -208,6 +223,7 @@ interface Data {
   spike: any;
   commentBody: string;
   commentName: string;
+  starRate: number;
   parameter1: any;
   parameter2: any;
 }
@@ -223,6 +239,7 @@ export default Vue.extend({
       spike: {},
       commentBody: "",
       commentName: "",
+      starRate: 0,
       parameter1: [],
       parameter2: null,
     };
@@ -277,10 +294,12 @@ export default Vue.extend({
             spikeId: this.spike.sys.id,
             commentBody: this.commentBody,
             commentName: this.commentName,
+            starRate: this.starRate,
           })
           .then((response: any) => {
             // コメントした内容を一旦リセット
             this.commentBody = "";
+            this.commentName = "";
             console.log(response);
           });
       }
