@@ -130,7 +130,7 @@ html {
   align-items: center;
   height: 40vh;
   background-color: gray;
-  background: url(../img/davis.png) no-repeat center center;
+  background: url(../img/test-asobi/davis.png) no-repeat center center;
   color: black;
 }
 .topView h1 {
@@ -200,6 +200,12 @@ html {
   color: #437BB9;
   font-weight: bold;
   text-align: center;
+}
+.stepCon {
+  margin: 15vw 0;
+}
+.stepbox img {
+  width: 90vw;
 }
 
 /*==検索ページ（spikeSearch.vue）==*/
