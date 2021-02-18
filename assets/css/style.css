@@ -272,3 +272,19 @@ html {
     padding: 5vh;
   }
 }
+
+
+/*==スパイク比較ページ（spikeCompare.vue）==*/
+
+.compareSelect1 {
+  display: inline-block;
+  /* float: left; */
+}
+
+.compareSelect2 {
+  display: inline-block;
+  /* float: right; */
+}
+
+
+
