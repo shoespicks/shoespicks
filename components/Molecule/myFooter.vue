@@ -40,3 +40,32 @@
 import shoesPicksLogo from "../Atom/shoesPicksLogo";
 export default {};
 </script>
+
+<style>
+.bgFooter {
+  width: 100vw;
+  padding: 5vw 7vw;
+  font-size: 3.2vw;
+  color: #fff;
+  background-color: #0a1921 !important;
+}
+
+.bgFooter a,
+.bgFooter li {
+  list-style-type: none;
+  text-decoration: none;
+  color: #fff;
+  line-height: 200%;
+}
+.bgFooter ul > li:first-of-type {
+  font-weight: 600;
+}
+.socialicon {
+  text-align: center;
+  font-weight: 600;
+}
+.socialicon img {
+  width: 48px;
+  margin: 2vw 2vw 6vw 2vw;
+}
+</style>

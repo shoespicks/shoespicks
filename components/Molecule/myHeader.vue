@@ -65,3 +65,30 @@ export default {
   },
 };
 </script>
+
+<style>
+.menuBack {
+  background-color: #0a1921 !important;
+}
+.b-sidebar {
+  /* bootstrapの上書き */
+  background-color: #0a1921 !important;
+}
+.sepLine {
+  /* SNSと堺の線 */
+  width: 100%;
+  height: 0.1vw;
+  background-color: #707070;
+  margin: 1.5vw 0;
+}
+.hamburger li,
+.hamburger a {
+  margin-left: 5%;
+  list-style-type: none;
+  text-decoration: none;
+  color: #fff;
+}
+.hamburger p {
+  margin-bottom: 0;
+}
+</style>

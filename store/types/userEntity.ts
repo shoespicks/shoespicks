@@ -14,6 +14,8 @@ export interface UserEntity {
 
   // 認証先のサービス twitter | facebook | google
   provider?: string;
+
+  prof?: string;
 }
 
 // フロントで扱うユーザ情報のデータ型
@@ -31,13 +33,16 @@ export class UserModel {
   // 認証先のサービス twitter | facebook | google
   provider?: string;
 
+  prof?: string;
+
   constructor(entity: UserEntity);
   constructor(entity: Partial<UserModel>);
   constructor(entity: UserCredential);
 
   constructor(entity: any) {
     if (this.isUser(entity)) {
-      console.log(entity)
+      console.log('ユーザー情報だよ');
+      console.log(entity);
       Object.assign(this, entity);
     } else {
       this.id = entity.user?.uid || '';
@@ -50,9 +55,16 @@ export class UserModel {
         this.accountName = entity.additionalUserInfo?.username;
       }
 
+      if (entity.additionalUserInfo?.Profile) {
+        this.prof = entity.additionalUserInfo?.Profile;
+      }
+
       if (entity.user?.photoURL) {
         this.iconUrl = entity.user?.photoURL;
       }
+      // if (entity.UserInfoInterface.PhotoUrl) {
+      //   this.iconUrl = entity.UserInfoInterface.PhotoUrl;
+      // }
 
       if (entity.credential?.providerId) {
         this.provider = entity.credential?.providerId;

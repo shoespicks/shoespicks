@@ -1,12 +1,13 @@
 <template>
-  <div> 
+  <div>
     <b-form @submit.prevent="submit">
       <b-form-group>
-        <b-form-input 
-        　　type="text"
-        　　v-model="query"
-        　　placeholder="スパイクで検索"
-        　　autofocus>
+        <b-form-input
+          　　type="text"
+          　　v-model="query"
+          　　placeholder="スパイクで検索"
+          　　autofocus
+        >
         </b-form-input>
       </b-form-group>
       <!-- 井口貴文開発中 -->
@@ -100,41 +101,41 @@
       </template> -->
       <!-- 検索結果表示 -->
       <!-- <template v-else> -->
-        <template v-if="spikes.length">
-          <!-- <h2 class="maker">{{ spike.fields.spikeMaker }}</h2> -->
+      <template v-if="spikes.length">
+        <!-- <h2 class="maker">{{ spike.fields.spikeMaker }}</h2> -->
 
-            <b-card
-              　v-for="spike in spikes"
-              @click="$nuxt.$router.push(`/${spike.fields.id}`)"
-              :title="spike.fields.spikeTitle"
-              img-alt="Image"
-              tag="article"
-            >
-              <b-img
-                :src="spike.fields.spikePhoto[0].fields.file.url"
-                style="width: 40vw;"
-                alt="スパイク画像"
-              >
-              </b-img>
-              <b-badge variant="gray">
-                <p>価格：¥{{ spike.fields.spikePrice }}</p>
-                <p>重さ：{{ spike.fields.spikeWeightNumber }}g</p>
-                <p>反発：{{ spike.fields.spikeResilience }}pw</p>
-                <p>反り：{{ spike.fields.spikeAngle }}角度</p>
-                <p>広さ：{{ spike.fields.spikeWidth }}cm</p>
-                <p>グリップ：{{ spike.fields.spikeGlip }}</p>
-              </b-badge>
-            </b-card>
-        </template>
-        <template v-else>
-          <v-list-item class="justify-center">
-            <div class="text-center">
-              <p>検索結果{{ spikes.length }}件</p>
-              <p>キーワードに一致する投稿がありません。</p>
-              <v-icon> mdi-emoticon-cry-outline </v-icon>
-            </div>
-          </v-list-item>
-        </template>
+        <b-card
+          　v-for="spike in spikes"
+          @click="$nuxt.$router.push(`/${spike.fields.id}`)"
+          :title="spike.fields.spikeTitle"
+          img-alt="Image"
+          tag="article"
+        >
+          <b-img
+            :src="spike.fields.spikePhoto[0].fields.file.url"
+            style="width: 40vw"
+            alt="スパイク画像"
+          >
+          </b-img>
+          <b-badge variant="gray">
+            <p>価格：¥{{ spike.fields.spikePrice }}</p>
+            <p>重さ：{{ spike.fields.spikeWeightNumber }}g</p>
+            <p>反発：{{ spike.fields.spikeResilience }}pw</p>
+            <p>反り：{{ spike.fields.spikeAngle }}角度</p>
+            <p>広さ：{{ spike.fields.spikeWidth }}cm</p>
+            <p>グリップ：{{ spike.fields.spikeGlip }}</p>
+          </b-badge>
+        </b-card>
+      </template>
+      <template v-else>
+        <v-list-item class="justify-center">
+          <div class="text-center">
+            <p>検索結果{{ spikes.length }}件</p>
+            <p>キーワードに一致する投稿がありません。</p>
+            <v-icon> mdi-emoticon-cry-outline </v-icon>
+          </div>
+        </v-list-item>
+      </template>
       <!-- </template> -->
     </v-col>
   </div>
@@ -166,7 +167,7 @@ export default Vue.extend({
           resilience: [],
           angle: [],
           grip: [],
-        }
+        },
       },
       spikeId: 0,
       spikes: [],
@@ -208,8 +209,10 @@ export default Vue.extend({
     isRequired() {
       // ＆＆前半の読み方：　queryがtrueならの二重否定なのでtrue
       // ＆＆後半の読み方：　/^\s+$/.test(this.query)　→先頭から末尾にかけて一つ以上ある空白がqueryにあるかチェックします。あればtrue。それの！(否定)なので、空白がなければtrue
-      return !!(this as any).query && !/^\s+$/.test((this as any).query)
-           || !(this as any).query && !/^\s+$/.test((this as any).query);
+      return (
+        (!!(this as any).query && !/^\s+$/.test((this as any).query)) ||
+        (!(this as any).query && !/^\s+$/.test((this as any).query))
+      );
     },
   },
   watch: {
@@ -223,7 +226,7 @@ export default Vue.extend({
     },
   },
   methods: {
-     async getPosts() {
+    async getPosts() {
       // 空白時に検索しない条件式
       if (this.isRequired) {
         this.loading = true;
@@ -231,62 +234,56 @@ export default Vue.extend({
           content_type: "spike",
         };
 
-      // こだわり検索
-      const displayOrder = () => {
-        // １　価格順
-        if (this.query.match("高い順")) {
-          loadingInput["order"] = "-fields.spikePrice";
-        } 
-        else if (this.query.match("安い順")) {
-          loadingInput["order"] = "fields.spikePrice";
-        }
-        // ２　重さ順
-        if (this.query.match("重い順")) {
-          loadingInput["order"] = "-fields.spikeWeightNumber";
-        } 
-        else if (this.query.match("軽い順")) {
-          loadingInput["order"] = "fields.spikeWeightNumber";
-        }
-        // ３　反発性順
-        if (this.query.match("強い順")) {
-          loadingInput["order"] = "-fields.spikeResilience";
-        } 
-        else if (this.query.match("弱い順")) {
-          loadingInput["order"] = "fields.spikeResilience";
-        }
-        // ４　反り順
-        if (this.query.match("鋭角順")) {
-          loadingInput["order"] = "-fields.spikeAngle";
-        } 
-        else if (this.query.match("鈍角順")) {
-          loadingInput["order"] = "fields.spikeAngle";
-        }
-        // ５　広さ順
-        if (this.query.match("広い順")) {
-          loadingInput["order"] = "-fields.spikeWidth";
-        } 
-        else if (this.query.match("狭い順")) {
-          loadingInput["order"] = "fields.spikeWidth";
-        }
-        // 6　グリップ順
-        if (this.query.match("グリップ性高い順")) {
-          loadingInput["order"] = "-fields.spikeGlip";
-        } 
-        else if (this.query.match("グリップ性低い順")) {
-          loadingInput["order"] = "fields.spikeGlip";
-        }
-      }
+        // こだわり検索
+        const displayOrder = () => {
+          // １　価格順
+          if (this.query.match("高い順")) {
+            loadingInput["order"] = "-fields.spikePrice";
+          } else if (this.query.match("安い順")) {
+            loadingInput["order"] = "fields.spikePrice";
+          }
+          // ２　重さ順
+          if (this.query.match("重い順")) {
+            loadingInput["order"] = "-fields.spikeWeightNumber";
+          } else if (this.query.match("軽い順")) {
+            loadingInput["order"] = "fields.spikeWeightNumber";
+          }
+          // ３　反発性順
+          if (this.query.match("強い順")) {
+            loadingInput["order"] = "-fields.spikeResilience";
+          } else if (this.query.match("弱い順")) {
+            loadingInput["order"] = "fields.spikeResilience";
+          }
+          // ４　反り順
+          if (this.query.match("鋭角順")) {
+            loadingInput["order"] = "-fields.spikeAngle";
+          } else if (this.query.match("鈍角順")) {
+            loadingInput["order"] = "fields.spikeAngle";
+          }
+          // ５　広さ順
+          if (this.query.match("広い順")) {
+            loadingInput["order"] = "-fields.spikeWidth";
+          } else if (this.query.match("狭い順")) {
+            loadingInput["order"] = "fields.spikeWidth";
+          }
+          // 6　グリップ順
+          if (this.query.match("グリップ性高い順")) {
+            loadingInput["order"] = "-fields.spikeGlip";
+          } else if (this.query.match("グリップ性低い順")) {
+            loadingInput["order"] = "fields.spikeGlip";
+          }
+        };
 
-      // 種目検索＋メーカー検索条件分岐
-      var words = this.query.split(' ');
-      console.log("みちゃんの両乳出たよ！！！");
+        // 種目検索＋メーカー検索条件分岐
+        var words = this.query.split(" ");
+        console.log("みちゃんの両乳出たよ！！！");
         console.log(this.query);
         loadingInput["fields.spikeCategory[match]"] = words[0];
         loadingInput["fields.spikeMaker[match]"] = words[1];
         displayOrder();
 
-      await contentfulClient
-           .getEntries(loadingInput)
+        await contentfulClient
+          .getEntries(loadingInput)
           .then(({ items }: { items: any }) => (this.spikes = items))
           .catch(console.error);
         this.loading = false;
@@ -311,15 +308,14 @@ export default Vue.extend({
       //   }
       //   console.log("失敗しね！！" + arr);
       // }
-      
+
       // サンプル2
       if (this.form.sort.price[0] == "H") {
         searchInput["order"] = "-fields.spikePrice";
-      }
-      else if (this.form.sort.price[0] == "L") {
+      } else if (this.form.sort.price[0] == "L") {
         searchInput["order"] = "fields.spikePrice";
       }
-      
+
       // 機能２　絞り込む　チェックボックスで選ばれたものを検索する
       if (this.form.status.length > 0) {
         // form.statusに入っているvalueを連結して、代入する
@@ -342,6 +338,20 @@ export default Vue.extend({
       });
     },
   },
-  
 });
 </script>
+
+<style>
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.maker {
+  padding: 15px 20px;
+  background-color: #0038c9;
+  border: 1px;
+  color: white;
+  display: block;
+  border-radius: 10px;
+}
+</style>

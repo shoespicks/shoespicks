@@ -19,3 +19,20 @@ export default {
   },
 };
 </script>
+
+<style>
+.purchaseBtn {
+  font-weight: 600;
+  font-size: 16px;
+  background: linear-gradient(to bottom, #ffd800, #e2be00) !important;
+  border-color: #ffd900;
+  color: #fff !important;
+  padding: 10px 25px 15px;
+  border-radius: 20px;
+}
+.purchaseBtn:hover {
+  color: #ffd900;
+  background: #fff !important;
+  border-color: #ffd900;
+}
+</style>

@@ -135,9 +135,15 @@
             <b-tab title="口コミ">
               <div class="comment">
                 <div v-if="!loginUser">
-                  <b-btn @click="loginWithTwitter">twitterログイン</b-btn>
-                  <b-btn @click="loginWithFacebook">Facebookログイン</b-btn>
-                  <b-btn @click="loginWithGoogle">Googleログイン</b-btn>
+                  <b-btn style="background-color: #55acee" @click="loginWithTwitter">
+                    twitterログイン
+                  </b-btn>
+                  <b-btn style="background-color: #3b5998" @click="loginWithFacebook">
+                    Facebookログイン
+                  </b-btn>
+                  <b-btn style="background-color: #fff" @click="loginWithGoogle">
+                    Googleログイン
+                  </b-btn>
                   <p>ログインして口コミを確認しよう</p>
                 </div>
                 <div v-if="loginUser">
@@ -214,9 +220,6 @@ import spikeCompareVue from "./spikeCompare.vue";
 import { authStore } from "~/store/index";
 import { commentStore } from "~/store/index";
 import { CommentModel } from "~/store/types/commentEntity";
-
-import VueRouter from "vue-router";
-Vue.use(VueRouter);
 
 interface Data {
   spikeId: number;
@@ -353,15 +356,61 @@ export default Vue.extend({
     },
   },
 });
-
-//compareをルーティング
-const router = new VueRouter({
-  routes: [
-    {
-      path: "/spikecompare:",
-      name: "spikeCompare",
-      component: spikeCompareVue,
-    },
-  ],
-});
 </script>
+
+<style>
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 800px;
+}
+.itemTitle {
+  display: block;
+  font-weight: 300;
+  font-size: 20px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+
+/* スパイク情報表 */
+.basicInfo {
+  border-collapse: collapse;
+  width: 99.7709%;
+  height: 243px;
+}
+.basicInfo tbody {
+  display: block;
+}
+.basicInfo tr {
+  display: flex;
+}
+.basicInfo td {
+  padding: 1% !important;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-left: none;
+}
+.basicInfo td:nth-child(1) {
+  text-align: center;
+  color: #fff;
+  background-color: #0494c8 !important;
+  width: 25%;
+}
+.basicInfo td:nth-child(2) {
+  text-align: left;
+  padding-left: 3% !important;
+  width: 75%;
+}
+
+/* カルーセルの３点 */
+.theme--dark.v-btn.v-btn--icon {
+  color: #327cbe; /* vuetifyの上書き */
+}
+
+@media screen and (min-width: 768px) {
+  .topSearchBar {
+    top: 50vh;
+    padding: 5vh;
+  }
+}
+</style>
