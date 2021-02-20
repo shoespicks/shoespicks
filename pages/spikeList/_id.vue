@@ -148,6 +148,7 @@
                 </div>
                 <div v-if="loginUser">
                   <p>{{ loginUser }}</p>
+                  <p>{{ loginUser.prof }}</p>
                   <img width="50" height="50" :src="loginUser.iconUrl" alt="ユーザーアイコン" />
                   <b-btn @click="logout">ログアウト</b-btn>
                   <b-form @submit="submitComment">

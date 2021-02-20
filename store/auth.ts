@@ -73,6 +73,7 @@ export default class Auth extends VuexModule {
     return $authRepository
       .signInWithFacebook()
       .then((result) => {
+        console.log(result);
         if (!result.user?.uid) {
           return null;
         }
@@ -95,6 +96,7 @@ export default class Auth extends VuexModule {
     return $authRepository
       .signInWithGoogle()
       .then((result) => {
+        console.log(result);
         if (!result.user?.uid) {
           return null;
         }

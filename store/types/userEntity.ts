@@ -51,20 +51,17 @@ export class UserModel {
         this.displayName = entity.user?.displayName;
       }
 
-      if (entity.additionalUserInfo?.username) {
-        this.accountName = entity.additionalUserInfo?.username;
+      if (entity.additionalUserInfo?.Profile) {
+        this.accountName = entity.additionalUserInfo?.Profile;
       }
 
-      if (entity.additionalUserInfo?.Profile) {
-        this.prof = entity.additionalUserInfo?.Profile;
-      }
+      // if (entity.additionalUserInfo?.Profile) {
+      //   this.prof = entity.additionalUserInfo?.Profile;
+      // }
 
       if (entity.user?.photoURL) {
         this.iconUrl = entity.user?.photoURL;
       }
-      // if (entity.UserInfoInterface.PhotoUrl) {
-      //   this.iconUrl = entity.UserInfoInterface.PhotoUrl;
-      // }
 
       if (entity.credential?.providerId) {
         this.provider = entity.credential?.providerId;
