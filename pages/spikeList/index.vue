@@ -106,7 +106,7 @@
 
         <b-card
           　v-for="spike in spikes"
-          @click="$nuxt.$router.push(`/${spike.fields.id}`)"
+          @click="$nuxt.$router.push(`/spikeList/${spike.fields.id}`)"
           :title="spike.fields.spikeTitle"
           img-alt="Image"
           tag="article"
@@ -276,8 +276,6 @@ export default Vue.extend({
 
         // 種目検索＋メーカー検索条件分岐
         var words = this.query.split(" ");
-        console.log("みちゃんの両乳出たよ！！！");
-        console.log(this.query);
         loadingInput["fields.spikeCategory[match]"] = words[0];
         loadingInput["fields.spikeMaker[match]"] = words[1];
         displayOrder();

@@ -50,12 +50,10 @@
 </template>
 
 <script>
-import searchForm from "../Atom/searchForm";
 import shoesPicksLogo from "../Atom/shoesPicksLogo";
 
 export default {
   components: {
-    searchForm,
     shoesPicksLogo,
   },
   data() {

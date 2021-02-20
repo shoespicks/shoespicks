@@ -12,7 +12,7 @@
       </p> -->
       <b-form>
         <!-- 2. 絞り込む -->
-        <CopySearchForm></CopySearchForm>
+        <TopSearchForm></TopSearchForm>
         <!-- <b-form-select name="" id="">
           <template #first>
             <b-form-select-option :value="null" disabled>こだわり</b-form-select-option>
@@ -84,11 +84,11 @@
 <script lang="ts">
 import { contentfulClient } from "~/plugins/contentful";
 import Vue from "vue";
-import CopySearchForm from "@/components/Atom/copy-searchForm.vue";
+import TopSearchForm from "@/components/Atom/TopSearchForm.vue";
 
 export default Vue.extend({
   components: {
-    CopySearchForm,
+    TopSearchForm,
   },
 });
 </script>
@@ -101,7 +101,7 @@ export default Vue.extend({
   align-items: center;
   height: 40vh;
   background-color: gray;
-  background: url(../img/test-asobi/davis.png) no-repeat center center;
+  background: url(../assets/img/test-asobi/davis.png) no-repeat center center;
   color: black;
 }
 .topView h1 {

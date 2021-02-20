@@ -107,10 +107,10 @@ export default {
       // query配列のなかにnullじゃない値があれば true
       if (this.query.some((num) => num !== null)) {
         let query = this.query.join(" ");
-        this.$router.push({ path: "/spikeSearch/", query: { q: query } });
+        this.$router.push({ path: "/spikeList/", query: { q: query } });
       } else if (this.query[0] == null) {
         let query = this.query.join("");
-        this.$router.push({ path: "/spikeSearch/", query: { q: query } });
+        this.$router.push({ path: "/spikeList/", query: { q: query } });
       }
       query = "";
     },
