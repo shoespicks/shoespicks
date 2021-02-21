@@ -22,7 +22,9 @@
           <b-tabs card>
             <b-tab title="詳細" active>
               <b-card-text>
-                <barChart :parameter1="[parameter1]" :parameter2="parameter2"></barChart>
+
+                <barChart :parameter1="parameter1"></barChart>
+
                 <!-- <NuxtLink to="/spikeCompare">
                 <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
                 </NuxtLink> -->
@@ -354,6 +356,15 @@ export default Vue.extend({
 
     logout() {
       authStore.logout();
+    },
+
+    makeParameter1(){
+      var spikeWeight1 = this.spike.fields.spikeWeight;
+      var spikeWidth1 = this.spike.fields.spikeWidth;
+      var spikeAngle1 = this.spike.fields.spikeAngle;
+      var spikespikeGlip1 = this.spike.fields.spikeGlip;
+      var spikeResilience1 = this.spike.fields.spikeResilience;
+      this.parameter1 = [spikeWeight1, spikeWidth1, spikeAngle1, spikespikeGlip1, spikeResilience1];
     },
   },
 });
