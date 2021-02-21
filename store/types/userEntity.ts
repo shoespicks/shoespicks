@@ -40,6 +40,7 @@ export class UserModel {
   constructor(entity: UserCredential);
 
   constructor(entity: any) {
+    // debugger;
     if (this.isUser(entity)) {
       console.log('ユーザー情報だよ');
       console.log(entity);
@@ -51,17 +52,29 @@ export class UserModel {
         this.displayName = entity.user?.displayName;
       }
 
-      if (entity.additionalUserInfo?.Profile) {
-        this.accountName = entity.additionalUserInfo?.Profile;
+      if (entity.additionalUserInfo?.username) {
+        this.accountName = entity.additionalUserInfo?.username;
       }
 
-      // if (entity.additionalUserInfo?.Profile) {
-      //   this.prof = entity.additionalUserInfo?.Profile;
-      // }
+      if (entity.additionalUserInfo?.profile.name) {
+        this.prof = entity.additionalUserInfo?.profile.name;
+      }
 
-      if (entity.user?.photoURL) {
+      // google.com,twitter.com
+      if (
+        entity.credential?.providerId == 'twitter.com' ||
+        entity.credential?.providerId == 'google.com'
+      ) {
         this.iconUrl = entity.user?.photoURL;
       }
+      // facebook.com
+      // おそらくiconUrl上書きしている
+      if (entity.credential?.providerId === 'facebook.com') {
+        this.iconUrl = entity.additionalUserInfo?.profile.picture.data.url;
+      }
+      // if (entity.user?.photoURL) {
+      //   this.iconUrl = entity.user?.photoURL;
+      // }
 
       if (entity.credential?.providerId) {
         this.provider = entity.credential?.providerId;

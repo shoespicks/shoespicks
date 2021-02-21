@@ -79,6 +79,7 @@ export default class Auth extends VuexModule {
         }
 
         const user = new UserModel(result);
+        console.log('const user = new UserModel(result);');
         console.log(user);
         this.set(user);
         $userRepository.upsert(user).then();
