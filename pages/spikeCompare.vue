@@ -1,65 +1,80 @@
 <template>
   <div>
+    <h1 class="compareTitle">{{ this.spike1.fields.spikeCategory[0] }}
+      スパイクを比較する</h1>
     <barChart :parameter1="parameter1" :parameter2="parameter2"></barChart>
 
-    <div class="compareBlock">
       <div class="compareSelect1">
-        <b-form-select v-model="spikeId1" class="mb-3" @change="submit">
-          <b-form-select-option-group :label="category">
-            <b-form-select-option
-              v-for="selectSpike in options"
-              v-bind:value="selectSpike.value"
-              :key="selectSpike.value"
-              :selected="spikeId1"
-              >{{ selectSpike.text }}
-            </b-form-select-option>
-          </b-form-select-option-group>
-        </b-form-select>
+        <div class="spikeImgCon">
+          <div class="spikeImgBox">
+            <b-img :src="spikeImgUrl1" class="compareSpikeImg" alt="スパイク比較用画像1"></b-img>
+          </div>
+          <div class="spikeImgBox">
+            <b-img :src="spikeImgUrl2"  class="compareSpikeImg" alt="スパイク比較用画像2"></b-img>
+          </div>
+        </div>
 
-        <b-img :src="spikeImgUrl1" alt="スパイク比較用画像1"></b-img>
+        <!-- spike1のselectフィールド -->
+        <div class="spikeSelectCon">
+          <b-form-select v-model="spikeId1" class="mb-3" @change="submit">
+            <b-form-select-option-group :label="category">
+              <b-form-select-option
+                v-for="selectSpike in options"
+                v-bind:value="selectSpike.value"
+                :key="selectSpike.value"
+                :selected="spikeId1"
+                >{{ selectSpike.text }}
+              </b-form-select-option>
+            </b-form-select-option-group>
+          </b-form-select>
+          <!-- spike2のselectフィールド -->
+          <b-form-select v-model="spikeId2" class="mb-3" @change="submit">
+            <b-form-select-option :value="null">比較する</b-form-select-option>
+            <b-form-select-option-group :label="category">
+              <b-form-select-option
+                v-for="selectSpike in options"
+                v-bind:value="selectSpike.value"
+                :key="selectSpike.value"
+                :selected="spikeId2"
+                >{{ selectSpike.text }}
+              </b-form-select-option>
+            </b-form-select-option-group>
+          </b-form-select>
+        </div>
+
+        <!-- spike1のtable -->
         <b-table
-          striped
+          class="spikeInfoTable"
           hover
           caption-top
+          borderless
           label="Table Options"
           :items="table1"
           :fields="[{ key: 'key' }, { key: 'result' }]"
         >
         </b-table>
-
         <b-button pill variant="primary" @click="$nuxt.$router.push(spikeId1)">詳細を見る</b-button>
-      </div>
 
-      <div class="compareSelect2">
-        <b-form-select v-model="spikeId2" class="mb-3" @change="submit">
-          <b-form-select-option :value="null">選択はよ</b-form-select-option>
-          <b-form-select-option-group :label="category">
-            <b-form-select-option
-              v-for="selectSpike in options"
-              v-bind:value="selectSpike.value"
-              :key="selectSpike.value"
-              :selected="spikeId2"
-              >{{ selectSpike.text }}
-            </b-form-select-option>
-          </b-form-select-option-group>
-        </b-form-select>
-
+        <!-- spike2のtable -->
         <div v-if="spikeId2 != null">
-          <b-img :src="spikeImgUrl2" alt="スパイク比較用画像2"></b-img>
           <b-table
-            striped
+            class="spikeInfoTable2"
             hover
             caption-top
+            borderless
             label="Table Options"
             :items="table2"
-            :fields="[{ key: 'key' }, { key: 'result' }]"
+            :fields="[{ key: 'result' }]"
           >
           </b-table>
 
           <b-button pill variant="primary" @click="$nuxt.$router.push(spikeId2)">詳細を見る</b-button>
         </div>
       </div>
-    </div>
+      <!-- spie2の昔の入れ物 -->
+      <!-- <div class="compareSelect2"></div> -->
+
+
     <!-- プルダウン選択したタイトルのIDが出る -->
     <div class="mt-2">
       ID1: <strong>{{ spikeId1 }}</strong>
@@ -168,7 +183,7 @@ export default Vue.extend({
   },
 
   methods: {
-    
+
     submit() {
       //クエリパラメータ付与
       this.$router.push({query: { spikeName1: String(this.spikeId1), spikeName2: String(this.spikeId2)}});
@@ -250,7 +265,7 @@ export default Vue.extend({
 
     makeTable1(){
       this.table1 = [
-      { key: "価格", result: this.spike1.fields.spikePrice },
+      { key: "定価", result: this.spike1.fields.spikePrice },
       { key: "重さ", result: this.spike1.fields.spikeWeightNumber },
       { key: "対応種目", result: String(this.spike1.fields.spikeEvent) },
       { key: "対応環境", result: String(this.spike1.fields.spikeEnvironment) },
@@ -282,7 +297,7 @@ export default Vue.extend({
 
     makeTable2(){
       this.table2 = [
-        { key: "価格", result: this.spike2.fields.spikePrice },
+        { key: "定価", result: this.spike2.fields.spikePrice },
         { key: "重さ", result: this.spike2.fields.spikeWeightNumber },
         { key: "対応種目", result: String(this.spike2.fields.spikeEvent) },
         { key: "対応環境", result: String(this.spike2.fields.spikeEnvironment) },
@@ -302,13 +317,60 @@ export default Vue.extend({
 </script>
 
 <style>
+.compareTitle {
+  margin: 10vw 5vw;
+  padding: 2vw;
+  font-size: 6vw;
+  font-weight: bold;
+  color: #327CBE;
+  text-align: center;
+  border-bottom: 2px solid #327CBE;
+}
+
+.spikeImgCon,
+.spikeSelectCon {
+  display: flex;
+}
 .compareSelect1 {
   display: inline-block;
+}
+.compareSelect2 {
+  display: inline-block;
+}
+.spikeImgBox {
+  height: 17vh;
+  box-shadow: 2px 2px 8px -4px #000000;
+  margin: 1vw 3vw;
+}
+.compareSpikeImg {
   width: 40vw;
 }
 
-.compareSelect2 {
-  display: inline-block;
-  width: 40vw;
+.spikeInfoTable {
+  border-collapse: separate;
+  border-spacing: 10px 30px;
+  /* table-layout: fixed; */
+}
+
+.spikeInfoTable2 {
+  border-collapse: separate;
+  border-spacing: 10px 78px;
+}
+
+.spikeInfoTable thead,
+.spikeInfoTable2 thead {
+  display: none;
+}
+
+.spikeInfoTable td,
+.spikeInfoTable2 td {
+  display: block;
+  word-break : break-all;
+}
+.spikeInfoTable tr td:nth-child(1) {
+  border-bottom: 2px solid #DDC;
+}
+.spikeInfoTable2 tr td:nth-child(1) {
+  border-top: 2px solid #DDC;
 }
 </style>
