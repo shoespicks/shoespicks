@@ -68,7 +68,7 @@ export default {
         .then((entries: any) => {
           return entries.items.map((spike: any) => {
             return {
-              route: `/${spike.fields.id}`,
+              route: `spikeList/${spike.fields.spikeCategory}/${spike.fields.id}`,
               payload: spike
             };
           });

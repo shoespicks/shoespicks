@@ -22,17 +22,17 @@ export default {
         {
           label: "トラック",
           options: [
-            { value: "短距離", text: "短距離" },
-            { value: "中距離", text: "中距離" },
-            { value: "長距離", text: "長距離" },
+            { value: "shortsprint", text: "短距離" },
+            { value: "midlesprint", text: "中距離" },
+            { value: "longsprint", text: "長距離" },
           ],
         },
         {
           label: "フィールド",
           options: [
-            { value: "走幅跳・三段跳", text: "走幅跳・三段跳" },
-            { value: "走高跳・棒高跳", text: "走高跳・棒高跳" },
-            { value: "投擲", text: "投擲" },
+            { value: "longjump", text: "走幅跳・三段跳" },
+            { value: "highjump", text: "走高跳・棒高跳" },
+            { value: "throw", text: "投擲" },
           ],
         },
       ],
@@ -47,45 +47,45 @@ export default {
       options3: [
         { value: null, text: "表示順", disabled: true },
         {
-          label: "価格",
+          // label: "価格",
           options: [
-            { value: "安い順", item: "L", text: "安い順" },
-            { value: "高い順", item: "H", text: "高い順" },
+            { value: "fields.spikePrice", item: "L", text: "価格｜安い順" },
+            { value: "-fields.spikePrice", item: "H", text: "価格｜高い順" },
           ],
         },
         {
-          label: "重さ",
+          // label: "重さ",
           options: [
-            { value: "軽い順", item: "L", text: "軽い順" },
-            { value: "重い順", item: "H", text: "重い順" },
+            { value: "fields.spikeWeightNumber",  text: "重さ｜軽い順" },
+            { value: "-fields.spikeWeightNumber", text: "重さ｜重い順" },
           ],
         },
         {
-          label: "反発性",
+          // label: "反発性",
           options: [
-            { value: "弱い順", item: "L", text: "弱い順" },
-            { value: "強い順", item: "H", text: "強い順" },
+            { value: "fields.spikeResilience", text: "反発｜弱い順" },
+            { value: "-fields.spikeResilience", item: "H", text: "反発｜強い順" },
           ],
         },
         {
           label: "ソールの傾斜",
           options: [
-            { value: "鈍角順", item: "L", text: "鈍角順" },
-            { value: "鋭角順", item: "H", text: "鋭角順" },
+            { value: "-fields.spikeAngle", item: "L", text: "ソール傾斜｜シャープ順" },
+            { value: "fields.spikeAngle", item: "H", text: "ソール傾斜｜フラット順" },
           ],
         },
         {
-          label: "足幅",
+          // label: "足幅",
           options: [
-            { value: "狭い順", item: "L", text: "狭い順" },
-            { value: "広い順", item: "H", text: "広い順" },
+            { value: "fields.spikeWidth", text: "足幅｜狭い順" },
+            { value: "-fields.spikeWidth", text: "足幅｜広い順" },
           ],
         },
         {
-          label: "グリップ性",
+          // label: "グリップ性",
           options: [
-            { value: "グリップ性低い順", item: "L", text: "低い順" },
-            { value: "グリップ性高い順", item: "H", text: "高い順" },
+            { value: "fields.spikeGlip", text: "グリップ性｜低い順" },
+            { value: "-fields.spikeGlip", text: "グリップ性｜高い順" },
           ],
         },
       ],
@@ -103,16 +103,24 @@ export default {
   },
   methods: {
     submit() {
+      var categoryStr = String(this.query[0]);
+      this.$router.push({
+          path: "/spikeList/" + categoryStr, 
+          query: { brandName: this.query[1], favorite: this.query[2]}
+      });
+
       // someメソッドは配列内の値に引っかかるがあれば true
       // query配列のなかにnullじゃない値があれば true
-      if (this.query.some((num) => num !== null)) {
-        let query = this.query.join(" ");
-        this.$router.push({ path: "/spikeList/", query: { q: query } });
-      } else if (this.query[0] == null) {
-        let query = this.query.join("");
-        this.$router.push({ path: "/spikeList/", query: { q: query } });
-      }
-      query = "";
+      
+      // if (this.query.some((num) => num !== null)) {
+      //   // let query = this.query.join(" ");
+      //   // this.$router.push({ path: "/spikeList/", query: { q: query } });
+
+      // } else if (this.query[0] == null) {
+      //   // let query = this.query.join("");
+      //   // this.$router.push({ path: "/spikeList/", query: { q: query } });
+      // }
+      // // query = "";
     },
   },
 };

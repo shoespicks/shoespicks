@@ -218,7 +218,7 @@ import Vue from "vue";
 import { contentfulClient } from "~/plugins/contentful";
 import BarChart from "@/components/Molecule/BarChart.vue";
 import purchaseBtn from "@/components/Atom/purchaseBtn.vue";
-import spikeCompareVue from "../spikeCompare.vue";
+// import spikeCompareVue from "../spikeCompare.vue";
 // 口コミ用
 import { authStore } from "~/store/index";
 import { commentStore } from "~/store/index";
