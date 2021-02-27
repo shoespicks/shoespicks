@@ -3,19 +3,12 @@
     <h1 class="compareTitle">{{ this.spike1.fields.spikeCategory[0] }}
       スパイクを比較する</h1>
     <barChart :parameter1="parameter1" :parameter2="parameter2"></barChart>
-
+    <div class="compareSelectCon">
       <div class="compareSelect1">
-        <div class="spikeImgCon">
           <div class="spikeImgBox">
             <b-img :src="spikeImgUrl1" class="compareSpikeImg" alt="スパイク比較用画像1"></b-img>
           </div>
-          <div class="spikeImgBox">
-            <b-img :src="spikeImgUrl2"  class="compareSpikeImg" alt="スパイク比較用画像2"></b-img>
-          </div>
-        </div>
-
         <!-- spike1のselectフィールド -->
-        <div class="spikeSelectCon">
           <b-form-select v-model="spikeId1" class="mb-3" @change="submit">
             <b-form-select-option-group :label="category">
               <b-form-select-option
@@ -27,20 +20,6 @@
               </b-form-select-option>
             </b-form-select-option-group>
           </b-form-select>
-          <!-- spike2のselectフィールド -->
-          <b-form-select v-model="spikeId2" class="mb-3" @change="submit">
-            <b-form-select-option :value="null">比較する</b-form-select-option>
-            <b-form-select-option-group :label="category">
-              <b-form-select-option
-                v-for="selectSpike in options"
-                v-bind:value="selectSpike.value"
-                :key="selectSpike.value"
-                :selected="spikeId2"
-                >{{ selectSpike.text }}
-              </b-form-select-option>
-            </b-form-select-option-group>
-          </b-form-select>
-        </div>
 
         <!-- spike1のtable -->
         <b-table
@@ -54,7 +33,26 @@
         >
         </b-table>
         <b-button pill variant="primary" @click="$nuxt.$router.push(spikeId1)">詳細を見る</b-button>
+      </div>
 
+      <!-- spie2の入れ物 -->
+      <div class="compareSelect2">
+        <div class="spikeImgBox">
+            <b-img :src="spikeImgUrl2"  class="compareSpikeImg" alt="スパイク比較用画像2"></b-img>
+        </div>
+        <!-- spike2のselectフィールド -->
+        <b-form-select v-model="spikeId2" class="mb-3" @change="submit">
+            <b-form-select-option :value="null">比較する</b-form-select-option>
+            <b-form-select-option-group :label="category">
+              <b-form-select-option
+                v-for="selectSpike in options"
+                v-bind:value="selectSpike.value"
+                :key="selectSpike.value"
+                :selected="spikeId2"
+                >{{ selectSpike.text }}
+              </b-form-select-option>
+            </b-form-select-option-group>
+        </b-form-select>
         <!-- spike2のtable -->
         <div v-if="spikeId2 != null">
           <b-table
@@ -67,12 +65,10 @@
             :fields="[{ key: 'result' }]"
           >
           </b-table>
-
           <b-button pill variant="primary" @click="$nuxt.$router.push(spikeId2)">詳細を見る</b-button>
         </div>
       </div>
-      <!-- spie2の昔の入れ物 -->
-      <!-- <div class="compareSelect2"></div> -->
+    </div>
 
 
     <!-- プルダウン選択したタイトルのIDが出る -->
@@ -327,8 +323,7 @@ export default Vue.extend({
   border-bottom: 2px solid #327CBE;
 }
 
-.spikeImgCon,
-.spikeSelectCon {
+.compareSelectCon {
   display: flex;
 }
 .compareSelect1 {
@@ -367,10 +362,26 @@ export default Vue.extend({
   display: block;
   word-break : break-all;
 }
-.spikeInfoTable tr td:nth-child(1) {
-  border-bottom: 2px solid #DDC;
+
+.spikeInfoTable tr td:nth-child(1):after {
+  /* border-bottom: 2px solid #DDC; */
+  content: "";
+  width: 90vw;
+  height: 2px;
+  display: block;
+  position: absolute;
+  background-color: #DDC;
 }
-.spikeInfoTable2 tr td:nth-child(1) {
+/* .spikeInfoTable2 tr td:nth-child(1) {
   border-top: 2px solid #DDC;
+} */
+td:nth-child(2) {
+    width: 44vw;
+}
+.compareSelect1 td:nth-child(2){
+  height: 13vh;
+}
+.compareSelect2 td{
+  height: 13vh;
 }
 </style>
