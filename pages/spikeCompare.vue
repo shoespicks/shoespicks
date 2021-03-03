@@ -42,7 +42,7 @@
       <!-- spie2の入れ物 -->
       <div class="compareSelect2">
         <div class="spikeImgBox">
-            <b-img :src="spikeImgUrl2"  class="compareSpikeImg" alt="スパイク比較用画像2"></b-img>
+            <b-img :src="spikeImgUrl2"  class="compareSpikeImg" alt="比較したいスパイクを選んでね"></b-img>
         </div>
         <!-- spike2のselectフィールド -->
         <b-form-select v-model="spikeId2" class="mb-3 spikeSelect" @change="submit">
@@ -346,10 +346,14 @@ export default Vue.extend({
   object-fit: cover;
 }
 .compareSelect1 .spikeSelect {
-  background: url(../assets/img/original-shoe.png) no-repeat center center;
+  background: url(../assets/img/original-shoe.png) no-repeat 5% center;
+  background-size: 30px;
+  padding-left: 25%;
 }
 .compareSelect2 .spikeSelect {
-  background: url(../assets/img/hikaku-shoe.png) no-repeat center center;
+  background: url(../assets/img/hikaku-shoe.png) no-repeat 5% center;
+  background-size: 30px;
+  padding-left: 25%;
 }
 
 
