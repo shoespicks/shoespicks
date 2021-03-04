@@ -22,7 +22,6 @@
           <b-tabs card>
             <b-tab title="詳細" active>
               <b-card-text>
-
                 <barChart :parameter1="parameter1"></barChart>
 
                 <!-- <NuxtLink to="/spikeCompare">
@@ -280,8 +279,7 @@ export default Vue.extend({
     },
   },
   created() {
-    // 2回出てしまう＋コメントしてから見て欲しい
-    // this.fetchComments();
+    this.fetchComments();
     var spikeWeight1 = this.spike.fields.spikeWeight;
     var spikeWidth1 = this.spike.fields.spikeWidth;
     var spikeAngle1 = this.spike.fields.spikeAngle;
@@ -312,6 +310,9 @@ export default Vue.extend({
     },
 
     fetchComments() {
+      //
+      // 【要対応】commentsのなかを一回からにする処理・・createed()のとこで一回取得しているから2回出てしまう
+      //
       commentStore.fetchSpikeComments(this.spike.sys.id).then((comments) => {
         console.log("commentsだよー");
         console.log(comments);
@@ -358,7 +359,7 @@ export default Vue.extend({
       authStore.logout();
     },
 
-    makeParameter1(){
+    makeParameter1() {
       var spikeWeight1 = this.spike.fields.spikeWeight;
       var spikeWidth1 = this.spike.fields.spikeWidth;
       var spikeAngle1 = this.spike.fields.spikeAngle;

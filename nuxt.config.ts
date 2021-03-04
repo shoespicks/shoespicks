@@ -23,7 +23,8 @@ export default {
     '~/plugins/contentful',
     '~/plugins/firebase',
     '~/plugins/repository',
-    { src: '~/plugins/initAuth', mode: 'client' }
+    { src: '~/plugins/initAuth', mode: 'client' },
+    { src: '~/plugins/router.js' }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
