@@ -1,24 +1,70 @@
 <template>
   <div class="">
     <div>
-      <b-btn style="background-color: #55acee" @click="loginWithTwitter"> twitterログイン </b-btn>
-      <b-btn style="background-color: #3b5998" @click="loginWithFacebook"> Facebookログイン </b-btn>
-      <b-btn style="background-color: #fff" @click="loginWithGoogle"> Googleログイン </b-btn>
-      <p>ログインして口コミを確認しよう</p>
+      <div v-if="!loginUser">
+        <b-btn style="background-color: #55acee" @click="loginWithTwitter"> twitterログイン </b-btn>
+        <b-btn style="background-color: #3b5998" @click="loginWithFacebook">
+          Facebookログイン
+        </b-btn>
+        <b-btn style="background-color: #fff" @click="loginWithGoogle"> Googleログイン </b-btn>
+        <p>ログインして口コミを確認しよう</p>
+      </div>
 
-      <b-btn @click="logout">ログアウト</b-btn>
+      <div v-if="loginUser">
+        <b-form @submit="submitUserInfo">
+          <b-form-group>
+            <b-form-input
+              type="text"
+              v-model="infoBody"
+              placeholder="ユーザー情報を入力"
+            ></b-form-input>
+            {{ infoBody }}
+          </b-form-group>
+          <b-btn type="submit">登録する</b-btn>
+        </b-form>
+
+        <b-btn @click="logout">ログアウト</b-btn>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { authStore } from "~/store/index";
+import { addUserInfoStore } from "~/store/index";
+import { AddUserInfoModel } from "~/store/types/addUserInfoEntity";
+
+interface Data {
+  infoBody: string;
+}
+
 export default {
-  computed: {},
-  data() {
-    return {};
+  computed: {
+    loginUser() {
+      return authStore.user;
+    },
+    addUserInfos(): AddUserInfoModel[] | undefined {
+      return addUserInfoStore.userAddUserInfos(this.$data.userId);
+    },
+  },
+  data(): Data {
+    return {
+      infoBody: "",
+    };
   },
   methods: {
+    submitUserInfo(e: Event) {
+      e.preventDefault();
+      addUserInfoStore
+        .postUserAddUserInfo({
+          userId: authStore.user?.id,
+          infoBody: this.infoBody,
+        })
+        .then((response: any) => {
+          console.log(response);
+        });
+    },
+
     loginWithTwitter() {
       authStore
         .loginWithTwitter()
