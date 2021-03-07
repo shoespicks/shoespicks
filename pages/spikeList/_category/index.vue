@@ -7,8 +7,36 @@
 
     <!-- 種目チェックボックス -->
     <div class="eventCheckBox">
+      <!-- 短距離 -->
+      <div v-if="spikeCategory == 'shortsprint'">
         <b-form-radio-group @change="submit" v-model="spikeEvent" :options="eventListShortsprint" class="mb-3" value-field="value" text-field="text">
         </b-form-radio-group>
+      </div>
+      <!-- 中距離 -->
+      <div v-if="spikeCategory == 'midlesprint'">
+        <b-form-radio-group @change="submit" v-model="spikeEvent" :options="eventListShortsprint" class="mb-3" value-field="value" text-field="text">
+        </b-form-radio-group>
+      </div>
+      <!-- 長距離 -->
+      <div v-if="spikeCategory == 'longsprint'">
+        <b-form-radio-group @change="submit" v-model="spikeEvent" :options="eventListShortsprint" class="mb-3" value-field="value" text-field="text">
+        </b-form-radio-group>
+      </div>
+      <!-- 走幅跳・三段跳 -->
+      <div v-if="spikeCategory == 'longjump'">
+        <b-form-radio-group @change="submit" v-model="spikeEvent" :options="eventListShortsprint" class="mb-3" value-field="value" text-field="text">
+        </b-form-radio-group>
+      </div>
+      <!-- 走高跳・棒高跳 -->
+      <div v-if="spikeCategory == 'highjump'">
+        <b-form-radio-group @change="submit" v-model="spikeEvent" :options="eventListShortsprint" class="mb-3" value-field="value" text-field="text">
+        </b-form-radio-group>
+      </div>
+      <!-- 投擲 -->
+      <div v-if="spikeCategory == 'throw'">
+        <b-form-radio-group @change="submit" v-model="spikeEvent" :options="eventListShortsprint" class="mb-3" value-field="value" text-field="text">
+        </b-form-radio-group>
+      </div>
     </div>
 
     <!-- 絞り込み -->
@@ -72,11 +100,17 @@ interface Data {
   spikeCategoryJpn: any,
   brandName: any,
   favorite:any,
+  spikeTerms: any;
   options: any,
   eventListShortsprint:any;
-  spikeTerms: any;
+  eventListMidlesprint:any;
+  eventListlongjump:any;
+  eventListLongsprint:any;
+  eventListHighjump:any;
+  eventLisThrow:any;
   termsList: any;
   spikeEvent: any;
+  categoryList: any;
 }
 
 export default Vue.extend({
@@ -85,11 +119,11 @@ export default Vue.extend({
       queryValue: "",
       spikeId: 0,
       spikes: [],
-      eventListShortsprint:["100m","200m","400m","110mH","400mH"],
       spikeCategory: null,
-      spikeCategoryJpn:null,
-      brandName: this.$route.query.brandName,
-      favorite: this.$route.query.favorite,
+      spikeCategoryJpn: null,
+      brandName: null,
+      favorite: null,
+      spikeTerms: null,
       options: [
         { value: null, text: "表示順", disabled: true },
         { value: "fields.spikePrice", text: "価格｜安い順"},
@@ -105,7 +139,12 @@ export default Vue.extend({
         { value: "fields.spikeGlip", text: "グリップ性｜低い順" },
         { value: "-fields.spikeGlip", text: "グリップ性｜高い順" },
       ],
-      spikeTerms: null,
+      eventListShortsprint:["100m","200m","400m","110mH","400mH"],
+      eventListMidlesprint:["800","1500m"],
+      eventListLongsprint:["3000m","5000m","10000m","3000mSC"],
+      eventListlongjump:["走幅跳","三段跳"],
+      eventListHighjump:["走高跳","棒高跳"],
+      eventLisThrow:["砲丸投","やり投げ","円盤投","ハンマー投"],
       termsList: [
         { value: "初心者", text: "初心者"},
         { value: "土兼用", text: "土兼用"},
@@ -113,51 +152,18 @@ export default Vue.extend({
         { value: "ベルトあり", text: "ベルトあり"},
       ],
       spikeEvent: [],
+      categoryList:{
+      shortsprint: "短距離",
+      midlesprint: "中距離",
+      longsprint: "長距離",
+      longjump: "走幅跳・三段跳",
+      highjump: "走高跳・棒高跳",
+      throw: "投擲"
+      },
     };
   },
   created: function(){
-    this.spikeTerms = this.$route.query.spikeTerms;
-    this.spikeEvent = this.$route.query.spikeEvent;
-    //飛んできたページのスパイクカテゴリを取得
-      this.spikeCategory = this.$route.params.category;
-
-      var categoryList = {
-        shortsprint: "短距離",
-        midlesprint: "中距離",
-        longsprint: "長距離",
-        longjump: "走幅跳・三段跳",
-        highjump: "走高跳・棒高跳",
-        throw: "投擲"
-      }
-
-      this.spikeCategoryJpn = categoryList[this.spikeCategory];
-      this.brandName = this.$route.query.brandName;
-      this.favorite = this.$route.query.favorite; 
-
-      // var searchInput: { [key: string]: string } = {
-      //   content_type: "spike",
-      //   "fields.spikeCategory[match]": this.spikeCategoryJpn,
-      //   "fields.spikeMaker[match]": this.brandName,
-      //   order: this.favorite,
-      //   };
-      // contentfulClient.getEntries(searchInput).then((e: any) => {
-      //   e.items?.forEach((item: any, index: number) => {});
-      //   this.spikes = e.items;
-      //   });
-
-
-      var searchInput: { [key: string]: string } = {
-        content_type: "spike",
-        "fields.spikeCategory[match]": this.spikeCategoryJpn,
-        "fields.spikeMaker[match]": this.brandName,
-        order: this.favorite,
-        };
-      contentfulClient.getEntries(searchInput).then((e: any) => {
-        e.items?.forEach((item: any, index: number) => {});
-        this.spikes = e.items;
-        });
-
-        
+    this.getSelectedEntries();
   },
 
 
@@ -171,9 +177,10 @@ export default Vue.extend({
       );
     },
   },
+
   watch: {
     favorite:function(){
-      
+
 
 
     },
@@ -187,6 +194,49 @@ export default Vue.extend({
   },
 
   methods: {
+    getSelectedEntries(){
+      this.brandName = this.$route.query.brandName;
+      this.spikeCategory = this.$route.params.category;
+      this.spikeEvent = this.$route.query.spikeEvent;
+      this.favorite = this.$route.query.favorite; 
+      this.spikeTerms = this.$route.query.spikeTerms;
+  
+      var searchContentfulTerms: { [key: string]: string } = {content_type: "spike"};
+      var searchCategory_type = "fields.spikeCategory[match]";
+      var searchMaker = "fields.spikeMaker[match]";
+      var searchEvents = "fields.spikeEvent[in]";
+      var searchTerms = "fields.spikeTerms[all]";
+
+      if(this.spikeCategory != null || this.spikeCategory != undefined){
+        this.spikeCategoryJpn = this.categoryList[this.spikeCategory];
+        searchContentfulTerms[searchCategory_type] = this.spikeCategoryJpn;
+      }
+    
+      if(this.brandName != null || this.brandName != undefined){
+        searchContentfulTerms[searchMaker] = this.brandName;
+      }
+
+      if(this.favorite != null || this.favorite != undefined){
+        searchContentfulTerms['order'] = this.favorite;
+      }
+    
+      if(this.spikeEvent != null || this.spikeEvent != undefined){
+        searchContentfulTerms[searchEvents] = this.spikeEvent;
+      }
+
+      if(this.spikeTerms != null || this.spikeTerms != undefined){
+        var spikeTermsStr = this.spikeTerms.join(",");
+        searchContentfulTerms[searchTerms] = spikeTermsStr;
+      }
+
+      contentfulClient.getEntries(searchContentfulTerms).then((e: any) => {
+        e.items?.forEach((item: any, index: number) => {});
+        this.spikes = e.items;
+      });
+    },
+
+
+
     submit() {
       
       if(this.spikeTerms){
