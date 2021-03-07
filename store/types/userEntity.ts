@@ -40,7 +40,6 @@ export class UserModel {
   constructor(entity: UserCredential);
 
   constructor(entity: any) {
-    // debugger;
     if (this.isUser(entity)) {
       console.log('ユーザー情報だよ');
       console.log(entity);
@@ -68,13 +67,9 @@ export class UserModel {
         this.iconUrl = entity.user?.photoURL;
       }
       // facebook.com
-      // おそらくiconUrl上書きしている
       if (entity.credential?.providerId === 'facebook.com') {
         this.iconUrl = entity.additionalUserInfo?.profile.picture.data.url;
       }
-      // if (entity.user?.photoURL) {
-      //   this.iconUrl = entity.user?.photoURL;
-      // }
 
       if (entity.credential?.providerId) {
         this.provider = entity.credential?.providerId;

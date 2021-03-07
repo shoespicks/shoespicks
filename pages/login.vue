@@ -1,61 +1,108 @@
 <template>
-  <div class="login">
-    <p v-if="user.login" class="text">
-      {{ user }}
-      <button class="button" type="submit" @click="logout">Logout</button>
-    </p>
-    <form v-else class="form" @submit.prevent>
-      <label class="label">
-        <span class="label"> email </span>
-        <input class="input" type="text" v-model="email" />
-      </label>
-      <label class="label">
-        <span class="label"> password </span>
-        <input class="input" type="password" v-model="password" />
-      </label>
-      <button class="button" type="submit" @click="login">Login</button>
-    </form>
-    <button class="button" type="submit" @click="loginWithTwitter">Twitterでloginする</button>
-    <button class="button" type="submit" @click="loginWithGoogle">googleでloginする</button>
+  <div class="">
+    <div>
+      <div v-if="!loginUser">
+        <b-btn style="background-color: #55acee" @click="loginWithTwitter"> twitterログイン </b-btn>
+        <b-btn style="background-color: #3b5998" @click="loginWithFacebook">
+          Facebookログイン
+        </b-btn>
+        <b-btn style="background-color: #fff" @click="loginWithGoogle"> Googleログイン </b-btn>
+        <p>ログインして口コミを確認しよう</p>
+      </div>
+
+      <div v-if="loginUser">
+        <b-form @submit="submitUserInfo">
+          <b-form-group>
+            <b-form-input
+              type="text"
+              v-model="infoBody"
+              placeholder="ユーザー情報を入力"
+            ></b-form-input>
+            {{ infoBody }}
+          </b-form-group>
+          <b-btn type="submit">登録する</b-btn>
+        </b-form>
+
+        <b-btn @click="logout">ログアウト</b-btn>
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-import Vue from "vue";
-import { contentfulClient } from "~/plugins/contentful";
-import { authStore } from "~/store";
-import { commentStore } from "~/store";
-import { CommentModel } from "~/store/types/commentEntity";
+<script lang="ts">
+import { authStore } from "~/store/index";
+import { addUserInfoStore } from "~/store/index";
+import { AddUserInfoModel } from "~/store/types/addUserInfoEntity";
+
+interface Data {
+  infoBody: string;
+}
 
 export default {
   computed: {
-    user() {
-      return this.$store.getters["user"];
+    loginUser() {
+      return authStore.user;
+    },
+    addUserInfos(): AddUserInfoModel[] | undefined {
+      return addUserInfoStore.userAddUserInfos(this.$data.userId);
     },
   },
-  data() {
+  data(): Data {
     return {
-      email: "",
-      password: "",
+      infoBody: "",
     };
   },
   methods: {
-    login(email, password) {
-      if (this.$store.dispatch("login", { email: this.email, password: this.password }))
-        // 成功したら1以上がreturnで帰ってくる
-        this.$router.push("/");
+    submitUserInfo(e: Event) {
+      e.preventDefault();
+      addUserInfoStore
+        .postUserAddUserInfo({
+          userId: authStore.user?.id,
+          infoBody: this.infoBody,
+        })
+        .then((response: any) => {
+          console.log(response);
+        });
     },
-    logout() {
-      // --------actionsで実装できない--------
-      // this.$store.dispatch("logout");
-      this.$store.commit("isLogout");
-      this.$router.push("/");
-    },
+
     loginWithTwitter() {
-      this.$store.dispatch("loginWithTwitter");
+      authStore
+        .loginWithTwitter()
+        .then((result) => {
+          console.log("clientでも出す:twitter");
+          console.log(result);
+        })
+        .catch((e) => {
+          console.log("clientでもエラー出す:twitter");
+        });
     },
+
+    loginWithFacebook() {
+      authStore
+        .loginWithFacebook()
+        .then((result) => {
+          console.log("clientでも出す:Facebook");
+          console.log(result);
+        })
+        .catch((e) => {
+          console.log("clientでもエラー出す:Facebook");
+        });
+    },
+
     loginWithGoogle() {
-      this.$store.dispatch("loginWithGoogle");
+      authStore
+        .loginWithGoogle()
+        .then((result) => {
+          console.log("clientでも出す:Google");
+          console.log(result);
+        })
+        .catch((e) => {
+          console.log("clientでもエラー出す:Google");
+        });
+    },
+
+    logout() {
+      authStore.logout();
     },
   },
 };
