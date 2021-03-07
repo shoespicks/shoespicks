@@ -5,22 +5,8 @@
     </section>
 
     <section class="topSearchBar">
-      <!-- やり方 -->
-      <!-- 検索バーと同じ作り方でできそう。検索ボタン押した後は、spikeSearch.vueに跳ぶ（スパイク一覧ページ） -->
-      <!-- <p @click="$nuxt.$router.push('spikeSearch')">
-        <b-btn>検索する</b-btn>
-      </p> -->
       <b-form>
-        <!-- 2. 絞り込む -->
         <TopSearchForm></TopSearchForm>
-        <!-- <b-form-select name="" id="">
-          <template #first>
-            <b-form-select-option :value="null" disabled>こだわり</b-form-select-option>
-          </template>
-          <b-form-select-option value="C">価格</b-form-select-option>
-          <b-form-select-option value="C">反発</b-form-select-option>
-          <b-form-select-option value="C">軽さ</b-form-select-option>
-        </b-form-select> -->
       </b-form>
     </section>
 

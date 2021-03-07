@@ -1,36 +1,28 @@
 <template>
   <div>
+    <!-- タイトル -->
+    <div class="spikeListSection1">
+      <p>{{spikeCategoryJpn}}スパイク｜{{brandName}}</p>
+    </div>
 
-    <p>{{spikeCategoryJpn}}｜{{brandName}}</p>
+    <!-- 種目チェックボックス -->
+    <div class="eventCheckBox">
+        <b-form-radio-group @change="submit" v-model="spikeEvent" :options="eventListShortsprint" class="mb-3" value-field="value" text-field="text">
+        </b-form-radio-group>
+    </div>
 
-      <b-form-group label="絞り込む">
-        <b-form-checkbox-group
-          v-model="form.status"
-          :options="status"
-          name="status"
-        ></b-form-checkbox-group>
-        <b-form-checkbox-group
-          v-model="form.target"
-          :options="target"
-          name="target"
-        ></b-form-checkbox-group>
-        <b-form-checkbox-group
-          v-model="form.environment"
-          :options="environment"
-          name="environment"
-        ></b-form-checkbox-group>
-        <b-form-checkbox-group
-          v-model="form.events"
-          :options="events"
-          name="events"
-        ></b-form-checkbox-group>
-      </b-form-group>
-      <b-form-select v-model="favorite" :options="options"> </b-form-select>
-      <b-btn type="submit">検索</b-btn>
+    <!-- 絞り込み -->
+    <div class="termsCheckBox">
+        <b-form-checkbox-group @change="submit" v-model="spikeTerms" :options="termsList" class="mb-3" value-field="value" text-field="text">
+        </b-form-checkbox-group>
+    </div>
 
+    <!-- 表示順序順序プルダウン -->
+    <b-form-select v-model="favorite" :options="options"> </b-form-select>
+    
+    <!-- スパイクカード -->
     <v-col cols="12">
       <template v-if="spikes.length">
-
         <b-card
           　v-for="spike in spikes"
           @click="$nuxt.$router.push(`/spikeList/${spikeCategory}/${spike.fields.id}`)"
@@ -73,86 +65,31 @@ import { contentfulClient } from "~/plugins/contentful";
 import Vue from "vue";
 
 interface Data {
-  query: any,
+  queryValue: any,
   spikes: any,
-  loading:any,
-  form:any,
   spikeId: any,
-  status: any,
-  target: any,
-  environment: any,
-  events: any,
-  price: any,
-  weight: any,
-  width: any,
-  resilience: any,
-  angle: any,
-  grip: any,
   spikeCategory: any,
   spikeCategoryJpn: any,
   brandName: any,
   favorite:any,
   options: any,
+  eventListShortsprint:any;
+  spikeTerms: any;
+  termsList: any;
+  spikeEvent: any;
 }
 
 export default Vue.extend({
   data():Data {
     return {
-      query: "",
-      loading: false,
-      form: {
-        name: "",
-        status: [],
-        target: [],
-        environment: [],
-        events: [],
-        sort: {
-          price: [],
-          weight: [],
-          width: [],
-          resilience: [],
-          angle: [],
-          grip: [],
-        },
-      },
+      queryValue: "",
       spikeId: 0,
       spikes: [],
-      status: [{ text: "新着", value: "新着" }],
-      target: [{ text: "初心者", value: "初心者" }],
-      environment: [{ text: "土兼用", value: "土兼用" }],
-      events: [
-        { text: "100m", value: "100m" },
-        { text: "200m", value: "200m" },
-        { text: "400m", value: "400m" },
-      ],
-      price: [
-        { item: "L", name: "安い順" },
-        { item: "H", name: "高い順" },
-      ],
-      weight: [
-        { item: "L", name: "軽い順" },
-        { item: "H", name: "重い順" },
-      ],
-      width: [
-        { item: "H", name: "広い順" },
-        { item: "L", name: "狭い順" },
-      ],
-      resilience: [
-        { item: "H", name: "高い順" },
-        { item: "L", name: "低い順" },
-      ],
-      angle: [
-        { item: "H", name: "高い順" },
-        { item: "L", name: "低い順" },
-      ],
-      grip: [
-        { item: "H", name: "高い順" },
-        { item: "L", name: "低い順" },
-      ],
+      eventListShortsprint:["100m","200m","400m","110mH","400mH"],
       spikeCategory: null,
       spikeCategoryJpn:null,
-      brandName: null,
-      favorite:null,
+      brandName: this.$route.query.brandName,
+      favorite: this.$route.query.favorite,
       options: [
         { value: null, text: "表示順", disabled: true },
         { value: "fields.spikePrice", text: "価格｜安い順"},
@@ -168,41 +105,59 @@ export default Vue.extend({
         { value: "fields.spikeGlip", text: "グリップ性｜低い順" },
         { value: "-fields.spikeGlip", text: "グリップ性｜高い順" },
       ],
+      spikeTerms: null,
+      termsList: [
+        { value: "初心者", text: "初心者"},
+        { value: "土兼用", text: "土兼用"},
+        { value: "ベルトなし", text: "ベルトなし"},
+        { value: "ベルトあり", text: "ベルトあり"},
+      ],
+      spikeEvent: [],
     };
   },
   created: function(){
+    this.spikeTerms = this.$route.query.spikeTerms;
+    this.spikeEvent = this.$route.query.spikeEvent;
     //飛んできたページのスパイクカテゴリを取得
       this.spikeCategory = this.$route.params.category;
-      console.log(this.spikeCategory);
 
       var categoryList = {
-        "shortsprint": "短距離",
-        "midlesprint": "中距離",
-        "longsprint": "長距離",
-        "longjump": "走幅跳・三段跳",
-        "highjump": "走高跳・棒高跳",
-        "throw": "投擲"
-      };
+        shortsprint: "短距離",
+        midlesprint: "中距離",
+        longsprint: "長距離",
+        longjump: "走幅跳・三段跳",
+        highjump: "走高跳・棒高跳",
+        throw: "投擲"
+      }
 
       this.spikeCategoryJpn = categoryList[this.spikeCategory];
-      console.log(this.spikeCategory);
-
       this.brandName = this.$route.query.brandName;
-      console.log(this.brandName);
-      this.favorite = this.$route.query.favorite;
-      console.log(this.favorite);
+      this.favorite = this.$route.query.favorite; 
+
+      // var searchInput: { [key: string]: string } = {
+      //   content_type: "spike",
+      //   "fields.spikeCategory[match]": this.spikeCategoryJpn,
+      //   "fields.spikeMaker[match]": this.brandName,
+      //   order: this.favorite,
+      //   };
+      // contentfulClient.getEntries(searchInput).then((e: any) => {
+      //   e.items?.forEach((item: any, index: number) => {});
+      //   this.spikes = e.items;
+      //   });
+
 
       var searchInput: { [key: string]: string } = {
         content_type: "spike",
         "fields.spikeCategory[match]": this.spikeCategoryJpn,
+        "fields.spikeMaker[match]": this.brandName,
         order: this.favorite,
         };
-      //↑のカテゴリのスパイクデータをcontentfulから取得、spikesに格納
       contentfulClient.getEntries(searchInput).then((e: any) => {
         e.items?.forEach((item: any, index: number) => {});
         this.spikes = e.items;
         });
 
+        
   },
 
 
@@ -217,128 +172,75 @@ export default Vue.extend({
     },
   },
   watch: {
-    "$route.query.q": {
-      handler(newVal) {
-        this.query = newVal;
-        // クエリーが投げられた一番最初
-        this.getPosts();
-      },
-      immediate: true,
+    favorite:function(){
+      
+
+
     },
-    
+
+    spikeEvent:function(){
+      // this.queryValue = {brandName: String(this.brandName), spikeEvent:String(this.spikeEvent),}
+
+    }
+
 
   },
 
   methods: {
-    async getPosts() {
-      // 空白時に検索しない条件式
-      if (this.isRequired) {
-        this.loading = true;
-        var loadingInput: { [key: string]: string } = {
-          content_type: "spike",
-        };
-
-        // こだわり検索
-        const displayOrder = () => {
-          // １　価格順
-          if (this.query.match("高い順")) {
-            loadingInput["order"] = "-fields.spikePrice";
-          } else if (this.query.match("安い順")) {
-            loadingInput["order"] = "fields.spikePrice";
-          }
-          // ２　重さ順
-          if (this.query.match("重い順")) {
-            loadingInput["order"] = "-fields.spikeWeightNumber";
-          } else if (this.query.match("軽い順")) {
-            loadingInput["order"] = "fields.spikeWeightNumber";
-          }
-          // ３　反発性順
-          if (this.query.match("強い順")) {
-            loadingInput["order"] = "-fields.spikeResilience";
-          } else if (this.query.match("弱い順")) {
-            loadingInput["order"] = "fields.spikeResilience";
-          }
-          // ４　反り順
-          if (this.query.match("鋭角順")) {
-            loadingInput["order"] = "-fields.spikeAngle";
-          } else if (this.query.match("鈍角順")) {
-            loadingInput["order"] = "fields.spikeAngle";
-          }
-          // ５　広さ順
-          if (this.query.match("広い順")) {
-            loadingInput["order"] = "-fields.spikeWidth";
-          } else if (this.query.match("狭い順")) {
-            loadingInput["order"] = "fields.spikeWidth";
-          }
-          // 6　グリップ順
-          if (this.query.match("グリップ性高い順")) {
-            loadingInput["order"] = "-fields.spikeGlip";
-          } else if (this.query.match("グリップ性低い順")) {
-            loadingInput["order"] = "fields.spikeGlip";
-          }
-        };
-
-        // 種目検索＋メーカー検索条件分岐
-        var words = this.query.split(" ");
-        loadingInput["fields.spikeCategory[match]"] = words[0];
-        loadingInput["fields.spikeMaker[match]"] = words[1];
-        displayOrder();
-
-        await contentfulClient
-          .getEntries(loadingInput)
-          .then(({ items }: { items: any }) => (this.spikes = items))
-          .catch(console.error);
-        this.loading = false;
+    submit() {
+      
+      if(this.spikeTerms){
+      var spikeTermsStr = this.spikeTerms.join(",");
+      this.$router.push({query: { spikeTerms: String(spikeTermsStr)}});
       }
-    },
 
-    submit(e: Event) {
-      e.preventDefault();
-      // 機能０ 検索窓で検索する
-      var searchInput: { [key: string]: string } = {
+      if (this.spikeEvent){
+        this.$router.push({query: { spikeEvent: String(this.spikeEvent)}});
+      }
+
+      if(spikeTermsStr != null && this.spikeEvent != null){
+        var searchInput: { [key: string]: string } = {
         content_type: "spike",
-        "fields.alias[match]": this.query,
-      };
-      // 機能１　並び替え
-      // サンプル1
-      // for (var key in this.form.sort) {
-      //   if ( arr == "H") {
-      //     searchInput["order"] = "-fields.spikePrice";
-      //     console.log("Hが正常に出たよ！");
-      //   }
-      //   else if ( arr == "L") {
-      //     searchInput["order"] = "fields.spikePrice";
-      //   }
-      //   console.log("失敗しね！！" + arr);
-      // }
-
-      // サンプル2
-      if (this.form.sort.price[0] == "H") {
-        searchInput["order"] = "-fields.spikePrice";
-      } else if (this.form.sort.price[0] == "L") {
-        searchInput["order"] = "fields.spikePrice";
-      }
-
-      // 機能２　絞り込む　チェックボックスで選ばれたものを検索する
-      if (this.form.status.length > 0) {
-        // form.statusに入っているvalueを連結して、代入する
-        searchInput["fields.spikeStatus[all]"] = this.form.status.join(",");
-      }
-      if (this.form.target.length > 0) {
-        searchInput["fields.spikeTarget[all]"] = this.form.target.join(",");
-      }
-      if (this.form.environment.length > 0) {
-        searchInput["fields.spikeEnvironment[all]"] = this.form.environment.join(",");
-      }
-      if (this.form.events.length > 0) {
-        searchInput["fields.spikeEvent[all]"] = this.form.events.join(",");
-      }
+        "fields.spikeCategory[match]": this.spikeCategoryJpn,
+        order: this.favorite,
+        "fields.spikeEvent[all]": this.spikeEvent,
+        "fields.spikeTerms[all]": spikeTermsStr,
+        // "fields.spikeEvent[all]": this.spikeEvent,
+        };
+      //↑のカテゴリのスパイクデータをcontentfulから取得、spikesに格納
       contentfulClient.getEntries(searchInput).then((e: any) => {
-        e.items?.forEach((item: any, index: number) => {
-          console.log(item);
-        });
+        e.items?.forEach((item: any, index: number) => {});
         this.spikes = e.items;
-      });
+        });
+
+      } else if(spikeTermsStr != null && this.spikeEvent == null){
+        console.log("spikeTermsStrだけ");
+        var searchInput: { [key: string]: string } = {
+        content_type: "spike",
+        "fields.spikeCategory[match]": this.spikeCategoryJpn,
+        order: this.favorite,
+        "fields.spikeTerms[all]": spikeTermsStr,
+        };
+      //↑のカテゴリのスパイクデータをcontentfulから取得、spikesに格納
+      contentfulClient.getEntries(searchInput).then((e: any) => {
+        e.items?.forEach((item: any, index: number) => {});
+        this.spikes = e.items;
+        });
+
+      }else if(spikeTermsStr == null && this.spikeEvent != null){
+        console.log("this.spikeEventだけ");
+        var searchInput: { [key: string]: string } = {
+        content_type: "spike",
+        "fields.spikeCategory[match]": this.spikeCategoryJpn,
+        order: this.favorite,
+        "fields.spikeEvent[all]": this.spikeEvent,
+        };
+      //↑のカテゴリのスパイクデータをcontentfulから取得、spikesに格納
+      contentfulClient.getEntries(searchInput).then((e: any) => {
+        e.items?.forEach((item: any, index: number) => {});
+        this.spikes = e.items;
+        });
+      }
     },
   },
 });

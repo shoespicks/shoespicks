@@ -2,11 +2,10 @@
   <div>
     <v-form>
       <div class="menuFormCon">
-        <b-form-select v-model="query[0]" :options="options"> 　</b-form-select>
-        <b-form-select v-model="query[1]" :options="options2"> 　</b-form-select>
+        <b-form-select v-model="query[0]" :options="options"></b-form-select>
+        <b-form-select v-model="query[1]" :options="options2"></b-form-select>
       </div>
-      <span class="batsu"></span>
-      <b-form-select v-model="query[2]" :options="options3"> </b-form-select>
+      <!-- <b-form-select v-model="query[2]" :options="options3"> </b-form-select> -->
       <b-btn @click.prevent="submit" class="searchBtn">検索</b-btn>
     </v-form>
   </div>
@@ -106,7 +105,7 @@ export default {
       var categoryStr = String(this.query[0]);
       this.$router.push({
           path: "/spikeList/" + categoryStr, 
-          query: { brandName: this.query[1], favorite: this.query[2]}
+          query: { brandName: this.query[1]}
       });
 
       // someメソッドは配列内の値に引っかかるがあれば true
