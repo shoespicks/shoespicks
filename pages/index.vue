@@ -14,15 +14,50 @@
       <!-- やりかた -->
       <!-- よく検索されているスパイクを上位５つくらい表示する
       おそらくsys.date　的なやつで検索履歴に残っているやつでできる気がする -->
-      <h2>よく見られているスパイク | 短距離</h2>
-      <h2>よく見られているスパイク | 中距離</h2>
+      <h2 class="textBlueM">よく見られているスパイク | 短距離</h2>
+    </section>
+    <section class="searchEvent">
+      <div class="searchTrack">
+        <h2 class="textBlueM">種目から探す | トラック</h2>
+        <div class="searchEventCon">
+          <div class="eventBox">
+            <div class="eventImg eventSprint"></div>
+            <p class="eventText">短距離<br><span>（100m〜400m）</span></p>
+          </div>
+          <div class="eventBox">
+            <div class="eventImg eventMiddle"></div>
+            <p class="eventText">中距離<br><span>（800m〜1500m）</span></p>
+          </div>
+          <div class="eventBox">
+            <div class="eventImg eventLong"></div>
+            <p class="eventText">長距離<br><span>（3000m〜）</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="searchField">
+        <h2 class="textBlueM">種目から探す | フィールド</h2>
+        <div class="searchEventCon">
+          <div class="eventBox">
+            <div class="eventImg eventLongJump"></div>
+            <p class="eventText">走幅跳 | 三段跳</p>
+          </div>
+          <div class="eventBox">
+            <div class="eventImg eventHighJump"></div>
+            <p class="eventText">走高跳 | 棒高跳</p>
+          </div>
+          <div class="eventBox">
+            <div class="eventImg eventThrow"></div>
+            <p class="eventText">投擲</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="howToUse">
-      <h2>このサイトの使い方</h2>
+      <h2 class="textBlueL">このサイトの特徴</h2>
       <!-- ただのHTML -->
       <div class="stepCon">
-        <h3>①陸上スパイクをカンタン検索</h3>
+        <h3 class="textBlueM">①種目やこだわり、メーカーなどでカンタン検索</h3>
         <div class="stepbox">
           <img src="@/assets//img/test-asobi/bakeru1.png" alt="画像が入るよ" />
           <p>
@@ -33,7 +68,7 @@
         </div>
       </div>
       <div class="stepCon">
-        <h3>②あなたにおすすめなスパイクをランキング表示</h3>
+        <h3 class="textBlueM">②ランキング形式でわかりやすい</h3>
         <div class="stepbox">
           <img src="@/assets//img/test-asobi/bakeru2.png" alt="画像が入るよ" />
           <p>
@@ -42,7 +77,7 @@
         </div>
       </div>
       <div class="stepCon">
-        <h3>③有力選手の評価レビューや口コミが満載</h3>
+        <h3 class="textBlueM">③有名選手のレビューや口コミが満載！</h3>
         <div class="stepbox">
           <img src="@/assets//img/test-asobi/bakeru3.png" alt="画像が入るよ" />
           <p>
@@ -52,7 +87,7 @@
         </div>
       </div>
       <div class="stepCon">
-        <h3>④グラフでカンタンにスパイク性能比較</h3>
+        <h3 class="textBlueM">④グラフでカンタンに性能比較</h3>
         <div class="stepbox">
           <img src="@/assets//img/test-asobi/bakeru4.png" alt="画像が入るよ" />
           <p>
@@ -80,6 +115,18 @@ export default Vue.extend({
 </script>
 
 <style>
+/* common */
+.textBlueM {
+  color: #2C70AB;
+  font-size: 2.5vh;
+  font-weight: 600;
+}
+.textBlueL {
+  color: #2C70AB;
+  font-size: 3.5vh;
+  font-weight: bold;
+  text-align: center;
+}
 /* section 1 */
 .topView {
   display: flex;
@@ -87,8 +134,10 @@ export default Vue.extend({
   align-items: center;
   height: 40vh;
   background-color: gray;
-  background: url(../assets/img/test-asobi/davis.png) no-repeat center center;
-  color: black;
+  background: url(../assets/img/test-asobi/greate-pretender.jpg) no-repeat center center;
+  background-size: cover;
+  color: white;
+  margin-bottom: 25vw;
 }
 .topView h1 {
   font-weight: 900;
@@ -141,23 +190,49 @@ export default Vue.extend({
 }
 
 /* section 3 */
-.commonlySeen {
-  padding: 43vw 3vh 10vw;
-}
-.commonlySeen h2 {
-  font-size: 2.5vh;
+.commonlySeen, .searchEvent {
+  padding: 10vw 3vh 10vw;
 }
 
 /* section 4 */
+.searchEventCon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5vw;
+}
+.eventBox { margin: 0 1vw; }
+.eventImg {
+  width: 30vw;
+  height: 30vw;
+  background-color: black;
+  padding: 10%;
+  margin: 0 auto;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-position: center center !important;
+  background-size: cover !important;
+}
+.eventSprint{ background: url(../assets/img/test-asobi/eventSprint.png)no-repeat; }
+.eventMiddle { background: url(../assets/img/test-asobi/eventMiddle.png)no-repeat; }
+.eventLong { background: url(../assets/img/test-asobi/eventLong.png)no-repeat; }
+.eventLongJump{ background: url(../assets/img/test-asobi/eventLongJump.png)no-repeat; }
+.eventHighJump{ background: url(../assets/img/test-asobi/eventHighJump.png)no-repeat; }
+.eventThrow{ background: url(../assets/img/test-asobi/eventThrow.png)no-repeat; }
+
+.eventText{
+  font-size: 3.5vw;
+  margin-top: 2vw;
+  text-align: center;
+  line-height: 4vw;
+}
+.eventText span {
+  font-size: 1.5vw;
+}
+
+/* section 5 */
 /*  このサイトの使い方の文字色　#437BB9 */
 .howToUse {
   padding: 0 3vh 0;
-}
-.howToUse h2 {
-  font-size: 4vh;
-  color: #437bb9;
-  font-weight: bold;
-  text-align: center;
 }
 .stepCon {
   margin: 15vw 0;
@@ -165,7 +240,6 @@ export default Vue.extend({
 .stepbox img {
   width: 90vw;
 }
-
 .searchBtn {
   display: block;
   color: white !important;
