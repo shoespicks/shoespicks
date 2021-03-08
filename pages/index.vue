@@ -216,7 +216,7 @@ export default Vue.extend({
 .eventMiddle { background: url(../assets/img/test-asobi/eventMiddle.png)no-repeat; }
 .eventLong { background: url(../assets/img/test-asobi/eventLong.png)no-repeat; }
 .eventLongJump{ background: url(../assets/img/test-asobi/eventLongJump.png)no-repeat; }
-.eventHighJump{ background: url(../assets/img/test-asobi/eventHighJump.png)no-repeat; }
+.eventHighJump{ background: url(../assets/img/test-asobi/eventHighJump.jpg)no-repeat; }
 .eventThrow{ background: url(../assets/img/test-asobi/eventThrow.png)no-repeat; }
 
 .eventText{
