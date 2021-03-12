@@ -2,7 +2,7 @@
   <div>
     <div>
       <v-app-bar class="menuBack" dark>
-        <v-app-bar-nav-icon v-b-toggle.sidebar-backdrop></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon style="color: #fff" v-b-toggle.sidebar-backdrop></v-app-bar-nav-icon>
       </v-app-bar>
 
       <b-sidebar id="sidebar-backdrop" :backdrop-variant="variant" backdrop shadow>
