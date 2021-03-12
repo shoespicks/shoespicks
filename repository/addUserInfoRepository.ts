@@ -1,7 +1,7 @@
 import firebase from '~/plugins/firebase';
 import Auth = firebase.auth.Auth;
 import { AddUserInfoEntity, AddUserInfoModel } from '~/store/types/addUserInfoEntity';
-import {UserEntity, UserModel} from '~/store/types/userEntity';
+import { UserEntity, UserModel } from '~/store/types/userEntity';
 import ThenableReference = firebase.database.ThenableReference;
 
 export class AddUserInfoRepository {
@@ -19,9 +19,10 @@ export class AddUserInfoRepository {
     });
   }
 
+  // firebaceへの書き込み
   createByUserId(user: UserModel, addUserInfo: AddUserInfoEntity): ThenableReference {
     console.log(addUserInfo);
-    let Ref = firebase.database().ref(`/addUserInfos/${user.id}`);
+    let Ref = firebase.database().ref(`/addUserInfos/${addUserInfo.userId}/`);
     return Ref.push(addUserInfo);
   }
 }

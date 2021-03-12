@@ -26,10 +26,13 @@
         <b-btn @click="logout">ログアウト</b-btn>
       </div>
     </div>
+    <!--  一個前に戻るボタン -->
+    <button @click="goBack">Go Back</button>
   </div>
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import { authStore } from "~/store/index";
 import { addUserInfoStore } from "~/store/index";
 import { AddUserInfoModel } from "~/store/types/addUserInfoEntity";
@@ -38,7 +41,7 @@ interface Data {
   infoBody: string;
 }
 
-export default {
+export default Vue.extend({
   computed: {
     loginUser() {
       return authStore.user;
@@ -53,7 +56,12 @@ export default {
     };
   },
   methods: {
-    submitUserInfo(e: Event) {
+    // 一個前に戻るボタン
+    goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+    },
+
+    submitUserInfo(e: Event): void {
       e.preventDefault();
       addUserInfoStore
         .postUserAddUserInfo({
@@ -105,5 +113,5 @@ export default {
       authStore.logout();
     },
   },
-};
+});
 </script>

@@ -3,7 +3,7 @@ import { authStore } from '~/store';
 
 export default () => {
   if (firebase) {
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then();
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then();
     firebase.auth().onAuthStateChanged((user) => {
       console.log('onAuthStateChanged');
 

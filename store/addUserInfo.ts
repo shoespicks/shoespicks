@@ -57,8 +57,7 @@ export default class AddUserInfo extends VuexModule {
     return $addUserInfoRepository
       .createByUserId(args.userId, {
         body: args.infoBody || null,
-        userId: args.userId || null,
-        // userId: authStore.user?.id || null,・・・これでもいい
+        userId: args.userId || null, // userId: authStore.user?.id || null,
         replies: null
       })
       .then((result) => {
