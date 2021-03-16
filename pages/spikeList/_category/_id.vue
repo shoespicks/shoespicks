@@ -385,7 +385,24 @@ export default Vue.extend({
   letter-spacing: 1px;
 }
 
-/* スパイク情報表 */
+/* ボタン Amazon */
+
+/* ボタン 楽天　*/
+
+
+/* スパイク画像トップ*/
+
+.v-image__image--cover {
+  background-size: contain !important;
+}
+
+/* チャート */
+
+/* 口コミ */
+
+
+
+/* 基本情報　スパイク情報表 */
 .basicInfo {
   border-collapse: collapse;
   width: 99.7709%;
@@ -414,6 +431,13 @@ export default Vue.extend({
   padding-left: 3% !important;
   width: 75%;
 }
+
+/* 一流選手に聞いてみた */
+
+
+/* 商品紹介 */
+
+/* こんな人におすすめ */
 
 /* カルーセルの３点 */
 .theme--dark.v-btn.v-btn--icon {
