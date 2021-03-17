@@ -382,7 +382,7 @@ export default Vue.extend({
   position: absolute;
   background-color: #327CBE;
 }
-td:nth-child(2) {
+.compareSelectCon td:nth-child(2) {
   width: 44vw;
   height: 13vh;
 }

@@ -115,18 +115,6 @@ export default Vue.extend({
 </script>
 
 <style>
-/* common */
-.textBlueM {
-  color: #2C70AB;
-  font-size: 2.5vh;
-  font-weight: 600;
-}
-.textBlueL {
-  color: #2C70AB;
-  font-size: 3.5vh;
-  font-weight: bold;
-  text-align: center;
-}
 /* section 1 */
 .topView {
   display: flex;

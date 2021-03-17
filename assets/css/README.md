@@ -36,7 +36,7 @@
 
 ルール４　例外
 １．プロパティが１つしかない場合、１列に書く
-２．１列にである class が同類である場合、１行開けずに記述する
+２．１列にある class が同類である場合、１行開けずに記述する
 
 .example { background: url(example.png) no-repeat center center; }
 .example1 { background: url(example.png) no-repeat center center; }
