@@ -60,40 +60,40 @@
         <h3 class="textBlueM">①種目やこだわり、メーカーなどでカンタン検索</h3>
         <div class="stepbox">
           <img src="@/assets//img/top/feature1.png" alt="画像が入るよ" />
-          <!-- <p>
+          <p>
             種目、メーカー、表示順を選んでカンタンに陸上スパイクを検索。<br /><br />
             検索できるこだわり<br />
             価格/重さ/足幅/反発性/グリップ性/ソールの傾斜
-          </p> -->
+          </p>
         </div>
       </div>
       <div class="stepCon">
         <h3 class="textBlueM">②ランキング形式でわかりやすい</h3>
         <div class="stepbox">
           <img src="@/assets//img/top/feature2.png" alt="画像が入るよ" />
-          <!-- <p>
+          <p>
             カンタン検索でこだわりランキング形式に表示し、あなたにおすすめな陸上スパイクを用意に発見。初心者向けスパイクや土用スパイクも絞り込み可能。
-          </p> -->
+          </p>
         </div>
       </div>
       <div class="stepCon">
         <h3 class="textBlueM">③有名選手のレビューや口コミが満載！</h3>
         <div class="stepbox">
           <img src="@/assets//img/top/feature3.png" alt="画像が入るよ" />
-          <!-- <p>
+          <p>
             日本トップクラスの陸上選手に聞いたスパイクのレビューや、各スパイクへの口コミも充実。<br />
             無料会員登録することで閲覧可能になります。
-          </p> -->
+          </p>
         </div>
       </div>
       <div class="stepCon">
         <h3 class="textBlueM">④グラフでカンタンに性能比較</h3>
         <div class="stepbox">
           <img src="@/assets//img/top/feature4.png" alt="画像が入るよ" />
-          <!-- <p>
+          <p>
             気になるスパイクの性能を他のスパイクとカンタンに比較可能。<br />
             次のスパイクがどんなスパイクなのか、まずはご自分のスパイクと比べてみましょう。
-          </p> -->
+          </p>
         </div>
       </div>
 
