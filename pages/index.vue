@@ -97,7 +97,10 @@
         </div>
       </div>
 
-      <b-btn class="searchBtn">まずはスパイクを検索!</b-btn>
+      <b-btn class="searchBtn spaceL">まずはスパイクを検索!</b-btn>
+      <b-btn class="searchBtn spaceL">
+        <a href="#">TOPへ戻る</a>
+        </b-btn>
     </section>
   </div>
 </template>
@@ -231,9 +234,12 @@ export default Vue.extend({
 .searchBtn {
   display: block;
   color: white !important;
-  background-color: #007fff;
+  background-color: #2C70AB;
   margin: 3vw auto;
-  border-color: #007fff;
+  border-color: #2C70AB;
   padding: 1vh 10vw;
+}
+.searchBtn a {
+  color: #fff;
 }
 </style>

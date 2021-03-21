@@ -86,27 +86,47 @@
                 <p v-if="!loginUser">ログインして一流選手のレビューを確認しよう</p>
                 <div
                   v-if="loginUser"
-                  class="blog-content"
+                  class="blog-content spaceL"
                   v-html="$md.render(spike.fields.spikePlayerQuestion)"
                 ></div>
-                <b-img
-                  :src="spike.fields.spikePlayerListPhoto[1].fields.file.url"
-                  fluid-grow
-                  alt="Fluid-grow image"
-                ></b-img>
+                <h4 class="textBlueM">他にもこんな選手たちが愛用しています！</h4>
+                <b-container fluid class="otherTopP">
+                  <b-row>
+                    <b-col>
+                      <b-img
+                        :src="spike.fields.spikePlayerListPhoto[0].fields.file.url"
+                        fluid-grow
+                        rounded="circle"
+                        alt="Fluid-grow image"
+                      ></b-img>
+                      <p>{{ spike.fields.spikePlayerList[0] }}</p>
+                    </b-col>
+                    <b-col>
+                      <b-img
+                        :src="spike.fields.spikePlayerListPhoto[1].fields.file.url"
+                        fluid-grow
+                        rounded="circle"
+                        alt="Fluid-grow image"
+                      ></b-img>
+                      <p>{{ spike.fields.spikePlayerList[1] }}</p>
+                    </b-col>
+                  </b-row>
+                </b-container>
+                
+                <!-- <div class="otherTopP d-flex"></div> -->
 
                 <h2 class="textBlueL">商品紹介</h2>
                 <h3>アッパーについて</h3>
                 <b-img
                   :src="spike.fields.spikeUpperPhotoNear.fields.file.url"
-                  fluid-grow
+                  fluid
                   alt="Fluid-grow image"
                 ></b-img>
                 <p>{{ spike.fields.spikeUpperDiscription1 }}</p>
 
                 <b-img
                   :src="spike.fields.spikeUpperPhotoFar.fields.file.url"
-                  fluid-grow
+                  fluid
                   alt="Fluid-grow image"
                 ></b-img>
                 <p>{{ spike.fields.spikeUpperDescription2 }}</p>
@@ -403,12 +423,6 @@ h2 {
   line-height: 30px; 
 }
 
-/* ボタン Amazon */
-/* bakcground-color: #F6A306;  */
-
-/* ボタン 楽天　*/
-/* bakcground-color: #CF4944;  */
-
 /* チャート */
 .compareBtn {
   margin: 0 auto;
@@ -470,6 +484,9 @@ h5 {
   font-size: 3.8vw;
   font-weight: bold;
   margin-bottom: 7vw;
+}
+.otherTopP p {
+  font-size: 4vw;
 }
 /* 商品紹介 */
 
