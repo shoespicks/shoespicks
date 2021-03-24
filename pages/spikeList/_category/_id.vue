@@ -78,7 +78,7 @@
       <purchaseBtn :url="spike.fields.amazonURL"
       class="spaceL"></purchaseBtn>
       <div>
-        <b-card no-body>
+        <b-card no-body class="tabs">
           <b-tabs card>
             <b-tab title="詳細" active>
               <b-card-text>
@@ -432,6 +432,49 @@ h2 {
   font-weight: bold;
 }
 
+/* タブ */
+.card-header {
+  float: right;
+  position: relative;
+  left: 7%;
+  width: 113%;
+  margin-bottom: 10%;
+  padding-top: 10px;
+  background-color: #0494c8;
+  z-index: 1;
+}
+.tabs .nav-link:before{
+  content: "";
+  display: block;
+  width: 14vw;
+  height: 11vw;
+  background-size: contain !important;
+}
+.tabs .nav-link.active:before {
+  filter: invert(46%) sepia(46%) saturate(5489%) hue-rotate(169deg) brightness(94%) contrast(104%) !important;
+}
+.tabs .nav-item:nth-child(1) .nav-link:before{
+  background: url(~assets/img/tab-icon1.png) no-repeat;
+}
+.tabs .nav-item:nth-child(2) .nav-link:before{
+  background: url(~assets/img/tab-icon2.png) no-repeat;
+}
+.nav-link {
+  display: block;
+  text-align: center;
+  border: 1px solid transparent;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  margin: 0px 1vw;
+  padding: 12px 16vw;
+  color: #fff;
+  font-weight: bold;
+  transition: ease .2s;
+}
+.nav-link.active {
+  color: #0494c8 !important;
+  background-color: #fff !important;
+}
 /* 口コミ */
 
 /* 基本情報　スパイク情報表 */
