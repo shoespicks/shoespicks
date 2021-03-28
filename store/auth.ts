@@ -58,23 +58,7 @@ export default class Auth extends VuexModule {
           if (!result.user?.uid) {
             return null;
           }
-          // firebaceのユーザー情報をとる（userData）
-          const userData = $userRepository.getById(result.user?.uid);
-
-          console.log('①userData');
-          console.log(userData);
-
-          // firebaseにあるデータとtwitter側で持っているデータを結合する（combinedResult）
-          const combinedResult = Object.assign(userData, result);
-
-          console.log('⓪+①=②combinedResult');
-          console.log(combinedResult);
-
-          // UserModelに当てはめる
-          const user = new UserModel(combinedResult);
-
-          console.log('③userだよーーーーー');
-          console.log(user);
+          const user = new UserModel(result);
 
           // vuexの中にあるstore上書き
           this.set(user);

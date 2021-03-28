@@ -13,7 +13,6 @@ export class AddUserInfoRepository {
 
   getByUserId(userId: string): Promise<any> {
     let Ref = firebase.database().ref(`/users/${userId}`);
-    // let Ref = firebase.database().ref(`/addUserInfos/${userId}`);
     return Ref.once('value').then((snapshot) => {
       console.log(snapshot);
       return snapshot.val();
@@ -22,11 +21,8 @@ export class AddUserInfoRepository {
 
   // firebaceへの書き込み
   createByUserId(user: UserModel, addUserInfo: AddUserInfoEntity) {
-    // createByUserId(user: UserModel, addUserInfo: AddUserInfoEntity): ThenableReference {
     console.log(addUserInfo);
     let Ref = firebase.database().ref(`/users/${addUserInfo.userId}/`);
-    // let Ref = firebase.database().ref(`/addUserInfos/${addUserInfo.userId}/`);
     return Ref.update(addUserInfo);
-    // return Ref.push(addUserInfo);
   }
 }

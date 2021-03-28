@@ -50,13 +50,32 @@ export default class AddUserInfo extends VuexModule {
   }
 
   @Action({ rawError: true })
-  public async postUserAddUserInfo(args: { userId: any; infoBody: string }) {
+  public async postUserAddUserInfo(args: {
+    userId: any;
+    birthday: string;
+    sex: string;
+    liveArea: string;
+    TFHistory: number;
+    specialty: string;
+    bestRecord: string;
+    nowSpikeMaker: string;
+    nowSpikeName: string;
+    belongs: string;
+  }) {
     // postUserAddUserInfo(args: { userId: string })　・・・本当はStringにしたい
     console.log(args.userId);
 
     return $addUserInfoRepository
       .createByUserId(args.userId, {
-        body: args.infoBody || null,
+        birthday: args.birthday || null,
+        sex: args.sex || null,
+        liveArea: args.liveArea || null,
+        TFHistory: args.TFHistory || null,
+        specialty: args.specialty || null,
+        bestRecord: args.bestRecord || null,
+        nowSpikeMaker: args.nowSpikeMaker || null,
+        nowSpikeName: args.nowSpikeName || null,
+        belongs: args.belongs || null,
         userId: args.userId || null, // userId: authStore.user?.id || null,
         replies: null
       })
@@ -85,7 +104,15 @@ export default class AddUserInfo extends VuexModule {
               userId,
               addUserInfo: new AddUserInfoModel({
                 id: entryId,
-                body: entryAddUserInfo.body || undefined,
+                birthday: entryAddUserInfo.birthday || undefined,
+                sex: entryAddUserInfo.sex || undefined,
+                liveArea: entryAddUserInfo.liveArea || undefined,
+                TFHistory: entryAddUserInfo.TFHistory || undefined,
+                specialty: entryAddUserInfo.specialty || undefined,
+                bestRecord: entryAddUserInfo.bestRecord || undefined,
+                nowSpikeMaker: entryAddUserInfo.nowSpikeMaker || undefined,
+                nowSpikeName: entryAddUserInfo.nowSpikeName || undefined,
+                belongs: entryAddUserInfo.belongs || undefined,
                 user: undefined
               })
             });
@@ -97,7 +124,15 @@ export default class AddUserInfo extends VuexModule {
               userId,
               addUserInfo: new AddUserInfoModel({
                 id: entryId,
-                body: entryAddUserInfo.body || undefined,
+                birthday: entryAddUserInfo.birthday || undefined,
+                sex: entryAddUserInfo.sex || undefined,
+                liveArea: entryAddUserInfo.liveArea || undefined,
+                TFHistory: entryAddUserInfo.TFHistory || undefined,
+                specialty: entryAddUserInfo.specialty || undefined,
+                bestRecord: entryAddUserInfo.bestRecord || undefined,
+                nowSpikeMaker: entryAddUserInfo.nowSpikeMaker || undefined,
+                nowSpikeName: entryAddUserInfo.nowSpikeName || undefined,
+                belongs: entryAddUserInfo.belongs || undefined,
                 user: user ? new UserModel(user) : undefined
               })
             });
