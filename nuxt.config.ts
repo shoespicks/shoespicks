@@ -23,9 +23,13 @@ export default {
     '~/plugins/contentful',
     '~/plugins/firebase',
     '~/plugins/repository',
-    { src: '~/plugins/initAuth', mode: 'client' },
-    { src: '~/plugins/router.js' }
+    { src: '~/plugins/initAuth', mode: 'client' }
   ],
+
+  // socialログイン後、追加情報取得用バリーデーション
+  router: {
+    middleware: 'authCheck'
+  },
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,

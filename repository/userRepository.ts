@@ -1,6 +1,6 @@
 import firebase from '~/plugins/firebase';
 import Auth = firebase.auth.Auth;
-import {UserEntity, UserModel} from '~/store/types/userEntity';
+import { UserEntity, UserModel } from '~/store/types/userEntity';
 
 export class UserRepository {
   private readonly firebaseAuthConnection: Auth;
@@ -8,7 +8,11 @@ export class UserRepository {
   constructor() {
     this.firebaseAuthConnection = firebase.auth();
   }
-
+  /**
+   * id元にfirebaseからユーザー情報をとってくる
+   * @param userId　ユーザーの一意なid
+   * @returns firebaseからユーザー情報/firebaseに情報なければnull
+   */
   getById(userId: string | null = ''): Promise<UserEntity | null> {
     if (!userId) {
       return Promise.resolve(null);
@@ -19,8 +23,14 @@ export class UserRepository {
     });
   }
 
+  /**
+   * socialLogin時に取得する値をfirebaceに上書きする
+   * @param user
+   * @returns
+   */
   upsert(user: UserModel): Promise<any> {
     let Ref = firebase.database().ref(`/users/${user.id}`);
-    return Ref.set(user);
+    // set：全体上書き｜update：あるものだけ上書き
+    return Ref.update(user);
   }
 }

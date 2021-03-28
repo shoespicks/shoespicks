@@ -11,6 +11,7 @@
       </div>
 
       <div v-if="loginUser">
+        <!--  ユーザー情報をfirebaceに登録 -->
         <b-form @submit="submitUserInfo">
           <b-form-group>
             <b-form-input
@@ -28,6 +29,9 @@
     </div>
     <!--  一個前に戻るボタン -->
     <button @click="goBack">Go Back</button>
+
+    <!--  ユーザー情報をfirebaceから取得 -->
+    <button @click="getUserInfo">Get UserInfo</button>
   </div>
 </template>
 
@@ -36,6 +40,7 @@ import Vue from "vue";
 import { authStore } from "~/store/index";
 import { addUserInfoStore } from "~/store/index";
 import { AddUserInfoModel } from "~/store/types/addUserInfoEntity";
+import { $authRepository, $userRepository } from "~/plugins/repository";
 
 interface Data {
   infoBody: string;
@@ -59,6 +64,10 @@ export default Vue.extend({
     // 一個前に戻るボタン
     goBack() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+    },
+    getUserInfo() {
+      const userLastData = $userRepository.getById(authStore.user?.id);
+      console.log(userLastData);
     },
 
     submitUserInfo(e: Event): void {
