@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="container spikeDetailInfo">
     <div>
-      <h1 class="itemTitle">
+      <h1 class="itemTitle textBlueM">
         {{ spike.fields.spikeMaker[0] }}<br />{{ spike.fields.spikeTitle }} 評価レビュー
       </h1>
-      <v-carousel :show-arrows="false" hide-delimiter-background show-arrows-on-hover>
+      <v-carousel :show-arrows="false" hide-delimiter-background show-arrows-on-hover style="height: 66vw">
         <v-carousel-item
           v-for="(spikeImg, id) in spike.fields.spikePhoto"
           :key="id"
@@ -13,98 +13,120 @@
           transition="fade-transition"
         ></v-carousel-item>
       </v-carousel>
-      <p>参考価格：{{ spike.fields.spikePrice }}（税込）</p>
-      <purchaseBtn :url="spike.fields.amazonURL"></purchaseBtn>
-      <p>{{ spike.fields.spikeDescription }}</p>
+      <p class="taRight">参考価格：{{ spike.fields.spikePrice }}（税込）</p>
+      <!-- <purchaseBtn :url="spike.fields.amazonURL"></purchaseBtn> -->
+      <purchaseBtn :url="spike" class="spaceL"></purchaseBtn>
+      <p class="spikeTopDesc">{{ spike.fields.spikeDescription }}</p>
 
+    <barChart :parameter1="parameter1"></barChart>
+
+    <!-- <NuxtLink to="/spikeCompare">
+    <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
+    </NuxtLink> -->
+    <router-link :to="{ name: 'spikeCompare', query: { spikeName1: spike.fields.id } }">
+      <b-button pill variant="outline-primary" 
+      class="compareBtn spaceL" 
+      @click="$nuxt.$router.compare"
+        >他の靴と比較する</b-button
+      >
+      </router-link>
+      <h2 class="textBlueL">基本情報</h2>
+
+      <table class="basicInfo spaceL">
+        <tbody>
+          <tr>
+            <td>定価</td>
+            <td>{{ spike.fields.spikePrice }}円（税込）</td>
+          </tr>
+          <tr>
+            <td>重さ</td>
+            <td>片足{{ spike.fields.spikeWeightNumber }}（26cm）</td>
+          </tr>
+          <tr>
+            <td>対応種目</td>
+            <td>
+              <span v-for="spikeEvent in spike.fields.spikeEvent" :key="spikeEvent">
+                {{ spikeEvent }}/
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>サイズ</td>
+            <td>{{ spike.fields.spikeMinSiza }}cm〜{{ spike.fields.spikeMaxSize }}cm</td>
+          </tr>
+          <tr>
+            <td>対応環境</td>
+            <td>{{ spike.fields.spikeEnvironment[0] }}</td>
+          </tr>
+          <tr>
+            <td>アッパー素材</td>
+            <td>{{ spike.fields.spikeUpperMaterial }}</td>
+          </tr>
+          <tr>
+            <td>ソール素材</td>
+            <td>{{ spike.fields.spikeSoleMaterial }}</td>
+          </tr>
+          <tr>
+            <td>備考</td>
+            <td>
+              {{ spike.fields.spikePinLength[0] }}mm {{ spike.fields.spikePinType[0] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <purchaseBtn :url="spike.fields.amazonURL"
+      class="spaceL"></purchaseBtn>
       <div>
-        <b-card no-body>
+        <b-card no-body class="tabs">
           <b-tabs card>
             <b-tab title="詳細" active>
               <b-card-text>
-                <barChart :parameter1="parameter1"></barChart>
-
-                <!-- <NuxtLink to="/spikeCompare">
-                <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
-                </NuxtLink> -->
-                <router-link :to="{ name: 'spikeCompare', query: { spikeName1: spike.fields.id } }">
-                  <b-button pill variant="primary" @click="$nuxt.$router.compare"
-                    >他の靴と比較する</b-button
-                  >
-                </router-link>
-
-                <h2>基本情報</h2>
-
-                <table class="basicInfo">
-                  <tbody>
-                    <tr>
-                      <td>定価価格</td>
-                      <td>{{ spike.fields.spikePrice }}円（税込）</td>
-                    </tr>
-                    <tr>
-                      <td>重さ</td>
-                      <td>片足{{ spike.fields.spikeWeightNumber }}（26cm）</td>
-                    </tr>
-                    <tr>
-                      <td>対応種目</td>
-                      <td>
-                        <span v-for="spikeEvent in spike.fields.spikeEvent" :key="spikeEvent">
-                          {{ spikeEvent }}/
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>サイズ</td>
-                      <td>{{ spike.fields.spikeMinSiza }}cm〜{{ spike.fields.spikeMaxSize }}cm</td>
-                    </tr>
-                    <tr>
-                      <td>対応環境</td>
-                      <td>{{ spike.fields.spikeEnvironment[0] }}</td>
-                    </tr>
-                    <tr>
-                      <td>アッパー素材</td>
-                      <td>{{ spike.fields.spikeUpperMaterial }}</td>
-                    </tr>
-                    <tr>
-                      <td>ソール素材</td>
-                      <td>{{ spike.fields.spikeSoleMaterial }}</td>
-                    </tr>
-                    <tr>
-                      <td>備考</td>
-                      <td>
-                        {{ spike.fields.spikePinLength[0] }}mm {{ spike.fields.spikePinType[0] }}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <purchaseBtn :url="spike.fields.amazonURL"></purchaseBtn>
-
-                <h2>一流選手に聞いてみた！</h2>
+                <h2 class="textBlueL spaceL">一流選手に聞いてみた！</h2>
                 <p v-if="!loginUser">ログインして一流選手のレビューを確認しよう</p>
                 <div
                   v-if="loginUser"
-                  class="blog-content"
+                  class="blog-content spaceL"
                   v-html="$md.render(spike.fields.spikePlayerQuestion)"
                 ></div>
-                <b-img
-                  :src="spike.fields.spikePlayerListPhoto[0].fields.file.url"
-                  fluid-grow
-                  alt="Fluid-grow image"
-                ></b-img>
+                <h4 class="textBlueM">他にもこんな選手たちが愛用しています！</h4>
+                <b-container fluid class="otherTopP">
+                  <b-row>
+                    <b-col>
+                      <b-img
+                        :src="spike.fields.spikePlayerListPhoto[0].fields.file.url"
+                        fluid-grow
+                        rounded="circle"
+                        alt="Fluid-grow image"
+                      ></b-img>
+                      <p>{{ spike.fields.spikePlayerList[0] }}</p>
+                    </b-col>
+                    <b-col>
+                      <b-img
+                        :src="spike.fields.spikePlayerListPhoto[1].fields.file.url"
+                        fluid-grow
+                        rounded="circle"
+                        alt="Fluid-grow image"
+                      ></b-img>
+                      <p>{{ spike.fields.spikePlayerList[1] }}</p>
+                    </b-col>
+                  </b-row>
+                </b-container>
+                
+                <!-- <div class="otherTopP d-flex"></div> -->
 
-                <h2>商品紹介</h2>
+                <h2 class="textBlueL">商品紹介</h2>
                 <h3>アッパーについて</h3>
                 <b-img
                   :src="spike.fields.spikeUpperPhotoNear.fields.file.url"
-                  fluid-grow
+                  fluid
                   alt="Fluid-grow image"
                 ></b-img>
                 <p>{{ spike.fields.spikeUpperDiscription1 }}</p>
 
                 <b-img
                   :src="spike.fields.spikeUpperPhotoFar.fields.file.url"
-                  fluid-grow
+                  fluid
                   alt="Fluid-grow image"
                 ></b-img>
                 <p>{{ spike.fields.spikeUpperDescription2 }}</p>
@@ -128,9 +150,9 @@
                 ></b-img>
                 <p>{{ spike.fields.spikeAngleDiscription }}</p>
 
-                <h2>こんな人にオススメ</h2>
-                <p>{{ spike.fields.spikeRecomend }}</p>
-                <purchaseBtn :url="spike.fields.amazonURL"></purchaseBtn>
+                <h2 class="textBlueL">こんな人にオススメ</h2>
+                <p class="spaceL">{{ spike.fields.spikeRecomend }}</p>
+                <purchaseBtn :url="spike.fields.amazonURL" class="spaceL"></purchaseBtn>
               </b-card-text>
             </b-tab>
             <b-tab title="口コミ">
@@ -377,15 +399,85 @@ export default Vue.extend({
   min-height: 100vh;
   max-width: 800px;
 }
+h2 {
+  border-bottom: 3px solid #327CBE;
+  margin: 10vw 0 8vw;
+}
+/* スパイク画像トップ*/
+.v-image__image--cover {
+  background-size: contain !important;
+}
 .itemTitle {
   display: block;
-  font-weight: 300;
   font-size: 20px;
-  color: #35495e;
   letter-spacing: 1px;
+  border-bottom: solid 2px #327CBE;
+  padding-bottom: 10px;
+}
+.v-image {
+  height: 100% !important;
+}
+.spikeTopDesc {
+  padding: 20px 0;
+  font-weight: bold;
+  line-height: 30px; 
 }
 
-/* スパイク情報表 */
+/* チャート */
+.compareBtn {
+  margin: 0 auto;
+  display: block;
+  padding: 10px 50px;
+  border: solid 2px;
+  font-weight: bold;
+}
+
+/* タブ */
+.card-header {
+  float: right;
+  position: relative;
+  left: 7%;
+  width: 113%;
+  margin-bottom: 10%;
+  padding-top: 10px;
+  background-color: #0494c8;
+  z-index: 1;
+}
+.tabs .nav-link:before{
+  content: "";
+  display: block;
+  width: 14vw;
+  height: 11vw;
+  background-size: contain !important;
+}
+.tabs .nav-link.active:before {
+  filter: invert(46%) sepia(46%) saturate(5489%) hue-rotate(169deg) brightness(94%) contrast(104%) !important;
+}
+.tabs .nav-item:nth-child(1) .nav-link:before{
+  background: url(~assets/img/tab-icon1.png) no-repeat;
+}
+.tabs .nav-item:nth-child(2) .nav-link:before{
+  background: url(~assets/img/tab-icon2.png) no-repeat;
+}
+.nav-link {
+  display: block;
+  text-align: center;
+  border: 1px solid transparent;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  margin: 0px 1vw;
+  padding: 12px 16vw;
+  color: #fff;
+  font-weight: bold;
+  transition: ease .2s;
+}
+.nav-link.active {
+  color: #0494c8 !important;
+  background-color: #fff !important;
+}
+/* 口コミ */
+
+/* 基本情報　スパイク情報表 */
 .basicInfo {
   border-collapse: collapse;
   width: 99.7709%;
@@ -399,21 +491,49 @@ export default Vue.extend({
 }
 .basicInfo td {
   padding: 1% !important;
-  border: 1px solid #ddd;
   border-top: none;
   border-left: none;
 }
 .basicInfo td:nth-child(1) {
   text-align: center;
   color: #fff;
-  background-color: #0494c8 !important;
-  width: 25%;
+  background-color: #327CBE !important;
+  width: 38%;
+  font-weight: bold;
 }
 .basicInfo td:nth-child(2) {
   text-align: left;
   padding-left: 3% !important;
   width: 75%;
+  font-weight: bold;
 }
+
+/* 一流選手に聞いてみた */
+h3 {
+  font-size: 4.5vw;
+  font-weight: bold;
+  border-left: solid 5px #327CBE;
+  padding-left: 5px;
+}
+.blog-content img {
+  width: 100%;
+}
+h4 {
+  font-size: 3.8vw;
+  color: #327CBE;
+  font-weight: bold;
+}
+h5 {
+  font-size: 3.8vw;
+  font-weight: bold;
+  margin-bottom: 7vw;
+}
+.otherTopP p {
+  font-size: 4vw;
+}
+/* 商品紹介 */
+
+/* こんな人におすすめ */
 
 /* カルーセルの３点 */
 .theme--dark.v-btn.v-btn--icon {
@@ -425,5 +545,31 @@ export default Vue.extend({
     top: 50vh;
     padding: 5vh;
   }
+}
+
+/* ==== PC ==== */
+@media screen and (min-width: 768px) {
+/* スパイク画像トップ*/
+
+/* ボタン Amazon */
+
+/* ボタン 楽天　*/
+
+/* チャート */
+
+/* 口コミ */
+
+/* 基本情報　スパイク情報表 */
+
+/* 一流選手に聞いてみた */
+.blog-content h1 {
+  font-size: 2.5vw;
+}
+
+/* 商品紹介 */
+
+/* こんな人におすすめ */
+
+/* カルーセルの３点 */
 }
 </style>

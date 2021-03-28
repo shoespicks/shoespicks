@@ -59,7 +59,7 @@
       <div class="stepCon">
         <h3 class="textBlueM">①種目やこだわり、メーカーなどでカンタン検索</h3>
         <div class="stepbox">
-          <img src="@/assets//img/test-asobi/bakeru1.png" alt="画像が入るよ" />
+          <img src="@/assets//img/top/feature1.png" alt="画像が入るよ" />
           <p>
             種目、メーカー、表示順を選んでカンタンに陸上スパイクを検索。<br /><br />
             検索できるこだわり<br />
@@ -70,7 +70,7 @@
       <div class="stepCon">
         <h3 class="textBlueM">②ランキング形式でわかりやすい</h3>
         <div class="stepbox">
-          <img src="@/assets//img/test-asobi/bakeru2.png" alt="画像が入るよ" />
+          <img src="@/assets//img/top/feature2.png" alt="画像が入るよ" />
           <p>
             カンタン検索でこだわりランキング形式に表示し、あなたにおすすめな陸上スパイクを用意に発見。初心者向けスパイクや土用スパイクも絞り込み可能。
           </p>
@@ -79,7 +79,7 @@
       <div class="stepCon">
         <h3 class="textBlueM">③有名選手のレビューや口コミが満載！</h3>
         <div class="stepbox">
-          <img src="@/assets//img/test-asobi/bakeru3.png" alt="画像が入るよ" />
+          <img src="@/assets//img/top/feature3.png" alt="画像が入るよ" />
           <p>
             日本トップクラスの陸上選手に聞いたスパイクのレビューや、各スパイクへの口コミも充実。<br />
             無料会員登録することで閲覧可能になります。
@@ -89,7 +89,7 @@
       <div class="stepCon">
         <h3 class="textBlueM">④グラフでカンタンに性能比較</h3>
         <div class="stepbox">
-          <img src="@/assets//img/test-asobi/bakeru4.png" alt="画像が入るよ" />
+          <img src="@/assets//img/top/feature4.png" alt="画像が入るよ" />
           <p>
             気になるスパイクの性能を他のスパイクとカンタンに比較可能。<br />
             次のスパイクがどんなスパイクなのか、まずはご自分のスパイクと比べてみましょう。
@@ -97,7 +97,10 @@
         </div>
       </div>
 
-      <b-btn class="searchBtn">まずはスパイクを検索!</b-btn>
+      <b-btn class="searchBtn spaceL">まずはスパイクを検索!</b-btn>
+      <b-btn class="searchBtn spaceL">
+        <a href="#">TOPへ戻る</a>
+        </b-btn>
     </section>
   </div>
 </template>
@@ -115,18 +118,6 @@ export default Vue.extend({
 </script>
 
 <style>
-/* common */
-.textBlueM {
-  color: #2C70AB;
-  font-size: 2.5vh;
-  font-weight: 600;
-}
-.textBlueL {
-  color: #2C70AB;
-  font-size: 3.5vh;
-  font-weight: bold;
-  text-align: center;
-}
 /* section 1 */
 .topView {
   display: flex;
@@ -134,7 +125,7 @@ export default Vue.extend({
   align-items: center;
   height: 40vh;
   background-color: gray;
-  background: url(../assets/img/test-asobi/greate-pretender.jpg) no-repeat center center;
+  background: url(../assets/img/top/greate-pretender.jpg) no-repeat center center;
   background-size: cover;
   color: white;
   margin-bottom: 25vw;
@@ -212,12 +203,12 @@ export default Vue.extend({
   background-position: center center !important;
   background-size: cover !important;
 }
-.eventSprint{ background: url(../assets/img/test-asobi/eventSprint.png)no-repeat; }
-.eventMiddle { background: url(../assets/img/test-asobi/eventMiddle.png)no-repeat; }
-.eventLong { background: url(../assets/img/test-asobi/eventLong.png)no-repeat; }
-.eventLongJump{ background: url(../assets/img/test-asobi/eventLongJump.png)no-repeat; }
-.eventHighJump{ background: url(../assets/img/test-asobi/eventHighJump.jpg)no-repeat; }
-.eventThrow{ background: url(../assets/img/test-asobi/eventThrow.png)no-repeat; }
+.eventSprint{ background: url(../assets/img/top/eventSprint.png)no-repeat; }
+.eventMiddle { background: url(../assets/img/top/eventMiddle.png)no-repeat; }
+.eventLong { background: url(../assets/img/top/eventLong.png)no-repeat; }
+.eventLongJump{ background: url(../assets/img/top/eventLongJump.png)no-repeat; }
+.eventHighJump{ background: url(../assets/img/top/eventHighJump.jpg)no-repeat; }
+.eventThrow{ background: url(../assets/img/top/eventThrow.png)no-repeat; }
 
 .eventText{
   font-size: 3.5vw;
@@ -243,9 +234,12 @@ export default Vue.extend({
 .searchBtn {
   display: block;
   color: white !important;
-  background-color: #007fff;
+  background-color: #2C70AB;
   margin: 3vw auto;
-  border-color: #007fff;
+  border-color: #2C70AB;
   padding: 1vh 10vw;
+}
+.searchBtn a {
+  color: #fff;
 }
 </style>

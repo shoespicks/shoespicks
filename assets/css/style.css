@@ -19,3 +19,28 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
+
+/* common */
+.spaceL { margin-bottom: 10vw !important; }
+.spaceM { margin-bottom: 8vw; }
+.spaceS { margin-bottom: 6vw; }
+
+.taRight{ text-align: right; }
+
+.textBlueS {
+  color: #327CBE;
+  font-size: 2.3vh;
+  font-weight: 600;
+}
+
+.textBlueM {
+  color: #327CBE;
+  font-size: 2.5vh;
+  font-weight: 600;
+}
+.textBlueL {
+  color: #327CBE;
+  font-size: 3.5vh;
+  font-weight: bold;
+  text-align: center;
+}
