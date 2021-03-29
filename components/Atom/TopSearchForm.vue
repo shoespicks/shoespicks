@@ -3,6 +3,7 @@
     <v-form>
       <div class="menuFormCon">
         <b-form-select v-model="query[0]" :options="options"></b-form-select>
+        <span class="batsu"></span>
         <b-form-select v-model="query[1]" :options="options2"></b-form-select>
       </div>
       <!-- <b-form-select v-model="query[2]" :options="options3"> </b-form-select> -->
@@ -131,17 +132,17 @@ export default {
 }
 .batsu {
   display: block;
-  width: 25px;
-  height: 30px;
+  width: 10vw;
+  height: 8vw;
   position: relative;
-  margin: 1vh auto 0;
+  margin: auto 1vw;
 }
 .batsu::before,
 .batsu::after {
   content: "";
   display: block;
   width: 100%; /*バツ線の長さ*/
-  height: 6px; /*バツ線の太さ*/
+  height: 4px; /*バツ線の太さ*/
   background: #9a9a9a;
   transform: rotate(45deg);
   transform-origin: 0% 50%;

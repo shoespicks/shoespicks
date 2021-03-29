@@ -96,8 +96,6 @@
           </p>
         </div>
       </div>
-
-      <b-btn class="searchBtn spaceL">まずはスパイクを検索!</b-btn>
       <b-btn class="searchBtn spaceL">
         <a href="#">TOPへ戻る</a>
         </b-btn>
@@ -145,7 +143,7 @@ export default Vue.extend({
   align-items: center;
   width: 90vw;
   background-color: white;
-  padding: 10%;
+  padding: 6vw;
   margin: 0 auto;
   border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -207,7 +205,7 @@ export default Vue.extend({
 .eventMiddle { background: url(../assets/img/top/eventMiddle.png)no-repeat; }
 .eventLong { background: url(../assets/img/top/eventLong.png)no-repeat; }
 .eventLongJump{ background: url(../assets/img/top/eventLongJump.png)no-repeat; }
-.eventHighJump{ background: url(../assets/img/top/eventHighJump.jpg)no-repeat; }
+.eventHighJump{ background: url(../assets/img/top/eventHighJump.png)no-repeat; }
 .eventThrow{ background: url(../assets/img/top/eventThrow.png)no-repeat; }
 
 .eventText{
@@ -225,7 +223,7 @@ export default Vue.extend({
 .howToUse {
   padding: 0 3vh 0;
 }
-.stepCon {
+.stepCon, .stepCon p {
   margin: 15vw 0;
 }
 .stepbox img {
@@ -235,11 +233,28 @@ export default Vue.extend({
   display: block;
   color: white !important;
   background-color: #2C70AB;
-  margin: 3vw auto;
+  margin: 3vw auto 0;
   border-color: #2C70AB;
   padding: 1vh 10vw;
 }
 .searchBtn a {
   color: #fff;
+}
+
+/* タブレット版 */
+@media screen and (min-width: 768px) {
+  .topSearchBar {
+    padding: 3vw;
+  }
+}
+
+/* PC版 */
+@media screen and (min-width: 1024px) {
+  .topSearchBar {
+    padding: 2vw;
+  }
+  .custom-select {
+width: 24vw !important;
+  }
 }
 </style>
