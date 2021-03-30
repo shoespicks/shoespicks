@@ -133,9 +133,9 @@ export default {
 .batsu {
   display: block;
   width: 10vw;
-  height: 8vw;
+  height: 3vw;
   position: relative;
-  margin: auto 1vw;
+  margin: auto 2vw;
 }
 .batsu::before,
 .batsu::after {
@@ -163,5 +163,21 @@ export default {
   margin: 3vw auto;
   border-color: #007fff;
   padding: 1vh 10vw;
+}
+/* タブレット版 */
+@media screen and (min-width: 768px) {
+  .batsu {
+    width: 3vw;
+    height: 2vw;
+    margin: auto 2vw;
+  }
+}
+
+/* PC版 */
+@media screen and (min-width: 1025px) {
+  .batsu {
+    width: 2vw;
+    height: 1vw;
+  }
 }
 </style>

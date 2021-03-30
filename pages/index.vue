@@ -151,33 +151,6 @@ export default Vue.extend({
 .menuFormCon {
   display: flex;
 }
-.batsu {
-  display: block;
-  width: 25px;
-  height: 30px;
-  position: relative;
-  margin: 1vh auto 0;
-}
-.batsu::before,
-.batsu::after {
-  content: "";
-  display: block;
-  width: 100%; /*バツ線の長さ*/
-  height: 6px; /*バツ線の太さ*/
-  background: #9a9a9a;
-  transform: rotate(45deg);
-  transform-origin: 0% 50%;
-  position: absolute;
-  top: calc(14% - 5px);
-  left: 14%;
-}
-.batsu::after {
-  transform: rotate(-45deg);
-  transform-origin: 100% 50%;
-  left: auto;
-  right: 14%;
-}
-
 /* section 3 */
 .commonlySeen, .searchEvent {
   padding: 10vw 3vh 10vw;
@@ -246,15 +219,24 @@ export default Vue.extend({
   .topSearchBar {
     padding: 3vw;
   }
+  .custom-select {
+    width: 30vw !important;
+  }
+  .topView {
+    margin-bottom: 6vw;
+  }
 }
 
 /* PC版 */
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1025px) {
   .topSearchBar {
     padding: 2vw;
   }
   .custom-select {
-width: 24vw !important;
+    width: 24vw !important;
+  }
+  .topView {
+    margin-bottom: 2vw;
   }
 }
 </style>
