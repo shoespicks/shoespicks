@@ -197,7 +197,7 @@ export default Vue.extend({
   padding: 0 3vh 0;
 }
 .stepCon, .stepCon p {
-  margin: 15vw 0;
+  margin: 3vw 0 10vw;
 }
 .stepbox img {
   width: 90vw;
@@ -225,6 +225,13 @@ export default Vue.extend({
   .topView {
     margin-bottom: 6vw;
   }
+  .eventImg {
+    height: 20vw;
+  }
+  .eventText {
+    font-size: 2.5vw;
+    line-height: 3vw;  
+  }
 }
 
 /* PC版 */
@@ -238,5 +245,26 @@ export default Vue.extend({
   .topView {
     margin-bottom: 2vw;
   }
+  .commonlySeen, .searchTrack, .searchField, .howToUse {
+    margin: 0 10vw 0;
+  }
+  .searchEventCon {
+    margin-bottom: 1vw;
+  }
+  .eventImg {
+    width: 24vw;
+    height: 15vw;
+  }
+  .eventText {
+    font-size: 1.5vw;
+    margin-top: 1vw;
+    line-height: 2vw;  
+  }
+  .eventText span {
+    font-size: 1vw;
+  }
+  .stepbox img {
+    width: 80vw;
+  } 
 }
 </style>
