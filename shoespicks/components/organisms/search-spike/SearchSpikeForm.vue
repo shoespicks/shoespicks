@@ -6,6 +6,7 @@
         <SearchLauncher>
           <template #activator="{ on, attrs }">
             <Button
+              v-if="searchFormValue.eventCategory"
               class="search-spike-form-evens-input"
               color="#262626"
               outlined
