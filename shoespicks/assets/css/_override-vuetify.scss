@@ -1,0 +1,19 @@
+.v-application.theme--light {
+  font-family: 'Noto Sans JP', 'Roboto', sans-serif;
+
+  ul,
+  ol {
+    padding: 0;
+  }
+}
+
+.theme--light.v-application {
+  .v-application--wrap,
+  .theme--light.v-card {
+    color: #262626;
+  }
+
+  .v-rating {
+    display: flex;
+  }
+}

@@ -1,0 +1,19 @@
+@import 'override-vuetify';
+@import 'fonts';
+
+html {
+  font-family: 'Noto Sans JP', 'Roboto', sans-serif;
+}
+
+ul > li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+img {
+  display: inline-flex;
+}
