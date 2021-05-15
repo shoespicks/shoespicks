@@ -108,6 +108,7 @@ export default {
         })
         .then((entries: any) => {
           return entries.items.map((spike: ISpikeShoes) => {
+            console.log(spike.fields.slug);
             return {
               route: `/spikes/${spike.fields.slug}`,
               payload: transrateSpikeEntityToModel(spike)
