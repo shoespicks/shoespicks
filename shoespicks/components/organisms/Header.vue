@@ -19,7 +19,7 @@
       <NuxtLink class="header-logo" to="/">
         <img
           width="60"
-          src="~assets/images/logo/logo-text.svg"
+          src="~static/images/logo/logo-text.svg"
           alt="shoespicks"
         />
       </NuxtLink>
@@ -45,7 +45,7 @@
           <img
             width="40"
             height="40"
-            src="~assets/images/logo/logo-square.svg"
+            src="~static/images/logo/logo-square.svg"
             alt="shoespicks"
           />
         </NuxtLink>

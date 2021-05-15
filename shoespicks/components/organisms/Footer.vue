@@ -14,7 +14,7 @@
       <img
         width="80"
         height="80"
-        src="~assets/images/logo/logo-square.svg"
+        src="~static/images/logo/logo-square.svg"
         alt="shoespicks"
       />
     </div>

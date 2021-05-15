@@ -7,7 +7,7 @@
           <img
             width="180"
             height="180"
-            src="~assets/images/logo/logo-square.svg"
+            src="~static/images/logo/logo-square.svg"
             alt="shoespicks"
           />
           <div class="top-layout-heroimage-search-container">
@@ -68,7 +68,7 @@ export default defineComponent({
     Footer
   },
   setup() {
-    const heroImagePath = ref(require('~/assets/images/top/heroimage.png'));
+    const heroImagePath = ref(require('~/static/images/top/heroimage.png'));
 
     return {
       heroImagePath

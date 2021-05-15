@@ -7,7 +7,7 @@
           <img
             width="60"
             height="60"
-            src="~assets/images/logo/logo-square.svg"
+            src="~static/images/logo/logo-square.svg"
             alt="shoespicks"
           />
         </section>
@@ -32,7 +32,7 @@ export default defineComponent({
     Footer
   },
   setup() {
-    const heroImagePath = ref(require('~/assets/images/top/heroimage.png'));
+    const heroImagePath = ref(require('~/static/images/top/heroimage.png'));
 
     return {
       heroImagePath

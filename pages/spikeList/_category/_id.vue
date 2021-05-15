@@ -24,8 +24,8 @@
     <b-button pill variant="primary" @click="$nuxt.$router.compare">他の靴と比較する</b-button>
     </NuxtLink> -->
     <router-link :to="{ name: 'spikeCompare', query: { spikeName1: spike.fields.id } }">
-      <b-button pill variant="outline-primary" 
-      class="compareBtn spaceL" 
+      <b-button pill variant="outline-primary"
+      class="compareBtn spaceL"
       @click="$nuxt.$router.compare"
         >他の靴と比較する</b-button
       >
@@ -112,7 +112,7 @@
                     </b-col>
                   </b-row>
                 </b-container>
-                
+
                 <!-- <div class="otherTopP d-flex"></div> -->
 
                 <h2 class="textBlueL">商品紹介</h2>
@@ -420,7 +420,7 @@ h2 {
 .spikeTopDesc {
   padding: 20px 0;
   font-weight: bold;
-  line-height: 30px; 
+  line-height: 30px;
 }
 
 /* チャート */
@@ -454,10 +454,10 @@ h2 {
   filter: invert(46%) sepia(46%) saturate(5489%) hue-rotate(169deg) brightness(94%) contrast(104%) !important;
 }
 .tabs .nav-item:nth-child(1) .nav-link:before{
-  background: url(~assets/img/tab-icon1.png) no-repeat;
+  background: url(~static/img/tab-icon1.png) no-repeat;
 }
 .tabs .nav-item:nth-child(2) .nav-link:before{
-  background: url(~assets/img/tab-icon2.png) no-repeat;
+  background: url(~static/img/tab-icon2.png) no-repeat;
 }
 .nav-link {
   display: block;
