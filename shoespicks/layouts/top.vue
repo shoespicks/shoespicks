@@ -1,13 +1,13 @@
 <template>
   <v-app class="app-top-layout">
-    <Header :height="800" :image-path="heroImagePath">
+    <Header :height="800" image-path="/images/top/heroimage.png">
       <template #imgContent>
         <section class="top-layout-heroimage-logo-container">
           <h1>陸上競技者のためのシューズ検索サイト</h1>
           <img
             width="180"
             height="180"
-            src="~static/images/logo/logo-square.svg"
+            src="/images/logo/logo-square.svg"
             alt="shoespicks"
           />
           <div class="top-layout-heroimage-search-container">
@@ -54,7 +54,7 @@
   </v-app>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api';
+import { defineComponent } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import SearchLauncher from '~/components/molecules/SearchLauncher.vue';
 import Footer from '~/components/organisms/Footer.vue';
@@ -67,13 +67,7 @@ export default defineComponent({
     Header,
     Footer
   },
-  setup() {
-    const heroImagePath = ref(require('~/static/images/top/heroimage.png'));
-
-    return {
-      heroImagePath
-    };
-  }
+  setup() {}
 });
 </script>
 <style lang="scss" scoped>
