@@ -109,7 +109,7 @@ export default {
         .then((entries: any) => {
           return entries.items.map((spike: ISpikeShoes) => {
             return {
-              route: `/spike/${spike.fields.slug}`,
+              route: `/spikes/${spike.fields.slug}`,
               payload: transrateSpikeEntityToModel(spike)
             };
           });
