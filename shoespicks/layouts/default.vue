@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent, ref } from '@nuxtjs/composition-api';
 
 import Footer from '~/components/organisms/Footer.vue';
 import Header from '~/components/organisms/Header.vue';
@@ -32,7 +32,7 @@ export default defineComponent({
     Footer
   },
   setup() {
-    const heroImagePath = require('~/assets/images/top/heroimage.png');
+    const heroImagePath = ref(require('~/assets/images/top/heroimage.png'));
 
     return {
       heroImagePath

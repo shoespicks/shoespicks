@@ -10,13 +10,7 @@ import { defineComponent } from '@nuxtjs/composition-api';
 export default defineComponent({
   components: {},
   layout: 'top',
-  setup() {
-    const heroImagePath = require('~/assets/images/top/heroimage.png');
-
-    return {
-      heroImagePath
-    };
-  }
+  setup() {}
 });
 </script>
 <style lang="scss" scoped>

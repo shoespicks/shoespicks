@@ -54,7 +54,7 @@
   </v-app>
 </template>
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent, ref } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import SearchLauncher from '~/components/molecules/SearchLauncher.vue';
 import Footer from '~/components/organisms/Footer.vue';
@@ -68,7 +68,7 @@ export default defineComponent({
     Footer
   },
   setup() {
-    const heroImagePath = require('~/assets/images/top/heroimage.png');
+    const heroImagePath = ref(require('~/assets/images/top/heroimage.png'));
 
     return {
       heroImagePath
