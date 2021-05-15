@@ -1,13 +1,13 @@
 <template>
   <v-app class="app-default-layout">
-    <Header :height="160" :image-path="heroImagePath">
+    <Header :height="160" image-path="/images/top/heroimage.png">
       <template #imgContent>
         <section class="default-layout-heroimage-logo-container">
           <h2>陸上競技者のためのシューズ検索サイト</h2>
           <img
             width="60"
             height="60"
-            src="~static/images/logo/logo-square.svg"
+            src="/images/logo/logo-square.svg"
             alt="shoespicks"
           />
         </section>
@@ -31,13 +31,7 @@ export default defineComponent({
     Header,
     Footer
   },
-  setup() {
-    const heroImagePath = ref(require('~/static/images/top/heroimage.png'));
-
-    return {
-      heroImagePath
-    };
-  }
+  setup() {}
 });
 </script>
 
