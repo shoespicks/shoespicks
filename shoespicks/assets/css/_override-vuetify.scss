@@ -5,9 +5,7 @@
   ol {
     padding: 0;
   }
-}
 
-.theme--light.v-application {
   .v-application--wrap,
   .theme--light.v-card {
     color: #262626;
@@ -15,5 +13,9 @@
 
   .v-rating {
     display: flex;
+  }
+
+  .v-input--selection-controls {
+    margin-top: 0;
   }
 }

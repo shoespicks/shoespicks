@@ -68,7 +68,7 @@ import { defineComponent, PropType, ref } from '@nuxtjs/composition-api';
 import IconText from '~/components/atoms/IconText.vue';
 import ColorVariationsPicker from '~/components/molecules/ColorVariationsPicker.vue';
 import Rating from '~/components/molecules/Rating.vue';
-import { ISpikeModel } from '~/store/model/spikeModel';
+import { ISpikeModel } from '~/store/model/spike';
 import { shoeBrands } from '~/types/shoes/shoeBrands';
 
 export default defineComponent({
@@ -109,7 +109,7 @@ export default defineComponent({
   transition: transform 200ms ease;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     z-index: 1;
   }
 

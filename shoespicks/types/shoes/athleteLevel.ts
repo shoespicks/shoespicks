@@ -1,30 +1,31 @@
 // ISpikeShoesFieldsのbrandsからコピー
+import { ISelectItem } from '~/types/selectItem';
+
 export type AthleteLevelCode =
   | 'beginner'
   | 'intermediate'
   | 'advanced'
   | 'professional';
 
-export interface AthleteLevel {
+export interface AthleteLevel extends ISelectItem {
   id: AthleteLevelCode;
-  name: string;
 }
 
 export const athleteLevels: { [key in AthleteLevelCode]: AthleteLevel } = {
   beginner: {
     id: 'beginner',
-    name: '初心者'
+    label: '初心者'
   },
   intermediate: {
     id: 'intermediate',
-    name: '中級者'
+    label: '中級者'
   },
   advanced: {
     id: 'advanced',
-    name: '上級者'
+    label: '上級者'
   },
   professional: {
     id: 'professional',
-    name: 'エキスパート'
+    label: 'エキスパート'
   }
 };

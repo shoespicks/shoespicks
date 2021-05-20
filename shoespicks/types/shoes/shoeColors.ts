@@ -1,3 +1,5 @@
+import { ISelectItem } from '~/types/selectItem';
+
 // ISpikeShoesFieldsのcolorsからコピー
 export type shoeColorsCode =
   | 'black'
@@ -16,7 +18,7 @@ export type shoeColorsCode =
   | 'white'
   | 'yellow';
 
-export interface IShoeColor {
+export interface IShoeColor extends ISelectItem {
   id: shoeColorsCode;
   code: string;
 }

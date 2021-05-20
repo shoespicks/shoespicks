@@ -20,8 +20,8 @@ import {
 import SpikeList from '~/components/molecules/spikeList/SpikeList.vue';
 import SearchSpikeForm from '~/components/organisms/search-spike/SearchSpikeForm.vue';
 import { spikesStore } from '~/store';
-import { ISpikeModel } from '~/store/model/spikeModel';
-import { ISpikesSearchFormValue } from '~/store/spikes';
+import { ISpikesSearchFormValue } from '~/store/model/searchSpikeInput';
+import { ISpikeModel } from '~/store/model/spike';
 import { EventCategory } from '~/types/shoes/shoeEvents';
 
 export default defineComponent({

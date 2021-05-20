@@ -69,7 +69,7 @@
 import { defineComponent, reactive, ref } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import SearchLauncher from '~/components/molecules/SearchLauncher.vue';
-import { MenuItem } from '~/types/menuItem';
+import { IMenuItem } from '~/types/IMenuItem';
 
 export default defineComponent({
   components: { Button, SearchLauncher },
@@ -79,23 +79,27 @@ export default defineComponent({
   },
   setup() {
     const drawer = ref(false);
-    const navItems: MenuItem[] = reactive([
+    const navItems: IMenuItem[] = reactive([
       {
+        id: 'spikes',
         label: 'スパイクを探す',
         icon: 'fas fa-search',
         link: '/spikes'
       },
       {
+        id: 'hikaku',
         label: 'スパイクを比較する',
         icon: 'fas fa-arrows-alt-v',
         link: '/'
       },
       {
+        id: 'okini',
         label: 'お気に入りのスパイク',
         icon: 'fas fa-heart',
         link: '/'
       },
       {
+        id: 'toha',
         label: 'ShoesPicksとは？',
         icon: 'far fa-question-circle',
         link: '/'

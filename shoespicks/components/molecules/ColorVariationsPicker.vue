@@ -15,17 +15,20 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api';
+import { computed, defineComponent, PropType } from '@nuxtjs/composition-api';
+import { ISelectItem } from '~/types/selectItem';
 import { shoeColors } from '~/types/shoes/shoeColors';
 
 export default defineComponent({
   props: {
     value: {
+      // type: [Object as PropType<ISelectItem>, Array as PropType<ISelectItem[]>],
       type: [Object, Array],
-      default: null
+      required: true
     },
+    multiple: Boolean,
     items: {
-      type: Array,
+      type: Array as PropType<ISelectItem[]>,
       required: true
     },
     large: {
@@ -33,17 +36,57 @@ export default defineComponent({
     }
   },
   setup(props, context) {
+    const isActive = computed(() => {
+      return (colorVariation: ISelectItem) => {
+        if (!colorVariation || !props?.value) {
+          return false;
+        }
+
+        if (!props.multiple && !Array.isArray(props.value)) {
+          return colorVariation.id === (props.value as ISelectItem).id;
+        }
+
+        if (Array.isArray(props?.value)) {
+          return (props.value as ISelectItem[]).some(
+            (v: ISelectItem) => v.id === colorVariation.id
+          );
+        }
+
+        return false;
+      };
+    });
+
+    const clickItem = (e: Event, colorVariation: ISelectItem) => {
+      if (!colorVariation) {
+        return;
+      }
+
+      e.stopPropagation();
+      if (!props.multiple && !Array.isArray(props?.value)) {
+        context.emit('input', colorVariation);
+        return;
+      }
+
+      if (
+        Array.isArray(props?.value) &&
+        (props.value as ISelectItem[]).some(v => v.id === colorVariation.id)
+      ) {
+        context.emit(
+          'input',
+          (props.value as ISelectItem[]).filter(v => v.id !== colorVariation.id)
+        );
+      } else if (Array.isArray(props?.value)) {
+        context.emit('input', [
+          ...(props.value as ISelectItem[]),
+          colorVariation
+        ]);
+      }
+    };
+
     return {
       colors: shoeColors,
-      isActive: computed(() => {
-        return (colorVariation: any) => {
-          return colorVariation.id === (props.value as any)?.id;
-        };
-      }),
-      clickItem: (e: Event, colorVariation: any) => {
-        e.stopPropagation();
-        context.emit('input', colorVariation);
-      }
+      isActive,
+      clickItem
     };
   }
 });

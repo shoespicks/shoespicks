@@ -36,7 +36,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from '@nuxtjs/composition-api';
 import ColorVariationsPicker from '~/components/molecules/ColorVariationsPicker.vue';
-import { ISpikeModel } from '~/store/model/spikeModel';
+import { ISpikeModel } from '~/store/model/spike';
 
 export default defineComponent({
   components: { ColorVariationsPicker },

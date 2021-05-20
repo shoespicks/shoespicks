@@ -28,7 +28,7 @@ import {
   useRouter
 } from '@nuxtjs/composition-api';
 import SpikeListItem from '~/components/molecules/spikeList/SpikeListItem.vue';
-import { ISpikeModel } from '~/store/model/spikeModel';
+import { ISpikeModel } from '~/store/model/spike';
 
 export default defineComponent({
   components: { SpikeListItem },

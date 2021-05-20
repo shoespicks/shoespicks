@@ -41,7 +41,7 @@ export default defineComponent({
       {
         text:
           shoeEventCategory[route.value.params.events as EventCategoryCode]
-            ?.title,
+            ?.label,
         href: `/spikes/${route.value.params.events}`
       },
       {

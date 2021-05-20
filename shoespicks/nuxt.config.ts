@@ -1,7 +1,7 @@
 // @ts-ignore
 import colors from 'vuetify/es5/util/colors';
 import { contentfulClient } from './plugins/contentful';
-import { transrateSpikeEntityToModel } from './store/model/spikeModel';
+import { transrateSpikeEntityToModel } from './store/model/spike';
 import { ISpikeShoes } from './types/generated/contentful';
 
 export default {

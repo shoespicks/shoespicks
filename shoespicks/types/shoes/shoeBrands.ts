@@ -1,3 +1,5 @@
+import { ISelectItem } from '~/types/selectItem';
+
 // ISpikeShoesFieldsのbrandsからコピー
 export type ShoeBrandsCode =
   | 'adidas'
@@ -6,7 +8,7 @@ export type ShoeBrandsCode =
   | 'newBalance'
   | 'nike';
 
-export interface IShoeBrandName {
+export interface IShoeBrandName extends ISelectItem {
   id: ShoeBrandsCode;
   name: string;
   nameEn: string;

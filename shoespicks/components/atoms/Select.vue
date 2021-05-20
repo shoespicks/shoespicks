@@ -6,7 +6,10 @@
     :item-value="itemValue"
     :item-text="itemText"
     :dense="dense"
-    :outlined="placeholder"
+    :outlined="outlined"
+    :multiple="multiple"
+    :height="height"
+    :placeholder="placeholder"
     hide-details
   ></v-select>
 </template>
@@ -17,7 +20,7 @@ import { computed, defineComponent } from '@nuxtjs/composition-api';
 export default defineComponent({
   props: {
     value: {
-      type: [Object, String],
+      type: [Object, String, Array],
       default: null
     },
     items: {
@@ -47,6 +50,11 @@ export default defineComponent({
     outlined: {
       type: Boolean,
       default: true
+    },
+    multiple: Boolean,
+    height: {
+      type: Number,
+      default: null
     }
   },
 
@@ -63,4 +71,8 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.v-ripple__container {
+  opacity: 0;
+}
+</style>

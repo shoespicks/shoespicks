@@ -2,7 +2,7 @@
   <div class="page-content">
     <v-breadcrumbs :items="items"></v-breadcrumbs>
     <h2>
-      {{ event ? event.title + 'のスパイク検索結果' : 'スパイク検索結果' }}
+      {{ event ? event.label + 'のスパイク検索結果' : 'スパイク検索結果' }}
     </h2>
     <SearchSpike :event="event"></SearchSpike>
   </div>
@@ -35,7 +35,7 @@ export default defineComponent({
         href: '/spikes/'
       },
       {
-        text: event.value.title,
+        text: event.value.label,
         disabled: true
       }
     ]);
