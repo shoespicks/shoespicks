@@ -46,6 +46,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 ::v-deep .v-slider {
+  cursor: pointer;
+
   .v-slider__thumb-container {
     &:hover {
       .v-slider__thumb:before {

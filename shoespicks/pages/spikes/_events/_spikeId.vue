@@ -10,10 +10,12 @@ import {
   defineComponent,
   ref,
   useAsync,
-  useRoute
+  useRoute,
+  watch
 } from '@nuxtjs/composition-api';
-import SpikeDetail from '~/components/organisms/SpikeDetail.vue';
+import SpikeDetail from '~/components/organisms/spike-detail/SpikeDetail.vue';
 import { spikesStore } from '~/store';
+import { ISpikeModel } from '~/store/model/spike';
 import { EventCategoryCode, shoeEventCategory } from '~/types/shoes/shoeEvents';
 
 export default defineComponent({
@@ -21,11 +23,13 @@ export default defineComponent({
   setup() {
     const route = useRoute();
 
-    const spike = useAsync(() =>
-      spikesStore.getBySlug(
+    const spike = ref<ISpikeModel>();
+
+    useAsync(async () => {
+      spike.value = await spikesStore.getBySlug(
         `${route.value.params.events}/${route.value.params.spikeId}`
-      )
-    );
+      );
+    });
 
     console.log(spike.value?.name);
 
@@ -49,6 +53,17 @@ export default defineComponent({
         disabled: true
       }
     ];
+
+    watch(
+      () => route.value.params.spikeId,
+      async spikeId => {
+        spike.value = await spikesStore.getBySlug(
+          `${route.value.params.events}/${spikeId}`
+        );
+        console.log(spike.value?.name);
+      }
+    );
+
     return {
       items,
       spike

@@ -8,7 +8,8 @@ export interface IShoeColorVariation {
 export interface ISpikeModel extends ISpikeShoesFields {
   id: string;
   colorVariations: IShoeColorVariation[];
-  reviewRating: number;
+  reviewRating?: number;
+  strength?: { icon: string; label: string; description?: string }[];
 }
 
 const getColorVariationImageProperty = (

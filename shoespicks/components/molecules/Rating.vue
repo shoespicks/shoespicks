@@ -4,12 +4,12 @@
       v-model="ratingValue"
       background-color="gray lighten"
       color="#262626"
-      size="16"
+      :size="size"
       dense
       half-increments
       :readonly="readonly"
     ></v-rating>
-    <span>{{ ratingValue }}</span>
+    <span :style="{ fontSize: `${numberSize}px` }">{{ ratingValue }}</span>
   </div>
 </template>
 <script lang="ts">
@@ -21,7 +21,14 @@ export default defineComponent({
       type: Number,
       default: 0
     },
-    large: Boolean,
+    size: {
+      type: Number,
+      default: 16
+    },
+    numberSize: {
+      type: Number,
+      default: 12
+    },
     readonly: Boolean
   },
   setup(props, context) {
@@ -57,7 +64,6 @@ export default defineComponent({
 
   span {
     display: inline-flex;
-    font-size: 12px;
   }
 }
 </style>
