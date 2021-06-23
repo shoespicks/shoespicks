@@ -120,6 +120,8 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .organisms-header-component {
+  z-index: 10;
+
   ::v-deep .v-app-bar .v-toolbar__content {
     max-height: 50px;
 

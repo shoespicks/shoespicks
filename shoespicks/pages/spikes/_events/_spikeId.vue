@@ -1,8 +1,8 @@
 <template>
   <div v-if="!!spike" class="page-content">
-    <v-container>
+    <Container>
       <v-breadcrumbs :items="items"></v-breadcrumbs>
-    </v-container>
+    </Container>
     <SpikeDetail :spike="spike"></SpikeDetail>
   </div>
 </template>
@@ -15,13 +15,14 @@ import {
   useRoute,
   watch
 } from '@nuxtjs/composition-api';
+import Container from '~/components/atoms/Container.vue';
 import SpikeDetail from '~/components/organisms/spike-detail/SpikeDetail.vue';
 import { spikesStore } from '~/store';
 import { ISpikeModel } from '~/store/model/spike';
 import { EventCategoryCode, shoeEventCategory } from '~/types/shoes/shoeEvents';
 
 export default defineComponent({
-  components: { SpikeDetail },
+  components: { Container, SpikeDetail },
   setup() {
     const route = useRoute();
 
