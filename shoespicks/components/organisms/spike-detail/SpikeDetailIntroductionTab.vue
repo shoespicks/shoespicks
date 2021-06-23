@@ -244,6 +244,12 @@ h2 {
     width: 100%;
     padding: 32px;
 
+    h3 {
+      + * {
+        margin-top: 16px;
+      }
+    }
+
     > div {
       display: flex;
       flex-wrap: wrap;
