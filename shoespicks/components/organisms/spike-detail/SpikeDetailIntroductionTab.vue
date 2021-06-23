@@ -266,6 +266,23 @@ h2 {
           margin-top: 48px;
         }
       }
+
+      @media screen and (max-width: 768px) {
+        display: block;
+
+        > * {
+          width: 100%;
+
+          + * {
+            margin-left: 0;
+            margin-top: 16px;
+          }
+
+          > * + * {
+            margin-top: 24px;
+          }
+        }
+      }
     }
   }
 }
