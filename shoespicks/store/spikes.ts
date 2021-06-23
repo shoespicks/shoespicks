@@ -24,9 +24,8 @@ export default class Spikes extends VuexModule {
     this._spikes = val;
   }
 
-  @Action({ rawError: true }) public async search(
-    formValue: ISpikesSearchFormValue = {}
-  ) {
+  @Action({ rawError: true })
+  public async search(formValue: ISpikesSearchFormValue = {}) {
     await contentfulClient
       .getEntries(createSearchInput(formValue))
       .then((items: any) => {
@@ -35,17 +34,16 @@ export default class Spikes extends VuexModule {
             transrateSpikeEntityToModel(item)
           )
         );
-
-        console.log(items.items);
+        console.log(this._spikes);
       })
-      .catch(() => {
+      .catch((e: Error) => {
+        console.log(e);
         throw new Error('Spikes#search() faild');
       });
   }
 
-  @Action({ rawError: true }) async getBySlug(
-    slug: string
-  ): Promise<ISpikeModel> {
+  @Action({ rawError: true })
+  async getBySlug(slug: string): Promise<ISpikeModel> {
     const input = {
       content_type: 'spikeShoes',
       'fields.slug': slug
@@ -54,6 +52,7 @@ export default class Spikes extends VuexModule {
     return await contentfulClient
       .getEntries(input)
       .then((entries: any) => {
+        console.log(entries);
         console.log(transrateSpikeEntityToModel(entries.items[0]));
         return transrateSpikeEntityToModel(entries.items[0]);
       })

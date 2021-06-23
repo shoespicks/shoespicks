@@ -3,6 +3,10 @@
 
 html {
   font-family: 'Noto Sans JP', 'Roboto', sans-serif;
+
+  * {
+    z-index: unset;
+  }
 }
 
 ul > li {
@@ -16,4 +20,12 @@ a {
 
 img {
   display: inline-flex;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
 }

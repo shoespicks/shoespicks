@@ -5,54 +5,63 @@
       <small> {{ spike.name }}</small>
       <small>{{ spike.releaseYear }}年モデル</small>
     </h1>
-    <ul class="spike-top-actions">
-      <li>
-        <a href="#" class="spike-rating">
-          <Rating
-            :value="spike.reviewRating"
-            dense
-            :size="24"
-            :number-size="18"
-            readonly
-          ></Rating>
-          <span>
-            レビュー 0件
-          </span>
-        </a>
-      </li>
-      <li>
-        <v-btn-toggle v-model="isFavoriteValue" rounded borderless dense>
-          <Button text color="accent">
-            <v-icon color="accent" left>{{
-              isFavorite === 0 ? 'fas fa-heart' : 'far fa-heart'
-            }}</v-icon
-            >お気に入り</Button
-          >
-        </v-btn-toggle>
-      </li>
-      <li>
-        <v-btn-toggle v-model="haveValue" rounded borderless dense>
-          <Button text color="accent"
-            ><v-icon color="accent" left>{{
-              have === 0 ? 'fas fa-check-circle' : 'far fa-check-circle'
-            }}</v-icon
-            >持ってる</Button
-          >
-        </v-btn-toggle>
-      </li>
-      <li>
-        <v-btn-toggle v-model="reviewedValue" rounded borderless dense>
-          <Button text color="accent">
-            <v-icon color="accent" left>{{
-              reviewed === 0 ? 'fas fa-edit' : 'far fa-edit'
-            }}</v-icon
-            >クチコミを書く</Button
-          >
-        </v-btn-toggle>
-      </li>
-    </ul>
-    <div class="spike-top-content">
-      <div class="spike-top-content-image">
+    <div class="spike-top-actions">
+      <a href="#" class="spike-rating">
+        <Rating
+          :value="spike.reviewRating"
+          dense
+          :size="24"
+          :number-size="18"
+          readonly
+        ></Rating>
+        <span>
+          レビュー 0件
+        </span>
+      </a>
+      <ul class="spike-top-actions-buttons">
+        <li>
+          <v-btn-toggle v-model="isFavoriteValue" rounded borderless dense>
+            <Button text color="accent">
+              <v-icon color="accent" left>{{
+                isFavorite === 0 ? 'fas fa-heart' : 'far fa-heart'
+              }}</v-icon
+              >お気に入り</Button
+            >
+          </v-btn-toggle>
+        </li>
+        <li>
+          <v-btn-toggle v-model="haveValue" rounded borderless dense>
+            <Button text color="accent"
+              ><v-icon color="accent" left>{{
+                have === 0 ? 'fas fa-check-circle' : 'far fa-check-circle'
+              }}</v-icon
+              >持ってる</Button
+            >
+          </v-btn-toggle>
+        </li>
+        <li>
+          <v-btn-toggle v-model="reviewedValue" rounded borderless dense>
+            <Button text color="accent">
+              <v-icon color="accent" left>{{
+                reviewed === 0 ? 'fas fa-edit' : 'far fa-edit'
+              }}</v-icon
+              >クチコミを書く</Button
+            >
+          </v-btn-toggle>
+        </li>
+      </ul>
+    </div>
+
+    <v-row class="spike-top-content">
+      <v-col
+        cols="12"
+        xs="12"
+        sm="12"
+        md="6"
+        lg="6"
+        xl="6"
+        class="spike-top-content-image"
+      >
         <div class="spike-top-content-image-carousel-container">
           <v-carousel v-if="spike.colorVariations" height="100%">
             <v-carousel-item
@@ -69,10 +78,18 @@
           large
           class="color-variations-picker"
         ></ColorVariationsPicker>
-      </div>
-      <div class="spike-top-content-description">
+      </v-col>
+      <v-col
+        cols="12"
+        xs="12"
+        sm="12"
+        md="6"
+        lg="6"
+        xl="6"
+        class="spike-top-content-description"
+      >
         <section class="spike-top-content-description-strength">
-          <h2>{{ spike.name }} {{ spike.releaseYear }}年モデルの特徴</h2>
+          <h3>{{ spike.name }} {{ spike.releaseYear }}年モデルの特徴</h3>
           <ul v-if="spike.strength">
             <li v-for="strength in spike.strength" :key="strength.label">
               <span>
@@ -87,36 +104,39 @@
             </li>
           </ul>
         </section>
-
         <ul class="spike-top-content-description-buy-actions">
-          <li>
-            <Button color="primary">
-              <v-icon left> fab fa-amazon </v-icon>Amazonで買う</Button
+          <li v-if="spike.amazonUrl">
+            <Button color="primary" @click="openNewTabByUrl(spike.amazonUrl)">
+              <v-icon left>fab fa-amazon</v-icon>Amazonで買う</Button
             >
           </li>
-          <li>
-            <Button color="primary"> 楽天で買う</Button>
+          <li v-if="spike.rakutenUrl">
+            <Button color="primary" @click="openNewTabByUrl(spike.rakutenUrl)"
+              >楽天で買う</Button
+            >
           </li>
-          <li>
-            <Button color="primary">公式サイトで買う</Button>
+          <li v-if="spike.brandPageUrl">
+            <Button color="primary" @click="openNewTabByUrl(spike.brandPageUrl)"
+              >公式サイトで買う</Button
+            >
           </li>
         </ul>
-        <div v-if="spike.oldModels || spike.newModel" class="old-or-new-models">
+        <div v-if="spike.oldModel || spike.newModel" class="old-or-new-models">
           <router-link
             v-if="spike.newModel"
-            :to="`/spikes/${spike.newModel[0].fields.slug}`"
+            :to="`/spikes/${spike.newModel.fields.slug}`"
           >
             {{ spike.releaseYear + 1 }}年モデルはコチラ
           </router-link>
           <router-link
-            v-if="spike.oldModels"
-            :to="`/spikes/${spike.oldModels[0].fields.slug}`"
+            v-if="spike.oldModel"
+            :to="`/spikes/${spike.oldModel.fields.slug}`"
           >
             {{ spike.releaseYear - 1 }}年モデルはコチラ
           </router-link>
         </div>
-      </div>
-    </div>
+      </v-col>
+    </v-row>
   </section>
 </template>
 <script lang="ts">
@@ -130,6 +150,7 @@ import Button from '~/components/atoms/Button.vue';
 import ColorVariationsPicker from '~/components/molecules/ColorVariationsPicker.vue';
 import Rating from '~/components/molecules/Rating.vue';
 import { ISpikeModel } from '~/store/model/spike';
+import { openNewTabByUrl } from '~/utils/navigateUtils';
 
 export default defineComponent({
   components: { Button, ColorVariationsPicker, Rating },
@@ -171,7 +192,10 @@ export default defineComponent({
         set: (val: number) => {
           context.emit('update:reviewed', val);
         }
-      })
+      }),
+      openNewTabByUrl: (url: string) => {
+        openNewTabByUrl(url);
+      }
     };
   }
 });
@@ -202,21 +226,29 @@ export default defineComponent({
     }
   }
 
-  a.spike-rating {
-    margin-top: -4px;
-    display: inline-flex;
+  .spike-top-actions {
+    display: flex;
+    margin-left: -16px;
     align-items: center;
-    font-size: 18px;
+    flex-wrap: wrap;
 
-    * + * {
-      margin-left: 8px;
+    > * {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 8px;
+      margin-left: 16px;
+    }
+
+    > .spike-rating {
+      font-size: 18px;
+
+      * + * {
+        margin-left: 8px;
+      }
     }
   }
 
-  .spike-top-actions {
-    display: flex;
-    align-items: center;
-
+  .spike-top-actions-buttons {
     > li {
       &:first-of-type {
         + li {
@@ -235,16 +267,6 @@ export default defineComponent({
   }
 
   .spike-top-content {
-    display: flex;
-
-    > * {
-      width: 50%;
-
-      + * {
-        margin-left: 32px;
-      }
-    }
-
     .spike-top-content-image-carousel-container {
       position: relative;
       width: 100%;
@@ -262,77 +284,69 @@ export default defineComponent({
       margin: 16px 0;
     }
 
-    > .spike-top-content-description {
-      * + .spike-top-content-description-strength {
-        margin-top: 16px;
+    .spike-top-content-description-strength {
+      h3 {
+        + * {
+          margin-top: 16px;
+        }
       }
 
-      .spike-top-content-description-strength {
-        h2 {
-          font-size: 20px;
+      > ul {
+        padding-left: 16px;
 
-          + * {
+        > li {
+          display: flex;
+
+          > span {
+            display: inline-flex;
+            width: 30px;
+            height: 48px;
+            padding-top: 4px;
+            align-items: flex-start;
+            justify-content: center;
+
+            + * {
+              margin-left: 16px;
+            }
+          }
+
+          > div {
+            > p {
+              font-weight: 500;
+            }
+
+            > small {
+              color: gray;
+            }
+          }
+
+          + li {
             margin-top: 16px;
           }
         }
-
-        > ul {
-          padding-left: 16px;
-
-          > li {
-            display: flex;
-
-            > span {
-              display: inline-flex;
-              width: 30px;
-              height: 48px;
-              padding-top: 4px;
-              align-items: flex-start;
-              justify-content: center;
-
-              + * {
-                margin-left: 16px;
-              }
-            }
-
-            > div {
-              > p {
-                font-weight: 500;
-              }
-
-              > small {
-                color: gray;
-              }
-            }
-
-            + li {
-              margin-top: 16px;
-            }
-          }
-        }
-
-        + * {
-          margin-top: 32px;
-        }
       }
 
-      .spike-top-content-description-buy-actions {
-        display: flex;
-        align-items: center;
+      + * {
+        margin-top: 32px;
+      }
+    }
 
-        > li {
-          + li {
-            margin-left: 8px;
-          }
+    .spike-top-content-description-buy-actions {
+      display: flex;
+      align-items: center;
+
+      > li {
+        + li {
+          margin-left: 8px;
         }
       }
+    }
 
-      .old-or-new-models {
-        margin-top: 16px;
+    .old-or-new-models {
+      margin-top: 16px;
 
-        > * + * {
-          margin-left: 16px;
-        }
+      > * + * {
+        margin-left: 16px;
       }
     }
   }

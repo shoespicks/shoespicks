@@ -1,7 +1,9 @@
 <template>
-  <div class="page-content">
-    <v-breadcrumbs :items="items"></v-breadcrumbs>
-    <SpikeDetail v-if="!!spike" :spike="spike"></SpikeDetail>
+  <div v-if="!!spike" class="page-content">
+    <v-container>
+      <v-breadcrumbs :items="items"></v-breadcrumbs>
+    </v-container>
+    <SpikeDetail :spike="spike"></SpikeDetail>
   </div>
 </template>
 
@@ -25,15 +27,7 @@ export default defineComponent({
 
     const spike = ref<ISpikeModel>();
 
-    useAsync(async () => {
-      spike.value = await spikesStore.getBySlug(
-        `${route.value.params.events}/${route.value.params.spikeId}`
-      );
-    });
-
-    console.log(spike.value?.name);
-
-    const items = [
+    const items = ref<{ text: string; href?: string; disabled?: boolean }[]>([
       {
         text: 'ShoesPicks',
         href: '/'
@@ -47,12 +41,20 @@ export default defineComponent({
           shoeEventCategory[route.value.params.events as EventCategoryCode]
             ?.label,
         href: `/spikes/${route.value.params.events}`
-      },
-      {
-        text: spike.value?.name,
-        disabled: true
       }
-    ];
+    ]);
+
+    useAsync(async () => {
+      spike.value = await spikesStore.getBySlug(
+        `${route.value.params.events}/${route.value.params.spikeId}`
+      );
+
+      items.value.push({
+        text: spike.value.name,
+        disabled: true
+      });
+      console.log(spike.value?.name);
+    });
 
     watch(
       () => route.value.params.spikeId,
@@ -60,6 +62,12 @@ export default defineComponent({
         spike.value = await spikesStore.getBySlug(
           `${route.value.params.events}/${spikeId}`
         );
+
+        items.value.pop();
+        items.value.push({
+          text: spike.value?.name,
+          disabled: true
+        });
         console.log(spike.value?.name);
       }
     );
@@ -73,16 +81,9 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .page-content {
-  padding: 24px;
+  padding: 24px 0;
 
-  h2 {
-    font-size: 20px;
-    + * {
-      margin-top: 24px;
-    }
-  }
-
-  .v-breadcrumbs {
+  > .container {
     + * {
       margin-top: 8px;
     }

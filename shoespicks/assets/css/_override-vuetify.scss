@@ -1,6 +1,10 @@
 .v-application.theme--light {
   font-family: 'Noto Sans JP', 'Roboto', sans-serif;
 
+  .container {
+    padding: 0 24px;
+  }
+
   ul,
   ol {
     padding: 0;
