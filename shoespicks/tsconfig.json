@@ -15,7 +15,14 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@nuxt/types", "@nuxtjs/axios", "@types/node", "vuetify"]
+    "typeRoots": ["node_modules/@types"],
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/axios",
+      "@types/node",
+      "@types/lodash-es",
+      "vuetify"
+    ]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }
