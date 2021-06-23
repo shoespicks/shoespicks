@@ -72,10 +72,10 @@
             class="key-feature-item"
           >
             <h3>{{ keyFeature.title }}</h3>
-            <div>
+            <div class="key-feature-item-content">
               <div
                 v-if="keyFeature.imageUrls"
-                class="key-feature-item__image-container"
+                class="key-feature-item-content__image-container"
               >
                 <v-img
                   v-for="imageUrl in keyFeature.imageUrls"
@@ -173,6 +173,14 @@ h2 {
         flex: 0 0 50%;
       }
     }
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+
+      > * {
+        width: 100%;
+      }
+    }
   }
 }
 
@@ -195,18 +203,6 @@ h2 {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .spike-introduction-top-section {
-    > .atoms-container {
-      flex-direction: column;
-
-      > * {
-        width: 100%;
-      }
-    }
-  }
-}
-
 /**
  * 特徴のバリエーション１
  */
@@ -214,11 +210,21 @@ h2 {
   h2 + div {
     display: flex;
     flex-wrap: wrap;
+
+    @media screen and (max-width: 768px) {
+      display: block;
+    }
   }
 
   .key-feature-item {
     width: 48%;
     padding: 32px;
+
+    h3 {
+      + * {
+        margin-top: 16px;
+      }
+    }
 
     > div {
       display: flex;
@@ -231,6 +237,19 @@ h2 {
       + p {
         margin-top: 16px;
         line-height: 1.6;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      padding: 32px 0;
+
+      > div {
+        > * {
+          + * {
+            margin-left: 16px;
+          }
+        }
       }
     }
   }
@@ -250,7 +269,7 @@ h2 {
       }
     }
 
-    > div {
+    .key-feature-item-content {
       display: flex;
       flex-wrap: wrap;
 
@@ -262,16 +281,38 @@ h2 {
           margin-left: 48px;
         }
 
-        > * + * {
-          margin-top: 48px;
+        &.key-feature-item-content__image-container {
+          > * {
+            + * {
+              margin-top: 48px;
+            }
+          }
         }
       }
+    }
 
-      @media screen and (max-width: 768px) {
+    @media screen and (max-width: 768px) {
+      padding: 32px 0;
+
+      .key-feature-item-content {
         display: block;
 
         > * {
           width: 100%;
+
+          &.key-feature-item-content__image-container {
+            display: flex;
+
+            > * {
+              width: 1px;
+              flex: 1;
+
+              + * {
+                margin-top: 0;
+                margin-left: 16px;
+              }
+            }
+          }
 
           + * {
             margin-left: 0;

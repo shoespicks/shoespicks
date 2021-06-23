@@ -31,5 +31,9 @@ export default defineComponent({
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 32px;
+  }
 }
 </style>
