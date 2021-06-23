@@ -17,7 +17,11 @@
     </v-container>
     <v-tabs-items v-model="selectedTab">
       <v-tab-item>
-        <SpikeDetailIntroductionTab :spike="spike"></SpikeDetailIntroductionTab>
+        <StickySidenavLayout>
+          <SpikeDetailIntroductionTab
+            :spike="spike"
+          ></SpikeDetailIntroductionTab>
+        </StickySidenavLayout>
       </v-tab-item>
       <v-tab-item>
         スペック
@@ -30,12 +34,17 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, ref } from '@nuxtjs/composition-api';
+import StickySidenavLayout from '~/components/molecules/layout/StickySidenavLayout.vue';
 import SpikeDetailIntroductionTab from '~/components/organisms/spike-detail/SpikeDetailIntroductionTab.vue';
 import SpikeDetailTop from '~/components/organisms/spike-detail/SpikeDetailTop.vue';
 import { ISpikeModel } from '~/store/model/spike';
 
 export default defineComponent({
-  components: { SpikeDetailIntroductionTab, SpikeDetailTop },
+  components: {
+    StickySidenavLayout,
+    SpikeDetailIntroductionTab,
+    SpikeDetailTop
+  },
   props: {
     spike: {
       type: Object as PropType<ISpikeModel>,

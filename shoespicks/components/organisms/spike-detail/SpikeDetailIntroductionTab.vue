@@ -1,38 +1,40 @@
 <template>
   <div class="organisms-spike-detail-introduction-tab">
     <section class="spike-introduction-top-section">
-      <h2>
-        <span>
-          基本性能
-        </span>
-        <span class="background-text background-text--wide">
-          01
-        </span>
-      </h2>
-      <v-container>
-        <div>
-          <RadarChart :data="[2, 3.5, 4, 5, 5]"></RadarChart>
+      <Container>
+        <h2>
+          <span>
+            基本性能
+          </span>
+          <span class="background-text background-text--wide">
+            01
+          </span>
+        </h2>
+        <div class="spike-introduction-top-section-content">
+          <div>
+            <RadarChart :data="[2, 3.5, 4, 5, 5]"></RadarChart>
+          </div>
+          <section class="spike-introduction-recommended-for">
+            <h3>こんな人におすすめ！</h3>
+            <div
+              v-if="spike.recommendedFor"
+              v-html="$md.render(spike.recommendedFor)"
+            ></div>
+          </section>
         </div>
-        <section class="spike-introduction-recommended-for">
-          <h3>こんな人におすすめ！</h3>
-          <div
-            v-if="spike.recommendedFor"
-            v-html="$md.render(spike.recommendedFor)"
-          ></div>
-        </section>
-      </v-container>
+      </Container>
     </section>
     <section class="spike-introduction-key-features-section">
-      <h2>
-        <span>
-          特徴
-        </span>
-        <span class="background-text">
-          02
-        </span>
-      </h2>
-      <div>
-        <v-container>
+      <Container>
+        <h2>
+          <span>
+            特徴
+          </span>
+          <span class="background-text">
+            02
+          </span>
+        </h2>
+        <div>
           <section
             v-for="keyFeature in spike.keyFeatures"
             :key="keyFeature.id"
@@ -50,22 +52,55 @@
               {{ keyFeature.description }}
             </p>
           </section>
-        </v-container>
-      </div>
+        </div>
+      </Container>
     </section>
-    <div
-      v-if="spike.athletesInterview"
-      v-html="$md.render(spike.athletesInterview)"
-    ></div>
+    <section class="spike-introduction-key-features-section2">
+      <Container>
+        <h2>
+          <span>
+            特徴の見た目のバリエーション
+          </span>
+          <span class="background-text">
+            03
+          </span>
+        </h2>
+        <div>
+          <section
+            v-for="keyFeature in spike.keyFeatures"
+            :key="keyFeature.id"
+            class="key-feature-item"
+          >
+            <h3>{{ keyFeature.title }}</h3>
+            <div>
+              <div
+                v-if="keyFeature.imageUrls"
+                class="key-feature-item__image-container"
+              >
+                <v-img
+                  v-for="imageUrl in keyFeature.imageUrls"
+                  :key="imageUrl"
+                  :src="keyFeature.imageUrls[0]"
+                ></v-img>
+              </div>
+              <p>
+                {{ keyFeature.description }}
+              </p>
+            </div>
+          </section>
+        </div>
+      </Container>
+    </section>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api';
+import Container from '~/components/atoms/Container.vue';
 import RadarChart from '~/components/molecules/RadarChart.vue';
 import { ISpikeModel } from '~/store/model/spike';
 
 export default defineComponent({
-  components: { RadarChart },
+  components: { Container, RadarChart },
   props: {
     spike: {
       type: Object as PropType<ISpikeModel>,
@@ -121,7 +156,7 @@ h2 {
 }
 
 .spike-introduction-top-section {
-  > .container {
+  .spike-introduction-top-section-content {
     display: flex;
     flex-wrap: wrap;
 
@@ -162,7 +197,7 @@ h2 {
 
 @media screen and (max-width: 768px) {
   .spike-introduction-top-section {
-    > .container {
+    > .atoms-container {
       flex-direction: column;
 
       > * {
@@ -172,11 +207,15 @@ h2 {
   }
 }
 
+/**
+ * 特徴のバリエーション１
+ */
 .spike-introduction-key-features-section {
-  .container {
+  h2 + div {
     display: flex;
     flex-wrap: wrap;
   }
+
   .key-feature-item {
     width: 48%;
     padding: 32px;
@@ -188,10 +227,39 @@ h2 {
       > * {
         flex: 1;
       }
-    }
 
-    p {
-      line-height: 1.6;
+      + p {
+        margin-top: 16px;
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+/**
+ * 特徴のバリエーション２
+ */
+.spike-introduction-key-features-section2 {
+  .key-feature-item {
+    width: 100%;
+    padding: 32px;
+
+    > div {
+      display: flex;
+      flex-wrap: wrap;
+
+      > * {
+        flex: 1;
+        width: 1px;
+
+        + * {
+          margin-left: 48px;
+        }
+
+        > * + * {
+          margin-top: 48px;
+        }
+      }
     }
   }
 }
