@@ -106,17 +106,27 @@
         </section>
         <ul class="spike-top-content-description-buy-actions">
           <li v-if="spike.amazonUrl">
-            <Button color="primary" @click="openNewTabByUrl(spike.amazonUrl)">
+            <Button
+              color="grey darken-2"
+              dark
+              @click="openNewTabByUrl(spike.amazonUrl)"
+            >
               <v-icon left>fab fa-amazon</v-icon>Amazonで買う</Button
             >
           </li>
           <li v-if="spike.rakutenUrl">
-            <Button color="primary" @click="openNewTabByUrl(spike.rakutenUrl)"
+            <Button
+              color="grey darken-2"
+              dark
+              @click="openNewTabByUrl(spike.rakutenUrl)"
               >楽天で買う</Button
             >
           </li>
           <li v-if="spike.brandPageUrl">
-            <Button color="primary" @click="openNewTabByUrl(spike.brandPageUrl)"
+            <Button
+              color="grey darken-2"
+              dark
+              @click="openNewTabByUrl(spike.brandPageUrl)"
               >公式サイトで買う</Button
             >
           </li>

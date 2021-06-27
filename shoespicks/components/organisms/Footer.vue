@@ -46,10 +46,6 @@ export default defineComponent({
 });
 </script>
 <style lang="scss">
-h4 {
-  font-weight: 400;
-  font-size: 14px;
-}
 .v-footer {
   padding: 32px 32px 16px;
   flex-direction: column;
@@ -98,6 +94,11 @@ h4 {
         margin-left: 16px;
       }
     }
+  }
+
+  h4 {
+    font-weight: 400;
+    font-size: 14px;
   }
 }
 </style>

@@ -5,6 +5,7 @@ html {
   font-family: 'Noto Sans JP', 'Roboto', sans-serif;
 
   * {
+    box-sizing: border-box;
     z-index: unset;
   }
 }
@@ -20,8 +21,8 @@ a {
 
 p {
   text-align: justify;
-  word-wrap : break-word;
-  overflow-wrap : break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   letter-spacing: 0.01em;
 }
 
@@ -35,4 +36,8 @@ h2 {
 
 h3 {
   font-size: 20px;
+}
+
+h4 {
+  font-size: 18px;
 }

@@ -18,6 +18,7 @@ export default defineComponent({
     plain: Boolean,
     retainFocusOnClick: Boolean,
     rounded: Boolean,
+    dark: Boolean,
     tag: {
       type: String,
       default: 'button'

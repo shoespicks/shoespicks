@@ -1,6 +1,6 @@
 <template>
   <article class="organisms-spike-detail">
-    <Container>
+    <Container :max-width="1244" padding="32px">
       <SpikeDetailTop
         :spike="spike"
         :is-favorite.sync="isFavorite"
@@ -9,7 +9,7 @@
       ></SpikeDetailTop>
     </Container>
     <div class="spike-detail-tab">
-      <Container>
+      <Container max-width="1244" padding="0 32px">
         <v-tabs v-model="selectedTab" color="#262626" :height="60" grow>
           <v-tab :ripple="false">Top</v-tab>
           <v-tab :ripple="false">スペック情報</v-tab>
@@ -17,33 +17,91 @@
         </v-tabs>
       </Container>
     </div>
-    <v-tabs-items v-model="selectedTab">
-      <v-tab-item>
-        <StickySidenavLayout>
+    <StickySidenavLayout
+      :sticky-container-top-px="140"
+      container-max-width="1244"
+      right
+    >
+      <v-tabs-items v-model="selectedTab">
+        <v-tab-item>
           <SpikeDetailIntroductionTab
             :spike="spike"
           ></SpikeDetailIntroductionTab>
-        </StickySidenavLayout>
-      </v-tab-item>
-      <v-tab-item>
-        スペック
-      </v-tab-item>
-      <v-tab-item>
-        クチコミ
-      </v-tab-item>
-    </v-tabs-items>
+        </v-tab-item>
+        <v-tab-item>
+          <div class="spacer">
+            スペック
+          </div>
+        </v-tab-item>
+        <v-tab-item>
+          <div class="spacer">
+            口コミ
+          </div>
+        </v-tab-item>
+      </v-tabs-items>
+      <template #sidenav>
+        <div class="sidenav-item">
+          <ul class="sidenav-buttons">
+            <li v-if="spike.amazonUrl">
+              <Button
+                color="grey darken-2"
+                :width="200"
+                :height="40"
+                dark
+                @click="openNewTabByUrl(spike.amazonUrl)"
+              >
+                <v-icon left>fab fa-amazon</v-icon>Amazonで買う</Button
+              >
+            </li>
+            <li v-if="spike.rakutenUrl">
+              <Button
+                color="grey darken-2"
+                :width="200"
+                :height="40"
+                dark
+                @click="openNewTabByUrl(spike.rakutenUrl)"
+                >楽天で買う</Button
+              >
+            </li>
+            <li v-if="spike.brandPageUrl">
+              <Button
+                color="grey darken-2"
+                :width="200"
+                :height="40"
+                dark
+                @click="openNewTabByUrl(spike.brandPageUrl)"
+                >公式サイトで買う</Button
+              >
+            </li>
+          </ul>
+          <section class="sidenav-recomend-items-section">
+            <h4>おすすめスパイク</h4>
+            <ul>
+              <li v-for="item in spike.recomendItems" :key="item.fields.name">
+                <router-link :to="`/spikes/${item.fields.slug}`">
+                  {{ item.fields.name }}
+                </router-link>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </template>
+    </StickySidenavLayout>
   </article>
 </template>
 <script lang="ts">
 import { defineComponent, PropType, ref } from '@nuxtjs/composition-api';
+import Button from '~/components/atoms/Button.vue';
 import Container from '~/components/atoms/Container.vue';
 import StickySidenavLayout from '~/components/molecules/layout/StickySidenavLayout.vue';
-import SpikeDetailIntroductionTab from '~/components/organisms/spike-detail/SpikeDetailIntroductionTab.vue';
+import SpikeDetailIntroductionTab from '~/components/organisms/spike-detail/tab-content/SpikeDetailIntroductionTab.vue';
 import SpikeDetailTop from '~/components/organisms/spike-detail/SpikeDetailTop.vue';
 import { ISpikeModel } from '~/store/model/spike';
+import { openNewTabByUrl } from '~/utils/navigateUtils';
 
 export default defineComponent({
   components: {
+    Button,
     Container,
     StickySidenavLayout,
     SpikeDetailIntroductionTab,
@@ -60,7 +118,10 @@ export default defineComponent({
       isFavorite: ref<number>(),
       have: ref<number>(),
       reviewed: ref<number>(),
-      selectedTab: ref<any>()
+      selectedTab: ref<any>(),
+      openNewTabByUrl: (url: string) => {
+        openNewTabByUrl(url);
+      }
     };
   }
 });
@@ -78,6 +139,40 @@ export default defineComponent({
     top: 48px;
     z-index: 10;
     background-color: #ffffff;
+  }
+
+  .sidenav-item {
+    width: 200px;
+
+    > * + * {
+      margin-top: 32px;
+    }
+
+    > .sidenav-buttons {
+      * + * {
+        margin-top: 16px;
+      }
+    }
+
+    > .sidenav-recomend-items-section {
+      h4 {
+        + * {
+          margin-top: 8px;
+        }
+      }
+
+      > ul {
+        > li {
+          margin-top: 8px;
+        }
+      }
+    }
+  }
+
+  .spacer {
+    height: 1000px;
+    padding-top: 64px;
+    text-align: center;
   }
 }
 </style>

@@ -41,46 +41,15 @@
             class="key-feature-item"
           >
             <h3>{{ keyFeature.title }}</h3>
-            <div>
-              <v-img
-                v-for="imageUrl in keyFeature.imageUrls"
-                :key="imageUrl"
-                :src="imageUrl"
-              ></v-img>
-            </div>
-            <p>
-              {{ keyFeature.description }}
-            </p>
-          </section>
-        </div>
-      </Container>
-    </section>
-    <section class="spike-introduction-key-features-section2">
-      <Container>
-        <h2>
-          <span>
-            特徴の見た目のバリエーション
-          </span>
-          <span class="background-text">
-            03
-          </span>
-        </h2>
-        <div>
-          <section
-            v-for="keyFeature in spike.keyFeatures"
-            :key="keyFeature.id"
-            class="key-feature-item"
-          >
-            <h3>{{ keyFeature.title }}</h3>
             <div class="key-feature-item-content">
               <div
                 v-if="keyFeature.imageUrls"
                 class="key-feature-item-content__image-container"
               >
                 <v-img
-                  v-for="imageUrl in keyFeature.imageUrls"
-                  :key="imageUrl"
-                  :src="keyFeature.imageUrls[0]"
+                  v-for="(imageUrl, index) in keyFeature.imageUrls"
+                  :key="index"
+                  :src="imageUrl"
                 ></v-img>
               </div>
               <p>
@@ -113,6 +82,16 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
+// この画面幅を超えたときレーダーチャートのセクションを2列配置に
+$RadorTwoColBreakPoint: 1024px;
+
+// この画面幅を超えたとき特徴セクションを2列配置に
+$keyFeaturesTwoColBreakPoint: 1100px;
+
+// この画面幅を超えたときサイドナビを表示
+$sideNavBreakPoint: 768px;
+
+// TODO 見出しは別コンポーネント化
 h2 {
   position: relative;
   display: flex;
@@ -149,12 +128,19 @@ h2 {
 .organisms-spike-detail-introduction-tab {
   > section {
     display: flex;
-    padding: 48px 0 96px;
+    padding: 48px 264px 96px 32px;
     flex-direction: column;
     align-items: center;
+
+    @media screen and (max-width: $sideNavBreakPoint) {
+      padding: 48px 32px 96px;
+    }
   }
 }
 
+/**
+ * 基本性能セクション
+ */
 .spike-introduction-top-section {
   .spike-introduction-top-section-content {
     display: flex;
@@ -163,92 +149,39 @@ h2 {
     > * {
       display: inline-flex;
       width: 100px;
-      padding: 0 32px;
       flex-direction: column;
       justify-content: center;
       flex: 1 1 auto;
 
       + * {
-        min-width: 370px;
-        flex: 0 0 50%;
+        margin-left: 64px;
       }
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $RadorTwoColBreakPoint) {
       flex-direction: column;
 
       > * {
         width: 100%;
-      }
-    }
-  }
-}
 
-::v-deep .spike-introduction-recommended-for {
-  ul {
-    padding: 0 24px 24px;
-    list-style: square;
-
-    > li {
-      list-style: square;
-    }
-  }
-}
-
-.spike-introduction-recommended-for {
-  > h3 {
-    + * {
-      margin-top: 16px;
-    }
-  }
-}
-
-/**
- * 特徴のバリエーション１
- */
-.spike-introduction-key-features-section {
-  h2 + div {
-    display: flex;
-    flex-wrap: wrap;
-
-    @media screen and (max-width: 768px) {
-      display: block;
-    }
-  }
-
-  .key-feature-item {
-    width: 48%;
-    padding: 32px;
-
-    h3 {
-      + * {
-        margin-top: 16px;
+        + * {
+          margin-left: 0;
+        }
       }
     }
 
-    > div {
-      display: flex;
-      flex-wrap: wrap;
-
-      > * {
-        flex: 1;
+    ::v-deep .spike-introduction-recommended-for {
+      > h3 {
+        + * {
+          margin-top: 16px;
+        }
       }
+      ul {
+        padding: 0 24px 24px;
+        list-style: square;
 
-      + p {
-        margin-top: 16px;
-        line-height: 1.6;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      width: 100%;
-      padding: 32px 0;
-
-      > div {
-        > * {
-          + * {
-            margin-left: 16px;
-          }
+        > li {
+          list-style: square;
         }
       }
     }
@@ -256,12 +189,12 @@ h2 {
 }
 
 /**
- * 特徴のバリエーション２
+ * 特徴セクション
  */
-.spike-introduction-key-features-section2 {
+.spike-introduction-key-features-section {
   .key-feature-item {
     width: 100%;
-    padding: 32px;
+    padding: 32px 0;
 
     h3 {
       + * {
@@ -291,9 +224,7 @@ h2 {
       }
     }
 
-    @media screen and (max-width: 768px) {
-      padding: 32px 0;
-
+    @media screen and (max-width: $keyFeaturesTwoColBreakPoint) {
       .key-feature-item-content {
         display: block;
 

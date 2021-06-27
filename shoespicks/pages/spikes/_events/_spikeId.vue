@@ -1,6 +1,6 @@
 <template>
   <div v-if="!!spike" class="page-content">
-    <Container>
+    <Container max-width="1244" padding="0 34px">
       <v-breadcrumbs :items="items"></v-breadcrumbs>
     </Container>
     <SpikeDetail :spike="spike"></SpikeDetail>
@@ -82,7 +82,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .page-content {
-  padding: 24px 0;
+  padding-top: 24px;
 
   > .container {
     + * {
