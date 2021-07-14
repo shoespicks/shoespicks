@@ -31,7 +31,7 @@
         </v-tab-item>
         <v-tab-item>
           <div class="spacer">
-            口コミ
+            Comming Soon！
           </div>
         </v-tab-item>
       </v-tabs-items>

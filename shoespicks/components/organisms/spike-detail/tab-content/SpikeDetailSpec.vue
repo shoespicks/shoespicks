@@ -7,6 +7,10 @@
             <th>スパイク名</th>
             <td>{{ spike.name }}</td>
           </tr>
+          <tr v-if="spike.series && spike.brand && shoeBrands[spike.brand]">
+            <th>シリーズ</th>
+            <td>{{ shoeBrands[spike.brand].name }} {{ spike.series }}</td>
+          </tr>
           <tr v-if="spike.price">
             <th>価格</th>
             <td>{{ spike.price }}円</td>
@@ -92,6 +96,7 @@ import { ISpikeModel } from '~/store/model/spike';
 import { shoeLaceTypes } from '~/types/shoes/shoeLaceTypes';
 import { shoePinType } from '~/types/shoes/shoePinTypes';
 import { athleteLevels } from '~/types/shoes/athleteLevel';
+import { shoeBrands } from '~/types/shoes/shoeBrands';
 
 export default defineComponent({
   props: {
@@ -101,7 +106,7 @@ export default defineComponent({
     }
   },
   setup() {
-    return { shoeLaceTypes, shoePinType, athleteLevels };
+    return { shoeLaceTypes, shoePinType, athleteLevels, shoeBrands };
   }
 });
 </script>
