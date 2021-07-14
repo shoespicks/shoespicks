@@ -1,6 +1,6 @@
 <template>
   <article class="organisms-spike-detail">
-    <Container :max-width="1244" padding="32px">
+    <Container :max-width="1244" padding="0 32px 48px">
       <SpikeDetailTop
         :spike="spike"
         :is-favorite.sync="isFavorite"
@@ -9,7 +9,7 @@
       ></SpikeDetailTop>
     </Container>
     <div class="spike-detail-tab">
-      <Container max-width="1244" padding="0 32px">
+      <Container :max-width="1244" padding="0 32px">
         <v-tabs v-model="selectedTab" color="#262626" :height="60" grow>
           <v-tab :ripple="false">Top</v-tab>
           <v-tab :ripple="false">スペック情報</v-tab>
@@ -19,19 +19,15 @@
     </div>
     <StickySidenavLayout
       :sticky-container-top-px="140"
-      container-max-width="1244"
+      :container-max-width="1244"
       right
     >
       <v-tabs-items v-model="selectedTab">
         <v-tab-item>
-          <SpikeDetailIntroductionTab
-            :spike="spike"
-          ></SpikeDetailIntroductionTab>
+          <SpikeDetailIntroduction :spike="spike"></SpikeDetailIntroduction>
         </v-tab-item>
         <v-tab-item>
-          <div class="spacer">
-            スペック
-          </div>
+          <SpikeDetailSpec :spike="spike"></SpikeDetailSpec>
         </v-tab-item>
         <v-tab-item>
           <div class="spacer">
@@ -94,17 +90,19 @@ import { defineComponent, PropType, ref } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import Container from '~/components/atoms/Container.vue';
 import StickySidenavLayout from '~/components/molecules/layout/StickySidenavLayout.vue';
-import SpikeDetailIntroductionTab from '~/components/organisms/spike-detail/tab-content/SpikeDetailIntroductionTab.vue';
+import SpikeDetailIntroduction from '~/components/organisms/spike-detail/tab-content/SpikeDetailIntroduction.vue';
 import SpikeDetailTop from '~/components/organisms/spike-detail/SpikeDetailTop.vue';
+import SpikeDetailSpec from '~/components/organisms/spike-detail/tab-content/SpikeDetailSpec.vue';
 import { ISpikeModel } from '~/store/model/spike';
 import { openNewTabByUrl } from '~/utils/navigateUtils';
 
 export default defineComponent({
   components: {
+    SpikeDetailSpec,
     Button,
     Container,
     StickySidenavLayout,
-    SpikeDetailIntroductionTab,
+    SpikeDetailIntroduction,
     SpikeDetailTop
   },
   props: {

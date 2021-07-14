@@ -23,6 +23,10 @@ export interface IShoeKeyFeature {
   description?: string;
 }
 
+/**
+ * スパイク記事のModel
+ * ContentfulのISpikeShoesFields型とISpikeArticlesFields型どちらも継承
+ */
 export interface ISpikeModel
   extends Partial<ISpikeShoesFields>,
     Partial<ISpikeArticlesFields> {
@@ -48,10 +52,12 @@ export const transrateSpikeEntityToModel = (
     keyFeatures: createKeyFeatures(entity.fields.spikeArticle.fields)
   } as ISpikeModel;
 
+  // entityからISpikeShoesFields型の値をコピー
   defaultsDeep(model, entity.fields);
+
+  // entityからISpikeArticlesFields型の値をコピー
   entity.fields.spikeArticle?.fields &&
     defaultsDeep(model, entity.fields.spikeArticle?.fields);
-  model.spikeArticle = undefined;
 
   return model;
 };
